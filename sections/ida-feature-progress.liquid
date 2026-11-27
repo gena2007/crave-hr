@@ -1,0 +1,631 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+#shopify-section-{{ section.id }} {
+  width:100%;
+  display:block;
+  background-color:{{ section.settings.color_bg }};
+}
+
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .fpg-{{ section.id }} {
+    background-color: {{ section.settings.color_bg}};
+  }
+  .fpg-{{ section.id }} .fpg__subtitle {
+    font-size: {{ section.settings.subtitle_size_mobile }}px;
+    color: {{ section.settings.color_subtitle }};
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .fpg-{{ section.id }} .fpg__title {
+    font-size: {{ section.settings.title_size_mobile }}px;
+    color: {{ section.settings.color_title }};
+  }
+  .fpg-{{ section.id }} .fpg-item__title {
+    font-size: {{ section.settings.item_title_size_mobile }}px;
+    color: {{ section.settings.color_item_title }};
+  }
+  .fpg-{{ section.id }} .fpg-item__percentage {
+    font-size: {{ section.settings.percentage_size_mobile }}px;
+    color: {{ section.settings.color_percentage }};
+  }
+  .fpg-{{ section.id }} .fpg-item__label {
+    font-size: {{ section.settings.label_size_mobile }}px;
+    color: {{ section.settings.color_label }};
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .fpg-{{ section.id }} .fpg-item__desc {
+    font-size: {{ section.settings.desc_size_mobile }}px;
+    color: {{ section.settings.color_desc }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .fpg-{{ section.id }} .fpg__subtitle { font-size: {{ section.settings.subtitle_size_desktop }}px; }
+    .fpg-{{ section.id }} .fpg__title { font-size: {{ section.settings.title_size_desktop }}px; }
+    .fpg-{{ section.id }} .fpg-item__title { font-size: {{ section.settings.item_title_size_desktop }}px; }
+    .fpg-{{ section.id }} .fpg-item__percentage { font-size: {{ section.settings.percentage_size_desktop }}px; }
+    .fpg-{{ section.id }} .fpg-item__label { font-size: {{ section.settings.label_size_desktop }}px; }
+    .fpg-{{ section.id }} .fpg-item__desc { font-size: {{ section.settings.desc_size_desktop }}px; }
+  }
+
+
+  .fpg {
+    text-align: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .fpg__header {
+    margin-bottom: 4rem;
+  }
+  .fpg__subtitle {
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+  }
+  .fpg__title {
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+  }
+  
+  .fpg__grid {
+    display: grid;
+    gap: 3rem 2rem;
+    justify-content: center;
+  }
+
+
+  @media screen and (min-width: 750px) {
+    .fpg__grid {
+      grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    }
+  }
+
+
+  @media screen and (max-width: 749px) {
+    {% if section.settings.enable_mobile_slider %}
+      .fpg__grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        padding-bottom: 1rem;
+        justify-content: flex-start;
+        text-align: center;
+        gap: 2rem;
+      }
+      .fpg__grid::-webkit-scrollbar {
+        display: none;
+      }
+      .fpg-item {
+        flex: 0 0 75%;
+        scroll-snap-align: center;
+      }
+    {% else %}
+      .fpg__grid {
+        grid-template-columns: 1fr;
+      }
+    {% endif %}
+  }
+
+
+  .fpg-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .fpg-item__image-wrapper {
+    height: 120px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  .fpg-item__image {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+  }
+  .fpg-item__title {
+    font-weight: 600;
+    margin: 0 0 0.8rem 0;
+  }
+  .fpg-item__percentage {
+    font-weight: 700;
+    line-height: 1;
+    margin: 0 0 0.4rem 0;
+  }
+  .fpg-item__label {
+    font-weight: 700;
+    margin: 0 0 1.2rem 0;
+  }
+  
+
+  .fpg-item__progress-container {
+    width: 160px;
+    height: 8px;
+    position: relative;
+    margin-bottom: 1.5rem;
+    background-image: linear-gradient(to right, rgba(0,0,0,0.1) 70%, transparent 70%);
+    background-size: 32px 100%;
+    border-radius:50px;
+  }
+  
+
+  .fpg-item__progress-container::before {
+    content: '';
+    position: absolute;
+    top:0; left:0; width: 100%; height: 100%;
+    background-image: linear-gradient(to right, {{ section.settings.color_progress_bg }} 75%, transparent 75%);
+    background-size: 32px 100%;
+    opacity: 0.2;
+    border-radius:50px;
+  }
+
+  .fpg-item__progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-image: linear-gradient(to right, {{ section.settings.color_progress_fill }} 75%, transparent 75%);
+    background-size: 32px 100%;
+    width: 0%;
+    transition: width {{ section.settings.animation_duration }}s cubic-bezier(0.25, 1, 0.5, 1);
+    border-radius:50px;
+  }
+  
+  .fpg-item__desc {
+    margin: 0;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+{%- endstyle -%}
+
+<div class="fpg-{{ section.id }} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding page-width">
+  <div class="fpg">
+    {%- if section.settings.subtitle != blank or section.settings.title != blank -%}
+      <div class="fpg__header">
+        {%- if section.settings.subtitle != blank -%}
+          <p class="fpg__subtitle">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="fpg__title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="fpg__grid">
+      {%- for block in section.blocks -%}
+        <div class="fpg-item" {{ block.shopify_attributes }}>
+          <div class="fpg-item__image-wrapper">
+            {%- if block.settings.image != blank -%}
+              {%- capture sizes -%}(min-width: 990px) 200px, 150px{%- endcapture -%}
+              {{ block.settings.image | image_url: width: 400 | image_tag:
+                loading: 'lazy',
+                sizes: sizes,
+                widths: '150, 200, 300, 400',
+                class: 'fpg-item__image'
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg fpg-item__image' }}
+            {%- endif -%}
+          </div>
+          
+          {%- if block.settings.title != blank -%}
+            <h3 class="fpg-item__title">{{ block.settings.title | escape }}</h3>
+          {%- endif -%}
+
+          <p class="fpg-item__percentage" data-target-value="{{ block.settings.percentage }}">
+            {% if section.settings.enable_animation %}0{% else %}{{ block.settings.percentage }}{% endif %}%
+          </p>
+
+          {%- if block.settings.label != blank -%}
+            <p class="fpg-item__label">{{ block.settings.label | escape }}</p>
+          {%- endif -%}
+
+          <div class="fpg-item__progress-container">
+            <div class="fpg-item__progress-bar" 
+                 data-target-width="{{ block.settings.percentage }}%"
+                 {% unless section.settings.enable_animation %}style="width: {{ block.settings.percentage }}%;"{% endunless %}>
+            </div>
+          </div>
+
+          {%- if block.settings.description != blank -%}
+            <p class="fpg-item__desc">{{ block.settings.description }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.enable_animation -%}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sectionContainer = document.querySelector('.fpg-{{ section.id }}');
+    if (!sectionContainer) return;
+
+    const animateItems = () => {
+      const duration = {{ section.settings.animation_duration | times: 1000 }};
+      const steps = 60;
+      const stepDuration = duration / steps;
+
+      sectionContainer.querySelectorAll('.fpg-item').forEach(item => {
+        const percentEl = item.querySelector('.fpg-item__percentage');
+        const barEl = item.querySelector('.fpg-item__progress-bar');
+        
+        if (!percentEl || !barEl) return;
+        
+        const targetValue = parseInt(percentEl.getAttribute('data-target-value'), 10) || 0;
+        const targetWidth = barEl.getAttribute('data-target-width');
+
+        setTimeout(() => {
+          barEl.style.width = targetWidth;
+        }, 100);
+
+        let currentCount = 0;
+        const increment = targetValue / steps;
+        
+        const counter = setInterval(() => {
+          currentCount += increment;
+          if (currentCount >= targetValue) {
+            percentEl.textContent = targetValue + '%';
+            clearInterval(counter);
+          } else {
+            percentEl.textContent = Math.floor(currentCount) + '%';
+          }
+        }, stepDuration);
+      });
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateItems();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(sectionContainer);
+  });
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ida Feature Progress",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "背景颜色",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "副标题",
+      "default": "TESTED & RECOMMENDED BY PODIATRISTS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "标题",
+      "default": "Engineered for All-Day Pain-Free Comfort"
+    },
+    {
+      "type": "header",
+      "content": "布局"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "pc每行数量"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_slider",
+      "default": true,
+      "label": "mb 左右滑动"
+    },
+    {
+      "type": "header",
+      "content": "动画设置"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animation",
+      "default": true,
+      "label": "开启动画"
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "min": 0.5,
+      "max": 3.0,
+      "step": 0.1,
+      "unit": "s",
+      "default": 1.5,
+      "label": "动画持续时间"
+    },
+    {
+      "type": "header",
+      "content": "颜色设置"
+    },
+    {
+      "type": "color",
+      "id": "color_subtitle",
+      "label": "副标题颜色",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "标题颜色",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "color_item_title",
+      "label": "名称颜色",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "color_percentage",
+      "label": "数字颜色",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "color_label",
+      "label": "标签颜色",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "color_progress_fill",
+      "label": "进度条高亮色",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "color_progress_bg",
+      "label": "进度条背景底色",
+      "default": "#151515"
+    },
+    {
+      "type": "color",
+      "id": "color_desc",
+      "label": "描述文本颜色",
+      "default": "#151515"
+    },
+    {
+      "type": "header",
+      "content": "PC字体大小"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "副标题"
+    },
+    {
+      "type": "range",
+      "id": "title_size_desktop",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 36,
+      "label": "标题"
+    },
+    {
+      "type": "range",
+      "id": "item_title_size_desktop",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "项目名称"
+    },
+    {
+      "type": "range",
+      "id": "percentage_size_desktop",
+      "min": 24,
+      "max": 64,
+      "step": 1,
+      "unit": "px",
+      "default": 36,
+      "label": "百分比数字"
+    },
+    {
+      "type": "range",
+      "id": "label_size_desktop",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "label": "数字下标签"
+    },
+    {
+      "type": "range",
+      "id": "desc_size_desktop",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "描述内容"
+    },
+    {
+      "type": "header",
+      "content": "MB字体大小"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "label": "副标题"
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "label": "标题"
+    },
+    {
+      "type": "range",
+      "id": "item_title_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18,
+      "label": "项目名称"
+    },
+    {
+      "type": "range",
+      "id": "percentage_size_mobile",
+      "min": 20,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 32,
+      "label": "百分比数字"
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 11,
+      "label": "数字下标签"
+    },
+    {
+      "type": "range",
+      "id": "desc_size_mobile",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13,
+      "label": "描述内容"
+    },
+    {
+      "type": "header",
+      "content": "上下边距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60,
+      "label": "top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60,
+      "label": "bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_item",
+      "name": "特点描述项",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "插图/图标"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "特点标题",
+          "default": "Wide Toe Box"
+        },
+        {
+          "type": "range",
+          "id": "percentage",
+          "min": 1,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 94,
+          "label": "百分比数值"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "数值下方标签",
+          "default": "FREER"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "详细描述文本",
+          "default": "Our extra-wide toe box lets your toes spread naturally, reducing pressure and boosting stability for all-day comfort."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ida Feature Progress",
+      "settings": {
+      "subtitle": "TESTATO E RACCOMANDATO DAI PODOLOGI",
+      "title": "Progettato per un comfort senza dolore per tutto il giorno"
+    },
+      "blocks": [
+        { "type": "feature_item", "settings": { "title": "Punta Larga", "percentage": 94, "label": "PIÙ LIBERI","description":"La nostra punta extra larga permette alle dita di distendersi naturalmente, riducendo la pressione e aumentando la stabilità per un comfort che dura tutto il giorno." } },
+        { "type": "feature_item", "settings": { "title": "Allineamento Naturale", "percentage": 98, "label": "ALLINEATI","description":"Progettato con un supporto ortopedico che riduce la tensione sulle articolazioni e aiuta il corpo a mantenere un allineamento naturale a ogni passo."  } },
+        { "type": "feature_item", "settings": { "title": "Suola Flessibile", "percentage": 81, "label": "PIÙ LEGGERI","description":"Le suole ortopediche flessibili e di supporto migliorano l'equilibrio e la stabilità, mantenendo i piedi forti e stabili."  } },
+        { "type": "feature_item", "settings": { "title": "Suola Ortopedica", "percentage": 89, "label": "EQUILIBRATI","description":"Una suola ortopedica sagomata allinea piedi, ginocchia e fianchi per movimenti più fluidi e un comfort duraturo durante tutto il giorno."  } }
+      ]
+    }
+  ]
+}
+{% endschema %}

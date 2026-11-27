@@ -1,0 +1,36 @@
+<div class="wpage-template">
+        {% assign product_id = product.metafields.custom.products_template_id.value.pid |  default: product.id | plus: 0 %}
+
+        {% case product_id %}
+            {% when 9678321058033 %}
+                {% render 'spage9678321058033-28' %}
+            {% when 15226650984689 %}
+                {% render 'spage15226650984689-20' %}
+            {% when 9695220596977 %}
+                {% render 'spage9695220596977-19' %}
+            {% when 9734620119281 %}
+                {% render 'spage9734620119281-18' %}
+            {% when 15252181909745 %}
+                {% render 'spage15252181909745-26' %}
+            {% when 9672996159729 %}
+                {% render 'spage9672996159729-27' %}
+            {% when 15333774065905 %}
+                {% render 'spage15333774065905-42' %}
+            {% else %}
+                <h1>{{ product.title }}</h1>
+        {% endcase %}
+
+</div>
+
+
+{% schema %}
+{
+    "name": "WPage Template Shopping",
+    "settings": [],
+    "presets": [
+        {
+            "name": "WPage Template Shopping"
+        }
+    ]
+}
+{% endschema %}

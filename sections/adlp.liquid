@@ -1,0 +1,119 @@
+<section id="landing" class="shopify-section">
+
+  {%- assign ad = page.metafields.custom.adlp.value -%}
+  {%- assign p = blank -%}
+
+  {%- if ad != blank -%}
+    {%- assign raw_id = ad.product_id | strip -%}
+    {%- assign raw_url = ad.product_url | strip -%}
+
+    {%- comment -%} product {%- endcomment -%}
+    {%- if ad.product.value != blank -%}
+      {%- assign p = ad.product.value -%}
+    {%- elsif ad.product != blank -%}
+      {%- assign p = ad.product -%}
+    {%- endif -%}
+
+    {%- comment -%} product_id {%- endcomment -%}
+    {%- if p == blank and raw_id != blank -%}
+      {%- assign target_id = raw_id | plus: 0 -%}
+      {%- for product in collections.all.products -%}
+        {%- if product.id == target_id -%}
+          {%- assign p = product -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- comment -%} product_url {%- endcomment -%}
+    {%- if p == blank and raw_url != blank and raw_url contains '/products/' -%}
+      {%- assign url_parts = raw_url | split: '/products/' -%}
+      {%- assign handle_with_params = url_parts[1] -%}
+      {%- assign product_handle = handle_with_params | split: '?' | first | split: '#' | first | split: '/' | first -%}
+
+      {%- if product_handle != blank -%}
+        {%- assign p = all_products[product_handle] -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} Price {%- endcomment -%}
+  {%- if p != blank and p.price != blank -%}
+
+    {%- assign current_price = p.price | money | strip -%}
+
+    {%- if p.compare_at_price > p.price -%}
+
+      {%- assign compare_price = p.compare_at_price | money | strip -%}
+      {%- assign save_amount = p.compare_at_price | minus: p.price -%}
+      {%- assign save_percent_number = save_amount | times: 100.0 | divided_by: p.compare_at_price | round -%}
+
+      {%- if save_percent_number > 0 -%}
+        {%- assign save_percent = save_percent_number | append: '%' -%}
+      {%- else -%}
+        {%- assign compare_price = '' -%}
+        {%- assign save_percent = '' -%}
+      {%- endif -%}
+
+    {%- else -%}
+
+      {%- assign compare_price = '' -%}
+      {%- assign save_percent = '' -%}
+
+    {%- endif -%}
+
+  {%- else -%}
+
+    {%- assign current_price = '<strong style="color:red">Choose product</strong>' -%}
+    {%- assign compare_price = '<strong style="color:red">Choose product</strong>' -%}
+    {%- assign save_percent = '<strong style="color:red">Choose product</strong>' -%}
+
+  {%- endif -%}
+
+  {%- if ad != blank -%}
+
+    {%- capture all_frames -%}
+      {%- if ad.frame != blank %}{{ ad.frame }}{% endif -%}
+      {%- if ad.frame2 != blank %}{{ ad.frame2 }}{% endif -%}
+      {%- if ad.frame3 != blank %}{{ ad.frame3 }}{% endif -%}
+      {%- if ad.frame4 != blank %}{{ ad.frame4 }}{% endif -%}
+    {%- endcapture -%}
+
+    {{ all_frames
+      | replace: 'adlp_COMPARE_PRICE_', compare_price
+      | replace: 'adlp_CURRENT_PRICE_', current_price
+      | replace: 'adlp_SAVE_PERCENT_', save_percent }}
+
+  {%- else -%}
+
+    <div class="lp-empty">
+      The dynamic source is empty.
+    </div>
+
+  {%- endif -%}
+
+</section>
+
+{% schema %}
+{
+  "name": "ADLP-v3",
+  "settings": [],
+  "presets": [
+    {
+      "name": "ADLP"
+    }
+  ]
+}
+{% endschema %}
+
+{%- style -%}
+  .lp-empty {
+    padding: 60px 20px;
+    text-align: center;
+    color: #db3b3bff;
+    font-size: 20px;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+{%- endstyle -%}

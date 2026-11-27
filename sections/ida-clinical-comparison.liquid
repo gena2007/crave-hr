@@ -1,0 +1,456 @@
+{{ 'section-clinical-results.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+  #shopify-section-{{ section.id }} {
+  width:100%;
+  display:block;
+  background-color:{{ section.settings.color_background }};
+}
+
+.clinical-results__tab.is-active {
+  background-color: {{ section.settings.tab_active_bg | default: '#1e3a5f' }};
+  color: #ffffff;
+}
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | multiply: 1.5 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | multiply: 1.5 | round: 0 }}px;
+    }
+  }
+
+  .clinical-results-{{ section.id }} {
+    background-color: {{ section.settings.color_background }};
+    color: {{ section.settings.color_text }};
+  }
+{%- endstyle -%}
+
+<div class="clinical-results clinical-results-{{ section.id }} section-{{ section.id }}-padding ">
+    <div class="clinical-results__grid">
+      
+      {% comment %} Left Side - Single Image per tab {% endcomment %}
+      <div class="clinical-results__images-wrapper">
+        <div class="clinical-results__image-container">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'results_group' -%}
+              <div class="clinical-results__image-item {% if forloop.first %}is-active{% endif %}" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1000 | image_tag: 
+                    loading: 'lazy',
+                    sizes: '(min-width: 990px) 45vw, 90vw',
+                    widths: '400, 600, 800, 1000',
+                    alt: block.settings.image.alt | escape
+                  }}
+                {%- else -%}
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+{%- if section.settings.label_left != blank -%}
+                <span class="img-label label-left">{{ section.settings.label_left }}</span>
+                {%- endif -%}
+    <span class="img-label label-right">{{ shop.name | upcase}}</span>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {% comment %} Right Side - Static Headers, Tabs and Dynamic Comparison Tables {% endcomment %}
+      <div class="clinical-results__text-content">
+  <div class="clinical-results__static-header">
+    {%- if section.settings.heading != blank -%}
+      {%- liquid
+        assign desktop_size = section.settings.heading_size_desktop | default: '32'
+        assign mobile_size = section.settings.heading_size_mobile | default: '24'
+      -%}
+      <h2 
+        class="clinical-results__heading inline-richtext" 
+        style="--heading-size-desktop: {{ desktop_size }}px; --heading-size-mobile: {{ mobile_size }}px;"
+      >
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+            {%- liquid
+              assign desc_desktop_size = section.settings.description_size_desktop | default: '16'
+              assign desc_mobile_size = section.settings.description_size_mobile | default: '15'
+            -%}
+            <div 
+              class="clinical-results__description rte"
+              style="--description-size-desktop: {{ desc_desktop_size }}px; --description-size-mobile: {{ desc_mobile_size }}px;"
+            >
+              {{ section.settings.text }}
+            </div>
+          {%- endif -%}
+  </div>
+</div>
+
+        {% comment %} Tabs Area {% endcomment %}
+         
+        <div class="clinical-results__tabs-wrapper">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'results_group' -%}
+              <button class="clinical-results__tab {% if forloop.first %}is-active{% endif %}" data-block-id="{{ block.id }}" type="button">
+                {{ block.settings.tab_title }}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {% comment %} Comparison Tables {% endcomment %}
+        <div class="clinical-results__comparison-container">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'results_group' -%}
+              <div class="clinical-results__table {% if forloop.first %}is-active{% endif %}" data-block-id="{{ block.id }}">
+                
+                {% comment %} Table Header {% endcomment %}
+                <div class="clinical-results__table-header">
+                  <div class="clinical-results__header-col clinical-results__header-col--bad">
+                    <span class="dot-icon dot-icon--bad"></span>
+                    {{ section.settings.traditional_shoes }}
+                  </div>
+                  <div class="clinical-results__header-col clinical-results__header-col--good">
+                    <span class="dot-icon dot-icon--good"></span>
+                    {{ section.settings.our_brand_name }}
+                  </div>
+                </div>
+
+                {% comment %} Table Body Rows {% endcomment %}
+                <div class="clinical-results__table-body">
+                  {%- for i in (1..3) -%}
+                    {%- capture bad_point_key -%}bad_point_{{ i }}{%- endcapture -%}
+                    {%- capture good_point_key -%}good_point_{{ i }}{%- endcapture -%}
+                    
+                    {%- if block.settings[bad_point_key] != blank or block.settings[good_point_key] != blank -%}
+                      <div class="clinical-results__table-row">
+                        
+                        {% comment %} Bad Side Point {% endcomment %}
+                        <div class="clinical-results__cell clinical-results__cell--bad">
+                          {%- if block.settings[bad_point_key] != blank -%}
+                            <div class="clinical-results__point">
+                              <span class="status-icon status-icon--bad">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                              </span>
+                              <div class="rte">{{ block.settings[bad_point_key] }}</div>
+                            </div>
+                          {%- endif -%}
+                        </div>
+
+                        {% comment %} Good Side Point {% endcomment %}
+                        <div class="clinical-results__cell clinical-results__cell--good">
+                          {%- if block.settings[good_point_key] != blank -%}
+                            <div class="clinical-results__point">
+                              <span class="status-icon status-icon--good">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                              </span>
+                              <div class="rte">{{ block.settings[good_point_key] }}</div>
+                            </div>
+                          {%- endif -%}
+                        </div>
+
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      </div>
+    </div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const initClinicalResults = () => {
+      const sections = document.querySelectorAll('.clinical-results');
+      sections.forEach(section => {
+        const tabs = section.querySelectorAll('.clinical-results__tab');
+        const images = section.querySelectorAll('.clinical-results__image-item');
+        const tables = section.querySelectorAll('.clinical-results__table');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const blockId = tab.getAttribute('data-block-id');
+
+            // Toggle Tabs
+            tabs.forEach(t => t.classList.remove('is-active'));
+            tab.classList.add('is-active');
+
+            // Toggle Images
+            images.forEach(img => {
+              img.classList.remove('is-active');
+              if (img.getAttribute('data-block-id') === blockId) {
+                img.classList.add('is-active');
+              }
+            });
+
+            // Toggle Tables
+            tables.forEach(table => {
+              table.classList.remove('is-active');
+              if (table.getAttribute('data-block-id') === blockId) {
+                table.classList.add('is-active');
+              }
+            });
+          });
+        });
+      });
+    };
+
+    initClinicalResults();
+    // Theme customizer dynamic load
+    document.addEventListener('shopify:section:load', initClinicalResults);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Ida Clinical Comparison",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "label_left",
+      "label": "image left label",
+      "default": "Traditional Shoes"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Clinical Results.",
+      "label": "Title"
+    },
+  {
+    "type": "header",
+    "content": "title-size"
+  },
+  {
+    "type": "text",
+    "id": "heading_size_desktop",
+    "label": "pc",
+    "default": "36"
+  },
+  {
+    "type": "text",
+    "id": "heading_size_mobile",
+    "label": "mb",
+    "default": "24"
+  },
+  {
+    "type": "richtext",
+    "id": "text",
+    "default": "<p><b>Thirty days</b> is all it takes for most people to feel the difference.<b> Straighter posture, less strain on the back, knees, and hips, and feet that aren't crammed into the wrong shape</b> anymore.</p>",
+    "label": "description"
+  },
+    {
+      "type": "header",
+      "content": "desc-size"
+    },
+    {
+      "type": "text",
+      "id": "description_size_desktop",
+      "label": "pc",
+      "default": "16"
+    },
+    {
+      "type": "text",
+      "id": "description_size_mobile",
+      "label": "mb",
+      "default": "15"
+    },
+    {
+      "type": "text",
+      "id": "our_brand_name",
+      "default": "shop.name",
+      "label": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "traditional_shoes",
+      "default": "With Traditional shoes",
+      "label": "Traditional shoes"
+    },
+    {
+      "type": "header",
+      "content": "配色"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "default": "#fff",
+      "label": "bg-color"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "default": "#151515",
+      "label": "text-color"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "default": "#c28d59",
+      "label": "Tab-color"
+    },
+    {
+      "type": "header",
+      "content": "gap"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36,
+      "label": "top-padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36,
+      "label": "bottom-padding"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "results_group",
+      "name": "Comparative group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "default": "Back",
+          "label": "Tab"
+        },
+        {
+          "type": "header",
+          "content": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "header",
+          "content": "Comparative description"
+        },
+        {
+          "type": "paragraph",
+          "content": "Defect:"
+        },
+        {
+          "type": "richtext",
+          "id": "bad_point_1",
+          "label": "Defect 1"
+        },
+        {
+          "type": "richtext",
+          "id": "bad_point_2",
+          "label": "Defect 2"
+        },
+        {
+          "type": "richtext",
+          "id": "bad_point_3",
+          "label": "Defect 3"
+        },
+        {
+          "type": "paragraph",
+          "content": "Advantage :"
+        },
+        {
+          "type": "richtext",
+          "id": "good_point_1",
+          "label": "Advantage  1"
+        },
+        {
+          "type": "richtext",
+          "id": "good_point_2",
+          "label": "Advantage  2"
+        },
+        {
+          "type": "richtext",
+          "id": "good_point_3",
+          "label": "Advantage  3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ida Clinical Comparison",
+      "settings": {
+      "label_left": "Scarpe Tradizionali",
+      "heading": "Risultati Clinici.",
+      "text": "<p><b>Trenta giorni</b> è tutto ciò di cui la maggior parte delle persone ha bisogno per sentire la differenza. <b>Una postura più eretta, meno tensione nella schiena, nelle ginocchia e nei fianchi, e piedi che non vengono più compressi in una forma inadeguata</b>.</p>",
+      "traditional_shoes": "Con Scarpe Tradizionali"
+    },
+      "blocks": [
+        {
+          "type": "results_group",
+          "settings": {
+            "tab_title": "Schiena",
+            "bad_point_1": "<p>La suola rialzata inclina il bacino in avanti</p>",
+            "bad_point_2": "<p>La parte bassa della schiena compensa e si incurva</p>",
+            "bad_point_3": "<p>La tensione aumenta durante una lunga giornata in piedi</p>",
+            "good_point_1": "<p>La base ortopedica sagomata livella la postura</p>",
+            "good_point_2": "<p>Aiuta la colonna vertebrale ad allinearsi in modo più naturale</p>",
+            "good_point_3": "<p>I clienti riferiscono di stare più eretti con facilità</p>"
+          }
+        },
+        {
+          "type": "results_group",
+          "settings": {
+            "tab_title": "Piedi",
+            "bad_point_1": "<p>La punta stretta stringe e comprime le dita</p>",
+            "bad_point_2": "<p>La suola spessa riduce la percezione del contatto con il suolo</p>",
+            "bad_point_3": "<p>L'ammortizzazione spessa fa il lavoro che dovrebbe essere svolto dai tuoi piedi</p>",
+            "good_point_1": "<p>La punta larga permette alle dita di distendersi naturalmente</p>",
+            "good_point_2": "<p>La suola sottile ripristina la sensazione delle superfici</p>",
+            "good_point_3": "<p>I clienti riferiscono di sentire i piedi più forti nel tempo</p>"
+          }
+          },
+        {
+          "type": "results_group",
+          "settings": {
+            "tab_title": "Ginocchia",
+            "bad_point_1": "<p>Il tacco rialzato spinge le ginocchia in avanti</p>",
+            "bad_point_2": "<p>La suola rigida trasmette l'impatto alle ginocchia</p>",
+            "bad_point_3": "<p>Le scarpe rigide limitano il movimento naturale delle ginocchia</p>",
+            "good_point_1": "<p>La base ortopedica mantiene le ginocchia allineate sopra i piedi</p>",
+            "good_point_2": "<p>La suola flessibile attenua l'impatto a ogni passo</p>",
+            "good_point_3": "<p>I clienti riferiscono movimenti delle ginocchia più fluidi e facili</p>"
+          }
+          },
+        {
+          "type": "results_group",
+          "settings": {
+            "tab_title": "Fianchi",
+            "bad_point_1": "<p>Il tacco rialzato inclina i fianchi in avanti per tutta la giornata</p>",
+            "bad_point_2": "<p>La base stretta accorcia e limita la falcata</p>",
+            "bad_point_3": "<p>Il supporto irregolare distribuisce il carico in modo non uniforme sui fianchi</p>",
+            "good_point_1": "<p>La base livellata permette ai fianchi di rimanere equilibrati</p>",
+            "good_point_2": "<p>La piattaforma ampia offre una falcata più completa e libera</p>",
+            "good_point_3": "<p>I clienti riferiscono di camminare con maggiore equilibrio</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

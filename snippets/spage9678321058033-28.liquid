@@ -1,0 +1,1565 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.title }}</title>
+  </head>
+  <body>
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0807/0086/6801/files/ID-28-YH008260-HR_1.css?v=1792995900">
+
+    <!-- 克罗地亚语专属样式 -->
+    <style>
+      @media (max-width: 767px) {
+        .lp-hero__inventory > span, .lp-hero__inventory > span > span, .lp-hero__secure, .lp-hero__secure > span { font-size: 11px; }
+      }
+    </style>
+
+    {%- liquid
+      assign sp_initial_variant = product.selected_or_first_available_variant
+      assign sp_price = sp_initial_variant.price | default: product.price
+      assign sp_compare = sp_initial_variant.compare_at_price | default: sp_price
+    -%}
+    {% comment %} 落地页内容 {% endcomment %}
+    <div
+      id="root"
+      data-page-id="ID-28-YH105580-HR-G205"
+      style="
+        --wrapper-mw:1232px;
+        --primary-color:#F58625;
+        --text-color:#0D2638;
+        --gray-color:#4D4D4D;
+        --module-padding:50px 16px;
+        --secondary-color: #EFF7FF;
+        --third-color: #FF0000;
+        --btn-color:#fff;
+        --btn-bg-color:var(--primary-color);
+      "
+    >
+
+      {% comment %} 公告栏 {% endcomment %}
+      {%- capture sp_announcement_content -%}
+        <p class="announcement-bar-w__text">
+          <span class="announcement-bar-w__intro">Vremenski ograničen program podrške rehabilitaciji:</span>
+          <strong class="announcement-bar-w__offer">Uštedite do <span class="js-bind-discount-percent">60%</span> Danas · 30-dnevno probno razdoblje bez rizika</strong>
+        </p>
+      {%- endcapture -%}
+      <div class="announcement-bar-w common-pc--hide">
+        {{ sp_announcement_content }}
+      </div>
+
+      {% comment %} 头部 {% endcomment %}
+        <div class="announcement-bar-w common-mb--hide">
+          {{ sp_announcement_content }}
+        </div>
+      <section class="sph" id="sp-shopping-header" data-sp-header aria-label="Zaglavlje stranice">
+        {%- liquid
+          assign sph_logo = logo | default: '' | strip
+          if sph_logo == blank and settings.logo != blank
+            assign sph_logo = settings.logo | image_url: width: 600
+          endif
+          if sph_logo == blank
+            assign sph_logo = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/6888a41632338a4443544e81_EMSense_20logo.svg?v=1791771380'
+          endif
+        -%}
+        <div class="sph__bar">
+          <div class="sph__inner ">
+            <div class="sph__left">
+              <a
+                class="sph__logo sph__scroll"
+                href="{{ routes.root_url }}"
+                aria-label="{{ shop.name | escape }}"
+              >
+                <img
+                  src="{{ sph_logo }}"
+                  alt="{{ shop.name | escape }}"
+                  width="178"
+                  height="48"
+                  loading="eager"
+                  decoding="async"
+                >
+              </a>
+              <span class="sph__sep" aria-hidden="true"></span>
+              <span class="sph__tagline">Plaćanje pouzećem</span>
+            </div>
+
+            <div class="sph__right">
+              <nav class="sph__nav" aria-label="Navigacija odjeljcima">
+                <button class="sph__nav-link js-size-guide" type="button">
+                  <img class="sph__nav-icon" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_size-chart.svg?v=1791863371" alt="" width="24" height="24">
+                  <span>Tablica veličina</span>
+                </button>
+                <a class="sph__nav-link sph__scroll" href="#bewertungen" data-sph-target="bewertungen">
+                  <img class="sph__nav-icon" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_reviews.svg?v=1791863371" alt="" width="24" height="24">
+                  <span>Recenzije</span>
+                </a>
+               
+                <a class="sph__nav-link sph__scroll" href="#faq" data-sph-target="faq">
+                  <img class="sph__nav-icon" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq.svg?v=1791863371" alt="" width="24" height="24">
+                  <span>FAQ</span>
+                </a>
+              </nav>
+
+              <button class="sph__cart js-cart" type="button" aria-label="Otvorite košaricu">
+                <svg class="sph__cart-icon sph__cart-icon--pc" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16l1 13H3L4 7Zm4 0V5a4 4 0 0 1 8 0v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <img class="sph__cart-icon sph__cart-icon--mb" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_cart.svg?v=1791863579" alt="" width="28" height="28">
+                <span class="text">KOŠARICA</span>
+                <span class="sph__cart-count js-cardNum{% if cart.item_count < 1 %} sp-gray{% endif %}">
+                  {{- cart.item_count -}}
+                </span>
+              </button>
+
+              <a class="sph__cta sph__scroll" href="#shopping" data-sph-target="shopping">
+                <span>KUPITE SADA</span>
+              </a>
+
+              <button
+                type="button"
+                class="sph__menu-toggle js-header-menu-btn"
+                aria-label="Otvorite navigacijski izbornik"
+                aria-expanded="false"
+                aria-controls="sph-drawer"
+              >
+                <img class="sph__menu-icon" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_menu.svg?v=1791863579" alt="" width="27" height="24">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sph__drawer-backdrop js-header-menu-btn" data-header-menu aria-hidden="true"></div>
+        <aside class="sph__drawer" id="sph-drawer" data-header-menu aria-hidden="true" inert role="dialog" aria-modal="true" aria-labelledby="sph-drawer-title">
+          <div class="sph__drawer-head">
+            <strong id="sph-drawer-title">Izbornik</strong>
+            <button type="button" class="sph__drawer-close js-header-menu-btn" aria-label="Zatvorite navigacijski izbornik">
+              ×
+            </button>
+          </div>
+          <nav class="sph__drawer-nav" aria-label="Mobilna navigacija">
+            <button class="sph__drawer-link js-size-guide" type="button" data-sp-header-menu-close>
+              <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_size-chart.svg?v=1791863371" alt="" width="20" height="20">
+              <span>Tablica veličina</span>
+            </button>
+            <a class="sph__drawer-link sph__scroll" href="#bewertungen" data-sph-target="bewertungen" data-sp-header-menu-close>
+              <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_reviews.svg?v=1791863371" alt="" width="20" height="20">
+              <span>Recenzije</span>
+            </a>
+            <a class="sph__drawer-link sph__scroll" href="#faq" data-sph-target="faq" data-sp-header-menu-close>
+              <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq.svg?v=1791863371" alt="" width="20" height="20">
+              <span>FAQ</span>
+            </a>
+            <button class="sph__drawer-link js-cart" type="button" data-sp-header-menu-close>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16l1 13H3L4 7Zm4 0V5a4 4 0 0 1 8 0v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span
+                >Košarica (<span class="js-cardNum">{{ cart.item_count }}</span>)</span
+              >
+            </button>
+            <a class="sph__drawer-link sph__drawer-buy sph__scroll" href="#shopping" data-sph-target="shopping" data-sp-header-menu-close>KUPITE SADA</a>
+          </nav>
+        </aside>
+      </section>
+
+      {% comment %} 首屏介绍 {% endcomment %}
+      <section class="lp-hero" id="produkt">
+        <div class="lp-shell lp-hero__inner">
+          <div class="lp-hero__media reveal-on-scroll">
+            <div class="lp-hero__video-wrap" data-sp-hero-video-wrap>
+              <video class="lp-hero__video" data-sp-hero-video autoplay muted loop playsinline preload="metadata" poster="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_banner-video_poster.webp?v=1792656996" data-poster-pc="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_banner-video_poster.webp?v=1792656996" data-poster-mb="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_banner-video_poster_mb.webp?v=1792656998" aria-label="Demonstracija bež ortopedskih cipela za hodanje">
+                <source src="https://cdn.shopify.com/videos/c/o/v/fd472c6fdd994a13a3e75699d9f7fe06.webm" type="video/webm">
+              </video>
+              <button class="lp-hero__play" type="button" data-sp-hero-play aria-label="Reproducirajte video o proizvodu"></button>
+            </div>
+          </div>
+          <div class="lp-hero__copy">
+            <img class="lp-hero__rating" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_banner-rating.svg?v=1792658397" alt="Trustpilot ocjena: 4.9 od 5" width="344" height="31" loading="eager">
+            <div class="lp-hero__expert">
+              <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_banner_doctor.webp?v=1792402490" alt="" width="32" height="32" loading="eager">
+              <span>Preporučeno od <strong>specijalisti za njegu stopala</strong></span>
+            </div>
+            <h1 class="lp-hero__title">Napokon! Pravo olakšanje za upornu bol u vašim stopalima!*</h1>
+            <div class="lp-hero__lead">
+              <p> <strong>&quot;Comfort Therapy&quot;</strong> ublažava bol u stopalima, obamrlost, oticanje i umor—bez skupih postupaka ili ovisnosti o lijekovima protiv bolova. Obucite ih kako biste iskusili fokusiranu potporu svoda, stabilniju petu i jastučić koji apsorbira udarce koji čine svaki korak udobnijim.</p>
+            </div>
+            <ul class="lp-check-list">
+              <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_arch-support.webp?v=1791874144" alt="" width="37" height="29"><span><strong>Ciljana potpora luku</strong> pomaže raspodijeliti pritisak i podržava prirodno poravnanje stopala.*</span></li>
+              <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_wide-toe.webp?v=1791874143" alt="" width="37" height="29"><span><strong>Prostrana kutija za prste</strong> daje čukljevima i osjetljivim nožnim prstima više prostora za udobno kretanje.*</span></li>
+              <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_flexible-sole.webp?v=1791874143" alt="" width="37" height="29"><span><strong>Amortizacija pete</strong> apsorbira udarce i pomaže smanjiti naprezanje pri svakom koraku.*</span></li>
+            </ul>
+            <a class="common-button lp-cta lp-hero__cta" href="#shopping">
+              <span class="lp-hero__cta-box">
+                <span class="lp-hero__cta-label"><span class="js-bind-discount-percent">70%</span> POPUSTA SAMO DANAS!</span>
+              <img class="lp-hero__cta-arrow" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon1.svg?v=1792402546" alt="" width="42" height="42">
+              </span>
+            </a>
+            <div class="lp-hero__purchase-info">
+              <p class="lp-hero__inventory"><img class="lp-hero__inventory-icon" src="data:image/gif;base64,R0lGODlhQABAAPcAAP///wAAAPv7+/7+/vz8/P39/QICAgUFBQQEBAcHB/r6+gEBAQYGBggICPb29gMDA+3t7a2trRMTE8zMzO/v7xYWFpeXl+fn5/Dw8Ozs7BcXFyUlJSQkJA8PD4qKitPT0yYmJmhoaCEhIcTExMHBweXl5UxMTBEREWZmZhgYGM7OzktLSxISEjc3N1NTUzY2NiwsLFBQUCAgIFhYWNvb25iYmKurq8fHx9nZ2by8vIKCgs3NzcPDw6+vr9XV1fHx8QoKCh8fHzIyMhUVFRQUFGBgYNra2r29vfX19fT09Orq6uDg4PLy8pqamgkJCTk5OWdnZ0BAQG9vbz8/P2VlZQ4ODjQ0NE9PTwwMDE5OTkRERFdXV2pqaicnJ01NTaysrMjIyL6+vsbGxpWVlYuLi+Hh4bCwsJOTk7i4uMvLy9TU1Le3t8DAwObm5ra2tlFRUeTk5BwcHFxcXDw8PB0dHTAwMNHR0bu7u6enp7q6uvPz8/n5+WlpaV9fX1VVVV5eXnFxcUFBQUpKSnBwcElJSSsrKz4+PkdHR1paWm1tbSoqKmNjYzMzM1lZWWxsbGtrax4eHjExMTo6OnNzc9zc3L+/v4+Pj7W1te7u7o6OjrS0tNDQ0IODg5aWls/Pz4yMjLKyssXFxdjY2KioqIGBgdfX19bW1rm5uYmJid/f35ycnMLCwoiIiK6ursnJybGxsXx8fDg4OBoaGnl5eRkZGXh4eDs7O9LS0oWFhaqqqo2NjePj4+np6aamppGRkZCQkBsbG/j4+AsLC3Jycl1dXXV1dampqZubm6SkpMrKyvf39w0NDS8vL3t7exAQEFJSUjU1NWFhYaWlpd3d3aOjo+vr60hISOjo6C4uLi0tLVtbW3Z2dmJiYkNDQ0ZGRj09PaGhoYCAgGRkZH5+foSEhLOzs1ZWVnR0dCMjI6KiouLi4p6enpSUlFRUVCIiInd3dykpKX9/f5+fn0JCQnp6ep2dnSgoKKCgoG5uboaGhpmZmd7e3oeHh0VFRZKSkgAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQEBAD/ACwAAAAAQABAAAAI/wABCBxIsKDBgwgTKlzIsKHDhxAjSpxIceGAixgralQ4oIAAAQUMegQ5YONGAgIKDnCAAYODkgQFEDApUQBMATs6oYjCQYMECRo4REFhYcdMAB5pNiQAM1SIIAGiSp06VQYfMQIHHFVqcEBKAF9eSDWQoAEDA1MNMGiQAG3UFq0E2uRK8CgJIVEfJDhANUGHKgmoHmgb1coIgVuVKkAaIioCBlJZZCGD5kOJDBlKfEBDJssJqQwQRE0kl+tiGiACGDjg1kuEHwwxfDERdTVaRakALDa5OAzfA3wD+DE1ECWBxMdlDlTjIirwAA146N64+JLzBwE4sJE7d6ADCBAcEP/0evSIiAAIgt+ZTjFlJccLAvwpCbJgSgsIEFgA8HVgUgEzqCZaADfwN9FMNPA1ICqlGTRTBFFFAEBiA32lQwALiAZEGRNGVBIBGwRwQHxN8BfSQSFNENUESCFUwExnqMYXDFlBlBIUImLngW4wHVTSBRVUcAEAPRaXVUoXphcAIAY6NBMJMgZQRJMMUUABQovtAgeRM20hYnxpdNhQSXWIGAAINWq02BIaVFBCiwpABdkTLTKUEh7ooSVdfwxdZNBiKnwmy5sG5iFgAKCIyREAeEGGCJUULZaHaERseVRKMQQQ2Bx1JjQTDwFgF0ApnU6UUi9RJXALlTOpgCFaO5T/alBKKGgaQAyQUvSLVEewZ6QWtk6S63i60WGmJopSNEuoAeTia4UAjBIAZF0sNBMYzGqABJEeElTEtAH48uxAJUHQAYYBfCArtJlAF4ALyTL0IkG0OREALMMaeYitquRroBzuWuLvQUchsQcTsQQARAAoIFWkfQCQ4i4X/obUgpm9ziRTAQ/XBQAOK2gQRAruvkHkwzCFNFMP4GoRb40CyIDhAkasiyIARgQGWgCc2uyxq9jRiFBJP0gQFRZKCORADRFMMCTBAKwA3QJkBUDLthQKdMEEEdQgHgBLDBjHHtyqBAAEnwXAAiYCQTBgBVcWWVISQ6CrmgF0fE3uTBRU/+AYBAIpgUVURDBRNrEYGB1ABxm0/XbcxNJtd3xDLAZTSSX1bUCGgAOQwbkBSIDB4eQC4ADJ0LWhtAVNP+1g1FMv8ACJPBq0dQQWfN1GA1GlIF7HMKWGlg8+FxQSDoEZoLxbdwywW0Ih+aDamQqFZAi4a3S4ccdGgtwmdmgxUPOJBaHUoRvgTuFzSou4uyOf1gqkhwC6pBpAHEm8DC0r7lLhb0pjsNUV9Ae9rbxCNPayRfxoE5j9wM8/AHAVWoigB9KNyXkAsIPRFiaHhBCNBdPbhM9KUoDz8MUMBGTIYjJQJnvh4mUpgRBfOIC5hKTEEbbyQgrtJJA32OoVUCOErf+kMLAO3WB6ASAe+R4Ck6PUIgBC4MXr7PCqAIQpa8YDgFggM4MiyqskeEjarADQnMBIonjQskGeArAKL44HZVg0UA4O1YMdlo4R4NpADSfSxIeFRADngUwL0OixEURpSg9EiJVKN7SZNOJLAXCFHWMCAC7kKAA7ep6PAAAkIVkkJZwIFV8G4UZiFaALkCxRfW6mogCwaIkEmVeMVhMAoXFPITOhBGQGtKN8PShC+rMQhjTEoTguJCVQQk98+kAfWN4nPw40XkoAdCgClRJLAEDfJTdAArkwhSDfCc94lAOAHMhMSQHIwbgk0pvfBGcLoijOxupinIF8wIci4osTDqO1yYqcJkS2icoVemC4hVDABoKoDWsCUIglrNOfE2oMeiATFQnE4BOnUMNlMgCHD6zBAyZI2wJCExUiXvMhR2FDJPKyl778RWdSGYxbXoCVSfLxKzawwljKcpa0rIUwUXkCCvlzS6V8EwAjgAIkqMJUqYjgEWDIijHpQlS5TGAMVJhCT36Sgg0EIgQ18MSJ5kVVhphvPCxxycPIWVaHdOQjsEQKXIva1gtihK51zate98rXvhIkIAAh+QQFBAAHACwfABEAEwAdAAAI3QAPCBxI8ACAgggRHgRwMKFCgwwbOhS4MKJEhxUjGpyYkeHGiRA1XkxocSRGix+DjQC0qGBJg22MEQsSoGapA0hKArDDypCwmjUPfXFwQIMJHMHWOOoCtKasYR8QAqHVtKYhZEgmBkBQkwWXTQMFOKxp5RgGkASFVQqLVqAJAGLbDgT2YyFIIgYOIDhACi7aAVcSMDiwDEIBAmiVAQsgsBiAAm1dLajZoA2AASAVHPgVwEmARHDtJkQcY+uDJRpBOlgcgEpokGKTARVlEqHmTAFYBZM7cNdH3gfiOgwIACH5BAUFAAYALB4AGAAUABYAAAi/AA0IHEhwIICCCBMaBMBQYUGGECEWJLAwosWHBCxGHJCwwTSNEh3OoQEhokOELJg9ayYtDS8DBGQJXFBwwYIAOHM6U0SogcAhBXMKHYpTQsFWlEi4GWWB0yQqfgS1gCEhijUEAgOYOXhQ4R4HBlZgDRANQLCTAysdOGCgS0O0AqEFECjqLVpqAXyqAkCxq0MBQXA2AlCgAFwDrHAGKQCAo1+F1bDgVNP4scNHOHERtqxQVIBlnTifvMFEoOiBAQEAIfkEBQQADAAsHgAdABQAEwAACM4AGQgUaGSgwYMIGawAQCAhgIQCUxQAMACARYoMKFQQiOAgglAUL4bUyDGhLosKRAK4MCGChYMBHgToVgKAAJUXhwzMtixAggBOegkUYJCAAG4GBOpiEiNAgAUBGjlgQNTgrwUMAmx7OKKF0wCyjiBkE6DjMADKBCKj83XQUIHXDmB1ZLMhAwU6sDjFdssgDKdUbB68tuhrk4GNnGoTPFCBwE0rAggV+MmpC4YPE04wmMPpm4sQD1Y7EEAS5tAH35g4hhG1QRl7XEMEI9tgQAAh+QQFBAAMACwcAB8AFAARAAAIwAAZCBwoMAnBgwgHSjCYsKHALQAICATQsMrBQQAUAKBIEaEjAwMDBDCyceNEggAWgRR4IACDiCU5EmzkkoGtAAgCsIlpkuCzmiWsiWT0kudJEy7jACiRYEEAcBONMvAm0tpGaiJlBYsak8E3kbMAKGPgR2Q4lCUZvBBpIyMDPRoCAGlzsCO0AAZKASgggEEekdEaQgpAawCAAQMHifSU8JO3RcoKdBRYKIC3hsEgVbhwcJPIZAldCZxAsG8naggDAgAh+QQFBAADACwYABoAGQAYAAAIzwAHCBw4kADBgwgTKlzIsCFBgw4jSpxIcWKFim8GPCC4oqIbAwSFGRlQIGIBAKgCDAxAAgBEhwa1qBzoAwCAATcdUjgxc0AANjZzMjQYJsBGgQHKBXUoYAAsoww0BAiALOhNoQptGQggKNzUM1axJlQibEGAU5qmksO5VKxAg2imBgGQZuoktksTNl1kFhWAXVUCiLuaV+G4B0Aw2SwUwM9Aqwx5TQCggMChANYIFkb48gKtBgGgad6M8OYEpIoes6UYgEWwigMXDGFhCEnEgAAh+QQFBAAJACwXACAADQASAAAIpwATCBSYYqDBg1EMNjiYIJWTgwsFCkgQLcBALF5wGDQVwKJAEgAAEEgw0VwABA8SvBBZYKCKAAsGqgoJIMFILycTBJDAhKZAMQEMeHQEQEBIgYcCPPDoiWbNIx0DHEjwLYHTBD+kAPEikFqCAQOOCvyhLQAwJAJ9CiQALMA5gRQoiE3ApqMPgRUqXKgpMFEAawcn8E1QJMCXwQkiiBxYStlABAgsFA0IACH5BAUEAAgALBEAIAAQABIAAAidABEIHEgwGAuCCAcKANDMQEKEChCsC7Dg4cCIqwIEGJhCA0IBCMoACZBAYLoCSBIqQxfACQJhoQAAeBglABAEG8oAUDCAIMhFLQN0U7BT5sA9CNgFYBAAisynCGZGVHFAo66nUBEQCOkswAEzAAhgJaguRYATnoqOHQhnCC04CCJinSlwKxy4IKNCpau17sCnPS3+NSp4MN/CehEGBAAh+QQFBQADACwOAB4AFwARAAAIoAAHCBxIcICAgggTCjwosBIQhRAHYFDVwgCCiAIVDFTB50SAAAYwDkRCbc5HkAsGXFQIYMAHQLROGgiwYKW7Kwgd2Dh08sEDmggCDCDCKhgAJAVNnaTTDl6AAx+rxNMDAACBhH0esRmw62SCd5iqtmyJ8VGAQW2qFhgrEsAPI1UFkBU5YCwAuXPb1hXLlu5esXX9CuQbGGPevYUFEzwcMSAAIfkEBQQACQAsDgAbABEAFAAACJ4AEwhMMIBAAQEIBRAgMDCBgz0NIwoEMDCKBBgtBPmhUgyVhVFuVoniASSBhAAoU6pMaSDBgSECG5jAVoXlgwMIHghcIJBWgQS7VKyRAiQAT4kNHVioEwBpw1IhnAhEMLBpQwBurDbsIs7GiAQAwgLYlQAlJETyjIiluBYAOVZqCrRN8BNsWLtznU4Uq/cqRbB9rwYeTLjw4L+GEesNCAAh+QQFBAAGACwOABUAEgARAAAIpQANCBQjUIDAgwgRpgugxZVABQkjWghAUdsugQUiIrQDg2IDeg40HjRowBHFACnqCSQgUuCpFCcjHXnYMkm7AAsomhA1kuVIgdQYBEBAMdEWIgCSJh1AYE8wANe8DKUosEaECReUKkXiSZFABF8FVsCQgcSZPkIOaAQrcJ6TkzhbGkhiBW4AuQJxCSHkxQWiRVwG1QrXIaLWw0lxGEYMYKVIpXIDAgAh+QQFBAAGACwQABAAEQAhAAAIxgANCByYzoIBAQMTKkwWIMAthRAHegsAI2JETw0HHbQoEGG0hnc2JgQgkKSBEkACpEiiEIBLkwJJNTQn0sDLlwOBNURmQMHAlwUKDChgAFyABQ1K/CwJdIABaA0DRbxZAACbAAkCoIpYgIDXYCQDPAggxulSmy8xpQyAQJbAcRvmzBN0xc8fcdtEKNQjpKFfvxFpCWLxl6OBCkkcqAAnZQ4RjhduutRzi9q5OBAlS6aRwHBCAp5Dix5NurTp06hTq17NGvTAgAAh+QQFBAAHACwRAA4AEgAUAAAIxAAPCBxI8AASQxKGLCjIUGAwFgEaCgQA4EBFgYoiNqRIkaCVAA1obew40FsAawQEMOR48YCLADA2WuRoUVyAKtcksqw4KUCAZDI5EjhAzieyAyobDuB4xic9pDoBEACAzGcMiQMHFABQzmfMge/ejWAyEMAeAJV8dqgmcJrPABJWkEkWjKKRAwYC3D2w5q1fYH7uSTuwIMAcShbLFIMIEsFbhhc4/hhjT+ADiRUoAFhK8cs3rAc0c+aoAhFogixXHGhAMCAAIfkEBQQACwAsDwAOABkAFgAACO0AFwgcSHCgAAAWECAY6ABHwYcECQCIQHBigGgQMwKYUJBQAEcZIQK4UKGCQB8BAqwK+RAAAAoUBJ4LEAcJy4EAFrjMucABsAAzFhS4iRPAgAELkKVMR7TizgWGAjiBE1JAy52eUs7JmIHj1YN8UuZbYHUggQXcAshxSFbgzh8sUnqCuCllykWpBAoYoACAqpQcNJ5JeSAAAnxtdPZ9kZJPW6cAPEGS2iBAgloZAJBYULjcgrNO++7xI/BByiGEli0IoMEBz4I7XQ5ewGBh06ISVUASaGCg7aZ9g7mAOOT2AKMSbitfvhw00RUhAwIAIfkEBQUACwAsEwAOABwAEwAACOcAFwgcSLCgQAAADCpcWBBhQoYQGyKMSHHBAIcDCVRsuMDhQwULdsHZONCjQJBLNFQoMbCAQI0LTQpUcSKALJYLNH7oBdEjyDwIAhAZCfNDhQCcYjoUsKBXgAAJbi1g2tFCgAYB5AikmtDkr6cBjiwA+RIAoABAAkjSM/agx1kBHgTI1dYtQkFoA8QxUpIAwiIBGATwVbekw0IBnAQ4kKcrgAEmEgeANVWhw2sDn+oTEIxJrLwoGHZVACBNZgMVIKW4GuDNRtK5oBoMMIfkWAC4BD4gSAvJQ4pd9xAxSCeYbYFJKhxfEBAAIfkEBQQABQAsEgARACAAEQAACN0ACwgcSLCgwYEADhokoFBhQgAJGwpUI5HgQ4gRD1ZbFIBaAQUVC2CEaPAhiQABDOCQeBGjyJIEAMRACa9hS5IZLUJUEYBBACoFBBwc+bBgUQACAGwJkCBAuo9GR4YUCaBUgQUBHqzU6TJisBGAFh1MGq1AgwCKCA6QCqCNMWJBUAawGnWfgQIHAkQjCtEOK0PC5AY49MWB0aAA+AxkMGSFqGBrHHURHEDWsA8vS4psc5AW5QCGkCFhKTJmN4MBEKBkwWXTQKEhk2hAHcDKMQwDQU5tCITN693AYTcMCAAh+QQFBAAGACwWABIAHAATAAAIzAANCBRYZtXAgwgTJgSwLQADCAojLgQAgE+AAPwkahRIEUCei3QUbIwIwADFDMsWBKA2UmLHKRettFRYkmI8AwkChNlYkiQANgIDeGnZsadJk0wkGFCpxmXRjgcpHgpgIEA0gSI5Pn06sOangQw4KtjacQBJNAYeHJwGoADZjW8SzqEBoejMIRFZMHvWTFoaXgYIyBK4oOUDlRcTO1NEqIFAvBoPVE1MuXIApRuF8RC1ys0oC5wmUfEjqAUMCVFmGo24x8HMgQJiC1AYEAAh+QQFBAAGACwYABAAGgAbAAAI8QANCBzoaqDBgwgTIgGWsOFAAAIBAIj3ZIsyhxglAoAUgBYBjA41QguwwAfIhhpfBAiQ62RCjd9WvnP5EoC3ld5oIpRowgCCOHt0GpT4zMCDBziEPgTQSGCACEofLnJKKqoBAgAcDZRByaqRKgEMJlW6AqEgAB936tRQAMAAjW4NUKggEMHJUG7hvp1bV2DahrokKoAL4MKECBYwrnwQoFsJAAIIa2xIZMukBQESBHDSS6AAgwQ+Y9zXbiXmRg4MiHapQOCIFisDyDoSVTQyOrEHedaZVoEOLCux3aot8Nqi2E2stjawaUWAzlZVC5wwMCAAIfkEBQQABQAsHAAQABQAIAAACOgACxSYINCVwIMIEwq8UAGYA4UQBQIAQKHblF8RFU68diCArYwJJ54KEOANSIQTUZFsd/LgRHMk5bSUCEARSSozCwBoU8BAAEc5AYQJUCDAsKCfBAaYNZMAgD9KcQGYaYSIQAOsciZA2CGn15ZJvgqUEFbsFgAEJLY8UGAQAAUTdYJ8QLKAkYlx5SocwCMA3Tdo8U6dCpFVgAQB2AjOG3EKSUY6F6tNCKfBggDgaApWqKAANZKygmnGqzCtH5LhUJKGqEdDACA89RJWKKBAHpLRCtRuWXsQSU9iCwXwJnYTyWRea3eipjAgACH5BAUEAAgALB0ADwAOACMAAAjjABEIHEhgoEGDEw4qRFDhwsKDFAAAyFHtoUQAPgIcsLRwgAIAKAIEIINAwEGJvICINLVQIimR7izukSXyT0sA8hA0CADuZh0ECwzQaHkKwYEAiix2ExgAxcNDAwP0APBwoAExDxsYvFK168MhXgWuCCvMCIICBynNCSCQBICCCo0EMIDAh0QEVA1W6yCSzcWFhUSW+2uwYAyRyC5SzWtylsgzivOWREBNJDm8f6kWTCZyEmbCAq9VCSBuceaBgf0MVCxQAIFDAawZBE1rJ7TZoBEgXY35YAAWwaouGMLCEJKFAQEAIfkEBQUACwAsGQASABEAIAAACPYAFwgcSBAAAIECCCoUaBCAgFILCQ5YAEABAE4BaiWJyFAAgEoBQlLiSBEABgkhBy1IuLBhvwAGElwgaZHUAicB3q2MaLGSwABVIJA0KWFBggA6FijgSEDLAgYBiOghuaLoAgQBPpFciG7PVoUmvoodSxIBWYgEGwx1oCHAAixecGwtF+DAAhIGCURMyCfkCwAECmzdEFJVQ5IqQkpgcnhhwnwhHTk0SHJOSE8ND0bchdNQScoRqYWktmDAANALZwSQhYQhZc0DHcQJcE4gBQqoCZII6UNghQoXYBNMFMCawgnCBxYJ8EV4BMARSykbiACBBYcLAwIAIfkEBQQACAAsEQASACAAIAAACP8AEQgcSLCgQQQADipcWBBAQoYQDSZ06BABgYgQJ1L8tQRBAYwMAQhwKC4AiI4gFyoA4OBbgAQBNKWUiGDlNBkBnASwhEDAzIEDegIIAxNIAD4WfxJ0qCoAAp3elBZEEqyWUwYmfUodqEECAgYIAizb1fPgxZ8BAtyoubXgAwQGkLFta5ZuMDp0DV5MkoJgg7wCJTkFTNBLgAYBaAXRAHhRAKO2kuxBkpdezgBZKLa9aCkAVhQUHypVgKBXgAcBYIUWPZP0nbQB/FnUzBojaU8H0uIRqvnnxTLOAhy4UzP0VnUpApzwNNC4VDhDaMGZ69w3AjjTtRqvDfLsWYQOgxILFth7PHjugCtuDQgAIfkEBQQAAwAsDgAVACAAGgAACOQABwgcSLCgwYIAABxcyFCgwgEJCTxsSBEiRAACEopBUrGhQowJJ5gIoGMAgY4GFWYEYMdFgJcBrqE0KBEADmIDAjAI0MDYzIJIAMBBEWCAgQQBhJT5WZDWvIENXiYSqIDpwQMBDthgKqBhgEhLu3YUO6ASEIMM+FD9iUFVi5cHJzYkq4LPiZdYrRJEQu0bTJgpzv5U+AGQrL8BOITQ5ACHCQ0oHdg49BeIIVSbEmoGwLGjKZhxGkmD43Cz1T6PVjkguFmu3oGtX7O+qNmi7I+mXTPFXVu31diyEfYOLtw2cYTHAwIAIfkEBQQABgAsDgAUACIAGwAACNwADQgcSLCgwYMADipcyLChw4UJH0ocGBFAxIkMK1pMeBEjQY0bLXpUGBIAJjaPyDAUwFIAAQIILSZZxalblQABljER6GBPw44V3uTxl2WIQJw4G9gxUCCKBBgtBPmhUgyVhVFuVoniAcRgAIEJcAIjV22gBKRo0+JUiNQKMp8EjRpoYALbzbQLHhzEKSjPQAUEFwikVcDABVfUZsWA0UEhAz44BgqQGLKakTkkXz4sGZJSgoFfMQ7gvJFAx4mkQw6EOTL1SIgbBZ5+TZK27du4c+vezdvh7N6/bwcEACH5BAUEAAYALA4AFQAiAA8AAAjaAA0IFCNQgMCDCBMqXCgwXQAtrgQqYEixooUAGLXtEligoseEdmBgbEDPgUACHz0aNOAIY4AU9U6mTHkqhctIRySipAigJ4CKSdoFWIDRhCiFE30q7VlwZ0GB1BIEkBog0RYiBlaIWspVINeeBADsihLgAVGEHc45oiKnXRZCgWyhsyCwRoQJF5Yq6Jnv4AOKLjG62AMGgcAKFAAMULqYR0UEgRcQWSTDgGEDiA0s9rm4QIqFLml1Kzbqg4IkCn8qDLtCoQxYuUqZnLkQh8JpCQWspF0xWEeKAQEAIfkEBQQACAAsEAAQACAAFQAACNwAEQgcmM4CAgEDEypcyFBgsgABbjWcSFGgtwAwKmpc6AnioIMbQ0aDeAdkSIUABKZEUAJIgBRJTqIEQDMhKYjmTMqkyXMlAmAQkSFQIFNlz5rgAixoUKIogpVHU0KDGMhpwqhsAiQIgMrqwJ4EALwJ8CCAmAFWofI0ggDiA1kDie58CkABgI8JE9AAUCBqzYYrw25ZGAfQugkUol6YUDHJkIkBTsQKUePGDwoVNDqeeACiZydyRJxskNCA59MQ/SgA47RDvHdSuHBr9MwEIWbrvKrUTbEAAQHAGQYEACH5BAUFAAgALBUADgAbACMAAAj/ABEIHIgAiSEJQxYQXMiwYTAWARpKHAgAAAKLAhVFnNiwYkWCVgI0oMWRoUeC3gJYIyCgJEGPGBG4CADDpUmPBQCIC1Dlms2XOBFMChAgGQICPy0GJUcUGYKWPwVWzHmGKL2nUaUCyImMaIysL3OWI1oTrNScbIh2qGbW4gAAPhAYCGDErEABANgIDDCHktkCCHAIs8twBcEDCAhtJQCYsMB2aXJuHfCWcBRQHgkAoFDB5oOBnxHAY6en4oALE2wSJfogAVEitcrELBljVS85IlavXrAJq02Majo9o0WUhYOSSAcWgCpQmQpYnRA0BisguWOGAqZf3869u/fv4MPbBLWeNSAAIfkEBQQABgAsAAAAAEAAQAAACP8ADQgcSLCgwYMIEypcyLChw4cQI0qcSLGixYsYM2rcyLGjx48gQ4ocSbKkyZMoU6qsKACABQQIBjrAsXIhAQARCOIMEK2mQgATChIK4MiAAJ8HAVyoUEGgjwABViFFCAAABQoCzwWIg2RqQQAGqoI14ABYgBlekwIYoMAAMqjpjKbVWbWAAUMBnMCZ+xVAAQCeoM7h27clH6j55BIOOwDADxZQPS0eCKClKqgcJg8s0PIFVD6KCd8EQMLAgQDlNAsU5QWLgQAaHIydnIAgEFGqD5rIbVBCVd4Etf1tC9wACFOVG6tGwOB1vaotZ6clpAFqA4HEGiv4zRdTLWHWA4A/8CF2Mi98p08HaCJ9LvFdKKBCVaL6qAEjRQJYCj3ZvqlgxfEX4IAEFmjggQgmqOCCDDbo4IMQRijhhBRWCFFAADs=" alt="" width="20" height="20"><span>Otprema sutra <span aria-hidden="true">|</span> Trenutne zalihe: <strong>Još samo 18 pari!</strong></span></p>
+              <p class="lp-hero__secure">🔒 Zajamčeno sigurno i zaštićeno plaćanje <span aria-hidden="true">|</span> SSL Zaštićeno🔒</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-shell lp-benefits reveal-on-scroll">
+          <article class="lp-benefit">
+            <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_30-day.webp?v=1791874468" alt="" width="96" height="96" loading="lazy">
+            <div><h3>30-dnevni povrat novca</h3><p>Uvjereni smo da će vam se svidjeti—isprobajte bez rizika 30 dana ili zatražite puni povrat novca.</p></div>
+          </article>
+          <article class="lp-benefit">
+            <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_tracked-worldwide.webp?v=1791874468" alt="" width="96" height="96" loading="lazy">
+            <div><h3>Praćena dostava diljem svijeta</h3><p>Svaka narudžba uključuje praćenje u stvarnom vremenu i osiguranje od gubitka ili krađe u transportu.</p></div>
+          </article>
+          <article class="lp-benefit">
+            <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_powered-real.webp?v=1791874468" alt="" width="96" height="96" loading="lazy">
+            <div><h3>Pokreću stvarni korisnici</h3><p>Stvarno korisničko iskustvo pokreće naš razvoj i testiranje kako bismo stvorili vrhunsko rješenje.</p></div>
+          </article>
+        </div>
+      </section>
+
+      {% comment %} 四项步行鞋优势 {% endcomment %}
+      <section class="lp-core-benefits" aria-labelledby="lp-core-benefits-title">
+        <div class="lp-core-benefits__inner">
+          <h2 class="lp-core-benefits__title reveal-on-scroll" id="lp-core-benefits-title">Manje naprezanja. Više slobode. Korak po korak</h2>
+          <div class="lp-core-benefits__grid">
+            <article class="lp-core-benefits__card reveal-on-scroll">
+              <video class="lp-core-benefits__image js-lazy-video" poster="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp1_1_poster.webp?v=1792660305" width="290" height="290" muted loop playsinline preload="none" aria-label="Tretira demonstraciju čukljeva">
+                <source data-src="https://cdn.shopify.com/videos/c/o/v/efe17580e0984656942e9e667cd714e5.webm" type="video/webm">
+              </video>
+              <div class="lp-core-benefits__body">
+                <h3 class="lp-core-benefits__heading"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" alt="" width="20" height="20" loading="lazy"><span>Liječi čukljeve</span></h3>
+                <p class="lp-core-benefits__description">Prostrana kutija za nožne prste ispravlja položaj nožnih prstiju dok liječi bolne čukljeve i smanjuje pritisak.*</p>
+              </div>
+            </article>
+            <article class="lp-core-benefits__card reveal-on-scroll">
+              <video class="lp-core-benefits__image js-lazy-video" poster="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp1_2_poster.webp?v=1792660305" width="290" height="290" muted loop playsinline preload="none" aria-label="Ispravlja demonstraciju Hammertoes">
+                <source data-src="https://cdn.shopify.com/videos/c/o/v/b240b168719c4700995462b9ef752972.webm" type="video/webm">
+              </video>
+              <div class="lp-core-benefits__body">
+                <h3 class="lp-core-benefits__heading"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" alt="" width="20" height="20" loading="lazy"><span>Ispravlja Hammertoes</span></h3>
+                <p class="lp-core-benefits__description">Dodatna dubina nožnih prstiju vraća prirodni položaj i smanjuje bolno trenje uzrokovano preklapanjem čekićastih prstiju.*</p>
+              </div>
+            </article>
+            <article class="lp-core-benefits__card reveal-on-scroll">
+              <video class="lp-core-benefits__image js-lazy-video" poster="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp1_3_poster.webp?v=1792660306" width="290" height="290" muted loop playsinline preload="none" aria-label="Demonstracija ublažava bolove u prednjem dijelu stopala">
+                <source data-src="https://cdn.shopify.com/videos/c/o/v/5f227fa9093345fdbe188fa8fee2b6e2.webm" type="video/webm">
+              </video>
+              <div class="lp-core-benefits__body">
+                <h3 class="lp-core-benefits__heading"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" alt="" width="20" height="20" loading="lazy"><span>Ublažava bol u prednjem dijelu stopala</span></h3>
+                <p class="lp-core-benefits__description">Mekana amortizacija prednjeg dijela stopala liječi bol od pritiska ispod prstiju i štiti osjetljiva metatarzalna područja.*</p>
+              </div>
+            </article>
+            <article class="lp-core-benefits__card reveal-on-scroll">
+              <video class="lp-core-benefits__image js-lazy-video" poster="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp1_4_poster.webp?v=1792660306" width="290" height="290" muted loop playsinline preload="none" aria-label="Štiti osjetljivu kožu demonstracija">
+                <source data-src="https://cdn.shopify.com/videos/c/o/v/3f10c3ac6a264e94837281c947e5b8e0.webm" type="video/webm">
+              </video>
+              <div class="lp-core-benefits__body">
+                <h3 class="lp-core-benefits__heading"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" alt="" width="20" height="20" loading="lazy"><span>Štiti osjetljivu kožu</span></h3>
+                <p class="lp-core-benefits__description">Bešavna podstavljena unutrašnjost sprječava trljanje, mjehure, ranice i bolnu iritaciju na osjetljivoj koži.*</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>    {% comment %} Fußschmerzen Ursache {% endcomment %}
+      <section class="lp-cause" id="ergebnisse">
+        <div class="lp-shell">
+          <div class="lp-split lp-split--media-left">
+            <video class="lp-media reveal-on-scroll" data-sp-cause-video poster="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp2_video_poster.webp?v=1792661741" data-poster-pc="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp2_video_poster.webp?v=1792661741" data-poster-mb="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp2_video_poster_mb.webp?v=1792661741" width="599" height="579" autoplay muted loop playsinline preload="metadata">
+              <source src="https://cdn.shopify.com/videos/c/o/v/a3e47ffcf4ec4cb8a20eebd3cd4b561d.webm" type="video/webm">
+            </video>
+            <div class="lp-rich-text stext2">
+              <h2 class="lp-cause__title stitle2 reveal-on-scroll">Kada svakodnevni koraci preopterećuju lukove</h2>
+              <p><strong>Jaka traka tkiva</strong> ispod stopala pomaže poduprijeti svod i apsorbirati zahtjeve hodanja.</p>
+              <p>Zategnuti listovi i opetovano svakodnevno opterećenje mogu uvelike povećati napetost tog tkiva, <strong>pogotovo kada vam cipele pružaju slabu potporu.</strong></p>
+              <p>S vremenom, nadraženo područje može <strong>postati bolan,</strong> čineći prve korake nakon odmora daleko neugodnijima.*</p>
+              <p><strong>Nastavite ponavljati isti soj,</strong> a ciklus može biti teško prekinuti.</p>
+              <p>Postoji daleko bolji put naprijed...</p>
+              <a class="lp-solution stexts2" href="#shopping">
+                <span>PODUZMITE KORAKE KA OLAKŠANJU!</span>
+                <span class="lp-solution__arrow" aria-hidden="true"></span>
+              </a>
+            </div>
+          </div>
+          <div class="lp-stat-grid reveal-on-scroll">
+            <article class="lp-stat-card" data-sp-stat-wrap>
+              <div class="lp-stat-ring">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="lp-stat-ring__track" cx="60" cy="60" r="52"></circle>
+                  <circle class="lp-stat-ring__progress js-stat-progress" cx="60" cy="60" r="52" data-sp-stat-radius="52"></circle>
+                </svg>
+                <strong class="lp-stat-ring__value stitle2"><span class="js-stat-num" data-sp-stat-value="78">0</span><span class="lp-stat-percent">%</span></strong>
+              </div>
+              <p class="stexts2">odraslih starijih od 40 ispitanih opisali su ponavljajuću nelagodu nakon stajanja.*</p>
+            </article>
+            <article class="lp-stat-card" data-sp-stat-wrap>
+              <div class="lp-stat-ring">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="lp-stat-ring__track" cx="60" cy="60" r="52"></circle>
+                  <circle class="lp-stat-ring__progress js-stat-progress" cx="60" cy="60" r="52" data-sp-stat-radius="52"></circle>
+                </svg>
+                <strong class="lp-stat-ring__value stitle2"><span class="js-stat-num" data-sp-stat-value="82">0</span><span class="lp-stat-percent">%</span></strong>
+              </div>
+              <p class="stexts2">smanjili šetnje jer ih svakodnevno bole stopala.*</p>
+            </article>
+            <article class="lp-stat-card" data-sp-stat-wrap>
+              <div class="lp-stat-ring">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="lp-stat-ring__track" cx="60" cy="60" r="52"></circle>
+                  <circle class="lp-stat-ring__progress js-stat-progress" cx="60" cy="60" r="52" data-sp-stat-radius="52"></circle>
+                </svg>
+                <strong class="lp-stat-ring__value stitle2"><span class="js-stat-num" data-sp-stat-value="86">0</span><span class="lp-stat-percent">%</span></strong>
+              </div>
+              <p class="stexts2">rekao je da obične cipele pružaju premalo podrške.*</p>
+            </article>
+            <article class="lp-stat-card" data-sp-stat-wrap>
+              <div class="lp-stat-ring">
+                <svg viewBox="0 0 120 120" aria-hidden="true">
+                  <circle class="lp-stat-ring__track" cx="60" cy="60" r="52"></circle>
+                  <circle class="lp-stat-ring__progress js-stat-progress" cx="60" cy="60" r="52" data-sp-stat-radius="52"></circle>
+                </svg>
+                <strong class="lp-stat-ring__value stitle2"><span class="js-stat-num" data-sp-stat-value="77">0</span><span class="lp-stat-percent">%</span></strong>
+              </div>
+              <p class="stexts2">osjećao manje samopouzdanja u kretanju po tvrdim površinama.*</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {% comment %} 评分横幅 {% endcomment %}
+      <section class="lp-rating-bar">
+        <div class="lp-shell lp-rating-bar__inner">
+          <div class="lp-rating-bar__brand">
+            <img class="lp-rating-bar__rating" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_banner-rating.svg?v=1792658397" alt="Trustpilot ocjena: 4.9 od 5" width="344" height="31" loading="lazy">
+          </div>
+          <a class="lp-rating-bar__btn" href="#shopping"><span class="lp-rating-bar__btn-content"><span class="lp-rating-bar__btn-label">KUPUJTE ODMAH!</span><picture class="lp-rating-bar__arrow"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon2.svg?v=1792478894"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon1.svg?v=1792402546" alt="" width="41" height="41" loading="lazy"></picture></span></a>
+        </div>
+      </section>
+
+      {% comment %} 三重疗法介绍 {% endcomment %}
+      <section class="lp-therapy" id="so-funktionierts">
+        <div class="lp-shell">
+          <h2 class="lp-section-title stitle2 reveal-on-scroll">Jedan ste korak bliže trajnom oslobađanju od bolova u stopalima</h2>
+
+          <div class="lp-therapy__stories">
+          <article class="lp-story-row reveal-on-scroll">
+            <picture class="lp-media"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_1_mb_1.webp?v=1792664631"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_1.webp?v=1792663089" alt="Comfort Therapy podrška za cipele za hodanje i usporedba prostora za prste" loading="lazy" decoding="async"></picture>
+            <div class="lp-rich-text stext2">
+              <h3>Upoznajte cipele za hodanje &quot;Comfort Therapy&quot;.</h3>
+              <p>Liječenje bolova u stopalima ne odnosi se samo na mekše potplate. Loša potpora, stisnuti nožni prsti i ponavljani udarci pete mogu držati bolna područja pod stresom. Rješavanje ovih problema može <strong>smanjiti bol i učiniti svakodnevno hodanje ugodnijim.*</strong></p>
+              <p>Ovo je načelo iza <strong>&quot;Comfort Therapy&quot;</strong>: dizajn cipele za hodanje koji kombinira korekciju stopala s rasterećenjem pritiska.</p>
+              <p>Njegov pristup ima tri dijela:</p>
+              <ol class="lp-number-list">
+                <li><span><strong>Potpora luka</strong> umiruje stopalo, ispravlja poravnanje i liječi bol od plantarnog fasciitisa.*</span></li>
+                <li><span><strong>Šira kutija za prste</strong> daje prostor za širenje nožnih prstiju i ublažava bolni pritisak oko čukljeva.*</span></li>
+                <li><span><strong>Amortizacija pete</strong> apsorbira šok pri slijetanju i liječi bol u peti.*</span></li>
+              </ol>
+              <p class="lp-therapy__summary">Cilj je jasan: <strong>manje naprezanja bolnih stopala, bolja potpora i ugodnije kretanje</strong> tijekom cijelog dana.*</p>
+            </div>
+          </article>
+
+          <article class="lp-story-row lp-story-row--reverse reveal-on-scroll">
+            <picture class="lp-media"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_2_mb_1.webp?v=1792664632"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_2.webp?v=1792663088" alt="Stariji par drži Comfort Therapy cipele za hodanje" loading="lazy" decoding="async"></picture>
+            <div class="lp-rich-text stext2">
+              <h3>Cipele također pomažu</h3>
+              <p>Evo svih simptoma koje ove cipele za hodanje mogu ublažiti:</p>
+              <ul class="lp-therapy__conditions">
+                {%- assign sp_therapy_conditions = 'Dijabetes|Bol u živcima i trnci|čukljevi|Srušeni lukovi|Plantarni fasciitis|Tendinitis Ahilove tetive|Artritis stopala|Bol u leđima|Neuropatija i obamrlost|Loša cirkulacija' | split: '|' -%}
+                {%- for sp_condition in sp_therapy_conditions -%}
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp4_correct.svg?v=1792480347" alt="" width="22" height="22" loading="lazy"><span>{{ sp_condition }}</span></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </article>
+
+          <article class="lp-story-row reveal-on-scroll">
+            <picture class="lp-media"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_3_mb_1.webp?v=1792664632"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_3.webp?v=1792663088" alt="Stručnjaci za njegu stopala raspravljaju o ortopedskoj potpori" loading="lazy" decoding="async"></picture>
+            <div class="lp-rich-text stext2">
+              <h3>Razvili stručnjaci</h3>
+              <p>Ponovljeni klinički pregledi mogu postati <strong>skupo, nezgodno,</strong> i teško se uklapaju oko svakodnevnih obaveza.</p>
+              <p>Zato su stručnjaci za njegu stopala pomogli prevesti načela ortopedske podrške u <strong>Cipele za hodanje &quot;Comfort Therapy&quot;.</strong></p>
+              <p>Dizajn donosi <strong>strukturirana pomoć u satima kada je vašim stopalima zapravo najpotrebnija,</strong> nego samo tijekom kratkog dogovora.</p>
+            </div>
+          </article>
+
+          <article class="lp-story-row lp-story-row--reverse reveal-on-scroll">
+            <picture class="lp-media"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_4_mb_1.webp?v=1792664632"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp4_4.webp?v=1792663088" alt="Comfort Therapy cipele za hodanje tijekom svakodnevnog hodanja" loading="lazy" decoding="async"></picture>
+            <div class="lp-rich-text stext2">
+              <h3>Savršena svakodnevna terapija za stopala</h3>
+              <p>Cipele za hodanje s trostrukom terapijom kombiniraju značajke nadahnute ortopedijom—<strong>oslonac za luk, prostran prostor za prste i jastučić za petu</strong>— pružiti ugodno olakšanje bez lijekova.*</p>
+              <p>Nema kompliciranog postavljanja. Samo <strong>navuci ih, zaveži ih,</strong> i neka tri značajke podrške rade zajedno kako bi <strong>redistribuirati pritisak, apsorbirati udar,</strong> i <strong>utješi svoja stopala</strong> svakim korakom.</p>
+              <p>Nosite ih dok radite, kupujete, šetate ili jednostavno uživate u danu.</p>
+            </div>
+          </article>
+          </div>
+
+          <div class="lp-therapy__offer reveal-on-scroll">
+            <a class="common-button lp-cta lp-offer-cta lp-therapy__cta" href="#shopping">
+              <span class="lp-therapy__cta-content"><span class="lp-therapy__cta-label"><span class="js-bind-discount-percent">70%</span> POPUSTA SAMO DANAS!</span><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon2.svg?v=1792478894" alt="" width="34" height="34" loading="lazy"></span>
+            </a>
+            <div class="lp-therapy__stock"><span>Otprema sutra</span><span aria-hidden="true">|</span><span>Trenutne zalihe: <strong>Još samo 18 pari!</strong></span></div>
+          </div>
+        </div>
+      </section>
+
+      {% comment %} Our shoes versus conventional shoes {% endcomment %}
+      <section class="lp-comparison" aria-labelledby="lp-comparison-title">
+        <div class="lp-comparison__inner">
+          <h2 class="lp-comparison__title reveal-on-scroll" id="lp-comparison-title">Odbacite bolne cipele koje ne podržavaju radi sigurnije alternative.*</h2>
+          <p class="lp-comparison__subtitle">Druge cipele mogu izgledati elegantno, ali zbog njihovog uskog kroja i generičkog dizajna mogu vas boljeti stopala.</p>
+          <div class="lp-comparison__grid reveal-on-scroll">
+            <article class="lp-comparison__card">
+              <img class="lp-comparison__image" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp5_1.webp?v=1792665119" alt="Comfort Therapy potporne cipele za hodanje" width="590" height="358" loading="lazy" decoding="async">
+              <div class="lp-comparison__body">
+                <h3 class="lp-comparison__heading">Naše cipele</h3>
+                <ul class="lp-comparison__list">
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp4_correct.svg?v=1792480347" alt="" width="23" height="23" loading="lazy"><span>Pomaže u ublažavanju bolova i pritiska u čukljevima*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp4_correct.svg?v=1792480347" alt="" width="23" height="23" loading="lazy"><span>Podržava zdraviji protok krvi kroz stopala*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp4_correct.svg?v=1792480347" alt="" width="23" height="23" loading="lazy"><span>Pomaže u ublažavanju boli kod plantarnog fasciitisa*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp4_correct.svg?v=1792480347" alt="" width="23" height="23" loading="lazy"><span>Ostaje udoban do dvanaest sati*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp4_correct.svg?v=1792480347" alt="" width="23" height="23" loading="lazy"><span>Pruža dugotrajnu udobnost po pristupačnoj cijeni</span></li>
+                </ul>
+              </div>
+            </article>
+            <article class="lp-comparison__card">
+              <img class="lp-comparison__image" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp5_2.webp?v=1792665120" alt="Sive cipele za konvencionalno hodanje" width="590" height="358" loading="lazy" decoding="async">
+              <div class="lp-comparison__body">
+                <h3 class="lp-comparison__heading">Tradicionalne cipele</h3>
+                <ul class="lp-comparison__list">
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp5_error.svg?v=1792483246" alt="" width="23" height="23" loading="lazy"><span>Može povećati bol i pritisak u čukljevima*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp5_error.svg?v=1792483246" alt="" width="23" height="23" loading="lazy"><span>Može ograničiti zdrav protok krvi u stopalima*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp5_error.svg?v=1792483246" alt="" width="23" height="23" loading="lazy"><span>Nudi slabu potporu kod boli kod plantarnog fasciitisa*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp5_error.svg?v=1792483246" alt="" width="23" height="23" loading="lazy"><span>Često postaje neugodno nakon nekoliko sati*</span></li>
+                  <li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp5_error.svg?v=1792483246" alt="" width="23" height="23" loading="lazy"><span>Više košta bez pružanja trajne udobnosti</span></li>
+                </ul>
+              </div>
+            </article>
+          </div>
+          <div class="lp-comparison__offer reveal-on-scroll">
+            <a class="common-button lp-cta lp-offer-cta lp-comparison__cta" href="#shopping">
+              <span class="lp-comparison__cta-content"><span class="lp-comparison__cta-label"><span class="js-bind-discount-percent">70%</span> POPUSTA SAMO DANAS!</span><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon2.svg?v=1792478894" alt="" width="34" height="34" loading="lazy"></span>
+            </a>
+            <p class="lp-comparison__stock"><span>Naručite sada i ostvarite <span class="lp-comparison__discount">nevjerojatan popust od <span class="js-bind-discount-percent">70%</span>.</span></span><br><strong>Požurite sada - zalihe su već pri kraju!</strong></p>
+          </div>
+        </div>
+      </section>
+
+      {% comment %} 统计图文：提取自 ID19 {% endcomment %}
+      <section class="lp-results" id="results-speak">
+        <div class="lp-results__inner">
+          <header class="lp-results__head reveal-on-scroll">
+            <h2 class="lp-results__title">Klinički izmjerena udobnost koju možete osjetiti</h2>
+            <p class="lp-results__subtitle">Potvrđeno 8-tjedno ispitivanje može izmjeriti kako ortopedska potpora mijenja svakodnevnu mobilnost.*</p>
+          </header>
+          <div class="lp-results__main">
+            <div class="lp-results__media reveal-on-scroll">
+              <img
+                class="lp-results__img"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp6_1.webp?v=1792720821"
+                alt="Stručnjaci koji provode testiranje hoda i pritiska stopala"
+                width="600"
+                height="308"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+
+            <div class="lp-results__copy reveal-on-scroll">
+
+              <div class="lp-results__stats">
+                <div class="lp-results__stat">
+                  <div class="lp-results__value">
+                    <span class="lp-results__num js-stat-num" data-sp-stat-value="91">0</span><span class="lp-results__unit">%</span>
+                  </div>
+                  <p class="lp-results__text">izvijestili o smanjenoj boli plantarne fascije.*</p>
+                </div>
+                <div class="lp-results__stat">
+                  <div class="lp-results__value">
+                    <span class="lp-results__num js-stat-num" data-sp-stat-value="89">0</span><span class="lp-results__unit">%</span>
+                  </div>
+                  <p class="lp-results__text">hodao dalje u udobnosti više sati.*</p>
+                </div>
+                <div class="lp-results__stat">
+                  <div class="lp-results__value">
+                    <span class="lp-results__num js-stat-num" data-sp-stat-value="86">0</span><span class="lp-results__unit">%</span>
+                  </div>
+                  <p class="lp-results__text">osjećao stabilnije tijekom svakodnevnog kretanja.*</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {% comment %} 专家推荐：提取自 ID19 {% endcomment %}
+      <section class="lp-doctor" id="expert-recommend">
+        <div class="lp-doctor__inner">
+          <div class="lp-doctor__main">
+            <div class="lp-doctor__media reveal-on-scroll">
+              <picture>
+                <source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp7_1_1_mb.webp?v=1792722688">
+              <img
+                class="lp-doctor__img"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp7_1_1.webp?v=1792722308"
+                alt="dr. Emily Carter, podijatar"
+                width="600"
+                height="744"
+                loading="lazy"
+                decoding="async"
+              >
+              </picture>
+            </div>
+
+            <div class="lp-doctor__copy reveal-on-scroll">
+              <p class="lp-doctor__eyebrow">Upoznajte</p>
+              <h2 class="lp-doctor__name">Dr. Emily Carter</h2>
+
+              <div class="lp-doctor__desc stext2">
+                <p>“Moj klinički rad pokazuje kako otekline, hladne noge i ograničena cirkulacija mogu lagano hodanje učiniti iscrpljujućim i neugodnim do kraja dana.</p>
+                <p><strong>Prava cipela</strong> ne smije stiskati područja koja trebaju protok krvi, kretanje i prostor za oporavak.</p>
+                <p><strong>Otvoreni prednji dio stopala smanjuje kompresiju, potpora luku potiče prirodno kretanje, a amortizacija štiti osjetljivo tkivo od udaraca.*</strong></p>
+                <p><strong>Ove cipele za hodanje objedinjuju te funkcije u dizajnu</strong> pacijenti mogu nositi cijeli dan za posao, kupovinu, putovanje ili vrijeme provedeno kod kuće.</p>
+                <p>Zato ih preporučujem kod otečenih nogu, slabe cirkulacije i umora koji se pogoršava tijekom dana.”</p>
+              </div>
+
+              <div class="lp-doctor__sign">
+                <p class="lp-doctor__signature">Emily Carter</p>
+                <p class="lp-doctor__role stext2">Podijatar</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lp-doctor__footer reveal-on-scroll">
+            <a class="common-button lp-offer-cta lp-doctor__cta" href="#shopping">
+              <span class="lp-doctor__cta-content"><span class="lp-doctor__cta-label"><span class="js-bind-discount-percent">70%</span> POPUSTA SAMO DANAS!</span><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon2.svg?v=1792478894" alt="" width="34" height="34" loading="lazy"></span>
+            </a>
+            <p class="lp-doctor__promo stext2"><span>Otprema sutra</span> <span aria-hidden="true">|</span> <span>Trenutne zalihe: <strong>Još samo 18 pari!</strong></span></p>
+          </div>
+        </div>
+      </section>
+
+      {% comment %} Everyday comfort and construction features {% endcomment %}
+      <section class="lp-comfort-features" id="comfort-features">
+        <div class="lp-comfort-features__inner">
+          <div class="lp-comfort-features__card">
+          <h2 class="lp-comfort-features__title stitle2 reveal-on-scroll">
+            Što izdvaja bolju cipelu za hodanje
+          </h2>
+          <p class="lp-comfort-features__subtitle stext2 reveal-on-scroll">
+            Osim potpore, materijali i konstrukcija cipele mogu značajno utjecati na svakodnevnu udobnost, zaštitu i izdržljivost.
+          </p>
+
+          <div class="lp-comfort-features__row">
+            <div class="lp-comfort-features__features">
+              <div class="lp-comfort-features__item"><h3 class="lp-comfort-features__item-title">Fleksibilna, cjelodnevna udobnost</h3><p class="lp-comfort-features__item-text">Fleksibilna konstrukcija omogućuje da se cipela prirodno pomiče sa stopalom, čime se smanjuje krutost tijekom duljeg nošenja.</p></div>
+              <div class="lp-comfort-features__item"><h3 class="lp-comfort-features__item-title">Zaštita u promjenjivim uvjetima</h3><p class="lp-comfort-features__item-text">Vodootporni gornji dio pomaže u održavanju stopala suhima, dok vanjski potplat otporan na klizanje pruža stabilniju trakciju na mokrom ili neravnom terenu.</p></div>
+              <div class="lp-comfort-features__item"><h3 class="lp-comfort-features__item-title">Kvaliteta napravljena da traje</h3><p class="lp-comfort-features__item-text">Pažljivo odabrana koža spaja dugotrajnu izdržljivost s ugodnim osjećajem i profinjenim izgledom pogodnim za svakodnevno nošenje.</p></div>
+            </div>
+
+            <div class="lp-comfort-features__media">
+              <video class="lp-comfort-features__img js-lazy-video" poster="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp8_video_poster.webp?v=1792723092" width="600" height="600" muted loop playsinline preload="none" aria-label="Comfort Therapy demonstracija fleksibilnosti cipele za hodanje">
+                <source data-src="https://cdn.shopify.com/videos/c/o/v/1137068f744f4a37a7ad61b35327b4a2.webm" type="video/webm">
+              </video>
+         
+            </div>
+          </div>
+
+          
+          </div>
+          <div class="lp-comfort-features__footer reveal-on-scroll">
+            <a class="common-button lp-cta lp-offer-cta lp-comfort-features__cta" href="#shopping">
+              <span class="lp-comfort-features__cta-content"><span class="lp-comfort-features__cta-label"><span class="js-bind-discount-percent">70%</span> POPUSTA SAMO DANAS!</span><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon2.svg?v=1792478894" alt="" width="34" height="34" loading="lazy"></span>
+            </a>
+            <p class="lp-comfort-features__stock"><span>Naručite sada i ostvarite <span class="lp-comfort-features__discount">nevjerojatan popust od <span class="js-bind-discount-percent">70%</span>.</span></span><br><strong>Požurite sada - zalihe su već pri kraju!</strong></p>
+          </div>
+        </div>
+      </section>
+
+      {% comment %} Size chart and measuring guide {% endcomment %}
+      <section class="lp-size" id="size">
+        <div class="lp-size__inner">
+          <div class="lp-size__main">
+            <h2 class="lp-size__title">Tablica veličina</h2>
+            <div class="lp-size__table-wrap reveal-on-scroll">
+              <table class="lp-size__table">
+                <thead>
+                  <tr>
+                    <th scope="col">EU</th>
+                    <th scope="col">Duljina <span>(mm)</span></th>
+                    <th scope="col">EU</th>
+                    <th scope="col">Duljina <span>(mm)</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>36</td><td>230</td><td>45</td><td>275</td></tr>
+                  <tr><td>37</td><td>235</td><td>46</td><td>280</td></tr>
+                  <tr><td>38</td><td>240</td><td>47</td><td>285</td></tr>
+                  <tr><td>39</td><td>245</td><td>48</td><td>290</td></tr>
+                  <tr><td>40</td><td>250</td><td>49</td><td>295</td></tr>
+                  <tr><td>41</td><td>255</td><td>50</td><td>300</td></tr>
+                  <tr><td>42</td><td>260</td><td>51</td><td>305</td></tr>
+                  <tr><td>43</td><td>265</td><td>52</td><td>310</td></tr>
+                  <tr><td>44</td><td>270</td><td>53</td><td>315</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="lp-size__aside reveal-on-scroll">
+              <div class="lp-size__guarantee">
+                <img
+                  class="lp-size__guarantee-img"
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_30-day.webp?v=1791874468"
+                  alt="30 dana jamstva povrata novca"
+                  width="92"
+                  height="92"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <div class="lp-size__guarantee-text">
+                  <strong>Zabrinuti ste da veličina možda ne odgovara?</strong>
+                  <p class="lp-size__guarantee-copy--pc stext2">Bez brige - imate 30 dana da ih isprobate. Ako veličina ne odgovara, povrat i zamjena su besplatni.</p>
+                  <p class="lp-size__guarantee-copy--mb stext2">Ne brinite - nudimo 30-dnevno jamstvo za prilagodbu. Ako ne odgovaraju, možete ih besplatno vratiti ili zamijeniti.</p>
+                </div>
+              </div>
+
+              <picture class="lp-size__measure">
+                <source
+                  media="(min-width: 768px)"
+                  srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105674-measurement.webp?v=1787552916"
+                >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105674-measurement-mb.webp?v=1787552916"
+                  alt="Kako izmjeriti veličinu stopala"
+                  width="640"
+                  height="360"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
+
+              <ul class="lp-size__tips stext2">
+                <li>Nosite čarape i stojte prirodno tijekom mjerenja.</li>
+                <li>Dopustite varijaciju mjerenja od 0.3 do 0.5 cm.</li>
+                <li>Odaberite veću veličinu ako je između veličina.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {% comment %} Product selection and purchase {% endcomment %}
+      <div id="shopping" class="lp-shopping">
+        <div class="sp_product_part">
+          <div class="sp_product_content sp-product-layout">
+            <div class="sp-relative sp-product-media">
+              <div class="sp-gallery-main js-gallery-main">
+                <div class="sp-product-visual js-product-visual">
+                  {%- assign sp_first_product_image = product.images.first -%}
+                  <div
+                    class="sp-product-gallery sp-product-gallery-pc sp_pc"
+                    aria-label="Slika proizvoda"
+                    data-sp-pc-gallery
+                  >
+                    {%- if sp_first_product_image -%}
+                      {%- assign sp_first_product_image_url = sp_first_product_image
+                        | image_url: width: sp_first_product_image.width
+                        | split: '&width='
+                        | first
+                      -%}
+                      <img
+                        alt="{{ sp_first_product_image.alt | default: product.title | escape }}"
+                        class="sp-img-p js-img-p sp-pc-main-image js-pc-main-image"
+                        src="{{ sp_first_product_image_url }}"
+                        width="{{ sp_first_product_image.width }}"
+                        height="{{ sp_first_product_image.height }}"
+                        data-image-id="{{ sp_first_product_image.id }}"
+                        data-image-position="0"
+                        loading="eager"
+                      >
+                    {%- else -%}
+                      {{
+                        'product-1'
+                        | placeholder_svg_tag: 'sp-img-p js-img-p sp-pc-main-image js-pc-main-image sp-product-placeholder'
+                      }}
+                    {%- endif -%}
+                  </div>
+
+                  <div
+                    class="sp-img-wrap sp-product-gallery sp-product-gallery-mobile sp_mobile swiper"
+                    aria-label="Galerija proizvoda"
+                    data-sp-product-gallery
+                  >
+                    <div class="sp-img-inner swiper-wrapper">
+                      {%- for image in product.images -%}
+                        {%- assign sp_product_image_url = image
+                          | image_url: width: image.width
+                          | split: '&width='
+                          | first
+                        -%}
+                        <div
+                          class="sp-product-slide js-product-slide swiper-slide{% if forloop.first %} is-active{% endif %}"
+                          data-image-id="{{ image.id }}"
+                          data-image-position="{{ forloop.index0 }}"
+                        >
+                          <img
+                            alt="{{ image.alt | default: product.title | escape }}"
+                            class="sp-img-p js-img-p"
+                            src="{{ sp_product_image_url }}"
+                            width="{{ image.width }}"
+                            height="{{ image.height }}"
+                            data-image-id="{{ image.id }}"
+                            data-image-position="{{ forloop.index0 }}"
+                            loading="eager"
+                          >
+                        </div>
+                      {%- else -%}
+                        <div class="sp-product-slide js-product-slide swiper-slide is-active">
+                          {{ 'product-1' | placeholder_svg_tag: 'sp-img-p js-img-p sp-product-placeholder' }}
+                        </div>
+                      {%- endfor -%}
+                    </div>
+                    <button
+                      class="swiper-button-prev sp-gallery-prev js-gallery-prev"
+                      type="button"
+                      aria-label="Prethodna slika"
+                    ></button>
+                    <button
+                      class="swiper-button-next sp-gallery-next js-gallery-next"
+                      type="button"
+                      aria-label="Sljedeća slika"
+                    ></button>
+                  </div>
+
+                </div>
+
+                <div class="sp-product-thumbs swiper" aria-label="Sličice proizvoda" data-sp-product-thumbs>
+                  <div class="swiper-wrapper">
+                    {%- for image in product.images -%}
+                      <button
+                        class="js-product-thumb swiper-slide{% if forloop.first %} is-active{% endif %}"
+                        type="button"
+                        data-image-id="{{ image.id }}"
+                        data-image-position="{{ forloop.index0 }}"
+                        aria-label="Pogledajte sliku proizvoda {{ forloop.index }}"
+                      >
+                        <img
+                          src="{{ image | image_url: width: 240 }}"
+                          alt="{{ image.alt | default: product.title | escape }}"
+                          width="120"
+                          height="120"
+                        >
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                  <div class="sp-thumb-prev js-thumb-prev" aria-label="Prethodne sličice"><picture class="lp-shopping__thumb-arrow"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_shopping_left.svg?v=1791961676"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_shopping_up.svg?v=1791961676" alt="" loading="lazy"></picture>
+                  </div>
+                  <div class="sp-thumb-next js-thumb-next" aria-label="Sljedeće sličice"><picture class="lp-shopping__thumb-arrow"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_shopping_left.svg?v=1791961676"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_shopping_up.svg?v=1791961676" alt="" loading="lazy"></picture>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sp-cod-banner common-mb--hide">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/11_08b1d749-ec26-41f4-858d-171444af9603.webp?v=1790754565"
+                  alt=""
+                  width="82"
+                  height="70"
+                  loading="lazy"
+                >
+              </div>
+            </div>
+            <div class="sp_product_inner js-product-inner">
+              <div class="sp-expert-badge">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_shopping_doctor.webp?v=1792550378"
+                  alt=""
+                  width="30"
+                  height="30"
+                  loading="eager"
+                >
+                <span>Certificirani stručnjak:</span>
+              </div>
+              <h2 class="sp-title-s js-bind-title">{{ product.title }}</h2>
+
+              
+              <div class="sp-product-rating" aria-label="Ocijenjeno 4.9 od 5">
+                <span class="sp-stars">
+                  <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/start.png?v=1790044778" alt="zvijezda">
+                </span>
+                <span>4.9/5 (2,179)</span>
+              </div>
+              <ul class="sp-product-features"><li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_shopping_wider.svg?v=1791959238" alt="" width="30" height="30" loading="lazy"><span><span class="sp-feature-pc">40% širi prednji dio stopala</span><span class="sp-feature-mb">40% šira kutija za prste</span></span></li><li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp7_designed.svg?v=1791959239" alt="" width="30" height="30" loading="lazy"><span>Dizajniran za udobnost</span></li><li><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp7_helps.svg?v=1791959239" alt="" width="30" height="30" loading="lazy"><span>Pomaže u održavanju zdravog držanja</span></li></ul>
+              <div class="sp-sale-pill">UŠTEDITE <span class="js-bind-save-amount">{{ sp_compare | minus: sp_price | at_least: 0 | money_with_currency }}</span></div>
+              <div class="sp-price-group js-price-group">
+                <div class="sp-price1">
+                  <span class="sp-span js-bind-price">{{ sp_price | money_with_currency }}</span>
+                </div>
+                <div class="sp-price2">
+                  <span class="js-bind-compare">
+                    {%- if sp_compare > sp_price %}{{ sp_compare | money_with_currency }}{% else %}{{ sp_price | money_with_currency }}{% endif -%}
+                  </span>
+                </div>
+                <div class="sp-row sp-uppercase">
+                  <p class="sp-p">
+                    Uštedite
+                    <span class="js-bind-save-amount">{{ sp_compare | minus: sp_price | at_least: 0 | money_with_currency }}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="sp-shopping-promo">
+                <strong>POVRATAK NA PUNU CIJENU SUTRA</strong>
+                <span class="sp-shopping-countdown" role="timer" aria-label="Odbrojavanje ponude: minute, sekunde, stotinke sekunde"><img class="sp-shopping-countdown__flash" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_shopping_flash.svg?v=1792492798" alt="" width="14" height="18" loading="lazy"><span class="sp-shopping-countdown__digits"><span data-shopping-minutes>15</span><span aria-hidden="true">:</span><span data-shopping-seconds>59</span><span aria-hidden="true">:</span><span data-shopping-hundredths>59</span></span></span>
+              </div>
+              <div class="sp-padding">
+                {%- unless product.has_only_default_variant -%}
+                  {%- for option in product.options_with_values -%}
+                    <div class="js-option-heading">
+                      <div class="option-title">
+                        {{ option.name | escape }}:
+                        {%- if forloop.first -%}
+                          <span class="js-option-current" data-sp-option-current="{{ forloop.index0 }}">
+                            {{- option.selected_value | default: option.values.first | escape -}}
+                          </span>
+                        {%- endif -%}
+                      </div>
+                      {%- if forloop.index == 2 -%}
+                        <button class="js-size-guide" type="button" aria-label="Tablica veličina">
+                          <img
+                            src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/size-svg.png?v=1790152523"
+                            alt=""
+                            width="16"
+                            height="16"
+                          >
+                          Tablica veličina
+                        </button>
+                      {%- endif -%}
+                    </div>
+                    <div
+                      class="js-opt-group"
+                      data-option-index="{{ forloop.index0 }}"
+                      data-option-name="{{ option.name | escape }}"
+                    >
+                      {%- for value in option.values -%}
+                        {%- liquid
+                          assign is_active = false
+                          if option.selected_value == value
+                            assign is_active = true
+                          elsif option.selected_value == blank and forloop.first
+                            assign is_active = true
+                          endif
+                        -%}
+                        <button
+                          type="button"
+                          class="js-option{% if is_active %} active{% endif %}{% if option.position == 1 %} js-option-swatch{% endif %}"
+                          data-val="{{ value | escape }}"
+                          data-option-position="{{ option.position }}"
+                        >
+                          {%- if option.position == 1 -%}
+                            {%- assign option_variant = product.variants | where: 'option1', value | first -%}
+                            {%- if option_variant.featured_image -%}
+                              <img
+                                src="{{ option_variant.featured_image | image_url: width: 160 }}"
+                                alt="{{ value | escape }}"
+                              >
+                              <span class="visually-hidden">{{ value | escape }}</span>
+                            {%- else -%}
+                              {{ value | escape }}
+                            {%- endif -%}
+                          {%- else -%}
+                            {{ value | escape }}
+                          {%- endif -%}
+                        </button>
+                      {%- endfor -%}
+                    </div>
+                  {%- endfor -%}
+                {%- endunless -%}
+              </div>
+
+              
+              <div class="sp-footer-wrap">
+                <div class="sp-shopping-stock-progress" aria-hidden="true"><span class="sp-shopping-stock-progress__fill"></span></div>
+                <p class="sp-shopping-stock"><span>🔥 Brza prodaja! <strong>89,931</strong> Parovi su već prodani <strong class="sp-shopping-stock__remaining">Još samo 18 pari!</strong></span></p>
+                <div class="sp-quality-row">
+                  <div class="addGroup sp-quantity-control" aria-label="Količina">
+                    <button class="js-reduce" type="button" aria-label="Smanjite količinu">−</button>
+                    <input
+                      class="js-calcNumber"
+                      name="quantity"
+                      type="text"
+                      value="1"
+                      inputmode="numeric"
+                      aria-label="Količina"
+                    >
+                    <button class="js-add" type="button" aria-label="Povećajte količinu">+</button>
+                  </div>
+                  <button class="addCart btn-style cart-btn js-add-cart" type="button">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/add-cart.png?v=1788945807"
+                      alt=""
+                      width="25"
+                      height="25"
+                    >
+                    <span>Dodaj u košaricu</span>
+                  </button>
+                </div>
+                <button class="sp-btn-style btn-style js-buy-now" type="button">
+                  <span class="sp-buy-label">NARUČITE ODMAH</span>
+                  <span class="sp-buy-arrow"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_shopping_arrow.svg?v=1792549775" alt="" width="56" height="56"></span>
+                </button>
+                
+                {% comment %} Temporarily hide mobile cash-on-delivery banner
+<div class="sp-cod-banner common-pc--hide">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/11_08b1d749-ec26-41f4-858d-171444af9603.webp?v=1790754565"
+                    alt=""
+                    width="82"
+                    height="70"
+                    loading="lazy"
+                  >
+                </div>
+{% endcomment %}
+                {% comment %} Temporarily hide delivery estimate
+<p class="sp-delivery-note">
+                  <span class="sp-delivery-icon">
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/cart.png?v=1788945639"
+                      alt=""
+                      width="18"
+                      height="18"
+                    >
+                  </span>
+                  <span>
+                    Order Today Estimated Delivery:
+                    <span data-sp-delivery-start></span> – <span data-sp-delivery-end></span>
+                  </span>
+                </p>
+{% endcomment %}
+                <p class="sp-tax-note">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_65289d4c-028f-444d-8ecd-5998067fd7ef.png?v=1788949892"
+                    alt=""
+                    width="18"
+                    height="18"
+                  >
+                  Uključuje PDV i besplatno probno razdoblje
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      {% comment %} Walking shoe customer reviews {% endcomment %}
+      <section class="lp-guarantee" id="guarantee" aria-label="Jamstvo bez rizika">
+        <div class="lp-guarantee__inner">
+          <div class="lp-guarantee__card reveal-on-scroll">
+            <div class="lp-guarantee__trust">
+              <div class="lp-guarantee__trust-row">
+                <img
+                  class="lp-guarantee__trustpilot"
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/df7602c7facea48f153b8c79c2f851aa.svg?v=1791443228"
+                  alt="Trustpilot"
+                  width="160"
+                  height="28"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <span class="lp-guarantee__score stext2">4.9 / 5</span>
+                <span class="lp-guarantee__verified-pc stext2">
+                  100% provjereno na temelju 2,179 recenzija proizvoda
+                </span>
+              </div>
+              <p class="lp-guarantee__verified-mb stext14">100% provjerene recenzije</p>
+            </div>
+
+            <h2 class="lp-guarantee__title">
+              <img
+                class="lp-guarantee__emoji lp-guarantee__emoji--left"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/597d16be7e4d5e52b311d754f4ab067352ec7439290407-ioH1D7_fw658webp.webp_2x_a85d816e-c1ac-46ee-a23f-edd20535dbff.png?v=1789374169"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              >
+              <span class="lp-guarantee__title-pc stitle2">30 DANA JAMSTVA BEZ RIZIKA!</span>
+              <span class="lp-guarantee__title-mb stitle2">30-dnevno jamstvo bez rizika</span>
+              <img
+                class="lp-guarantee__emoji lp-guarantee__emoji--right"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/8312fbd9a52b8129df11b52536b0d1d575c59646301cd8-UnSr1E_fw658webp.webp_2x_2b01158d-ebcc-4147-90cd-76ee5f0a23aa.png?v=1789374169"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              >
+            </h2>
+          </div>
+
+          <div class="lp-guarantee__list">
+            <article class="lp-guarantee__item lp-guarantee__item--returns reveal-on-scroll">
+              <picture class="lp-guarantee__icon-picture"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp8_30day.svg?v=1791958361"><img
+                class="lp-guarantee__icon"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/30day-18-gold.png?v=1791529772"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              ></picture>
+              <p class="lp-guarantee__text"><span class="lp-guarantee__text--pc">30 DANA JAMSTVA POVRAT NOVCA</span><span class="lp-guarantee__text--mb">30 dana<br>Povratak</span></p>
+            </article>
+            <article class="lp-guarantee__item lp-guarantee__item--shipping reveal-on-scroll">
+              <picture class="lp-guarantee__icon-picture"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp8_24hr.svg?v=1791958360"><img
+                class="lp-guarantee__icon"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_sp9_cash-on-delivery.svg?v=1792553062"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              ></picture>
+              <p class="lp-guarantee__text"><span class="lp-guarantee__text--pc">PLAĆANJE POUZETOM COD</span><span class="lp-guarantee__text--mb">24 sata<br>Dostava</span></p>
+            </article>
+            <article class="lp-guarantee__item lp-guarantee__item--risk reveal-on-scroll">
+              <picture class="lp-guarantee__icon-picture"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp8_risk.svg?v=1791958360"><img
+                class="lp-guarantee__icon"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/free.webp?v=1790220343"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              ></picture>
+              <p class="lp-guarantee__text"><span class="lp-guarantee__text--pc">KVALITETA ZAGARANTIRANA</span><span class="lp-guarantee__text--mb">Bez rizika<br>Kupnja</span></p>
+            </article>
+            <article class="lp-guarantee__item lp-guarantee__item--local reveal-on-scroll">
+              <img
+                class="lp-guarantee__icon"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/local_HR.svg?v=1792641494"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              >
+              <p class="lp-guarantee__text"><span class="lp-guarantee__text--pc">LOKALNA DOSTAVA BRZA DOSTAVA</span><span class="lp-guarantee__text--mb"></span></p>
+            </article>
+          </div>
+          <div class="lp-guarantee__cod">
+            <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/58_3x_6c6ce61c-6ce8-4c70-b823-27f1e9194640.png?v=1792554566" alt="Plaćanje pouzećem. Platite kada primite narudžbu. Pouzdana metoda plaćanja. Sigurno i pouzdano." width="674" height="155" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </section>
+
+      <section class="lp-reviews" id="bewertungen" aria-labelledby="lp-reviews-title">
+        <div class="lp-reviews__inner">
+          <header class="lp-reviews__header"><h2 class="lp-reviews__title" id="lp-reviews-title"><span class="lp-reviews__copy--pc">Tisuće zadovoljnih korisnika</span><span class="lp-reviews__copy--mb">Tisuće zadovoljnih korisnika</span></h2><p class="lp-reviews__subtitle"><span class="lp-reviews__copy--pc">Pogledajte što drugi govore o našim cipelama za hodanje</span><span class="lp-reviews__copy--mb">Pogledajte što drugi govore o našim cipelama za hodanje</span></p></header>
+          <div class="lp-reviews__summary">
+            <div class="lp-reviews__rating">
+              <div class="lp-reviews__rating-value"><strong>4.9</strong><span>/ 5</span><img class="lp-reviews__mobile-star" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_star.svg?v=1791944213" width="18" height="18" alt="zvijezda"></div>
+              <img class="lp-reviews__rating-stars" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_rating.svg?v=1791944213" alt="Prosječna ocjena: 4.9 od 5" loading="lazy">
+              <p class="lp-reviews__rating-caption--pc">2,179+ recenzija</p>
+              <p class="lp-reviews__rating-caption--mb">2,179+ recenzija</p>
+            </div>
+            <div class="lp-reviews__distribution lp-reviews__distribution--pc"><div class="lp-reviews__distribution-row"><span>5 zvjezdica</span><span class="lp-reviews__track"><span style="width:88.89%"></span></span><span>2,149</span></div><div class="lp-reviews__distribution-row"><span>4 zvjezdice</span><span class="lp-reviews__track"><span style="width:5.09%"></span></span><span>20</span></div><div class="lp-reviews__distribution-row"><span>3 zvjezdice</span><span class="lp-reviews__track"><span style="width:2.08%"></span></span><span>9</span></div></div><div class="lp-reviews__distribution lp-reviews__distribution--mb"><div class="lp-reviews__distribution-row"><span>5 zvjezdica</span><span class="lp-reviews__track"><span style="width:88.89%"></span></span><span>2,149</span></div><div class="lp-reviews__distribution-row"><span>4 zvjezdice</span><span class="lp-reviews__track"><span style="width:18.67%"></span></span><span>20</span></div><div class="lp-reviews__distribution-row"><span>3 zvjezdice</span><span class="lp-reviews__track"><span style="width:6.86%"></span></span><span>9</span></div><div class="lp-reviews__distribution-row"><span>2 zvjezdice</span><span class="lp-reviews__track"><span style="width:1.39%"></span></span><span>1</span></div><div class="lp-reviews__distribution-row"><span>1 zvjezdica</span><span class="lp-reviews__track"><span style="width:0%"></span></span><span>0</span></div></div>
+          </div>
+          <div class="lp-reviews__slider js-reviews-grid" aria-label="Recenzije kupaca">
+            <div class="lp-reviews__list">
+              <article class="lp-reviews__card" data-review-index="1">
+                <img class="lp-reviews__photo" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp10_1.webp?v=1792727658" alt="Fiona Chapman cipele za hodanje" loading="lazy" decoding="async">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Fiona Chapman</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Tako lagane da sam ih zaboravila upaliti. Cijeli vikend na nogama, nema nikakvih bolova.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="2">
+                <img class="lp-reviews__photo" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp10_2.webp?v=1792727658" alt="Graham Whitfield cipele za hodanje" loading="lazy" decoding="async">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Graham Whitfield</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Izbirljiv sam kad je riječ o obući, ali na ove sam se naviknuo u jednom danu. Mekane su ispod pete, a vezice drže bez pritiska. Sad imaju stalno mjesto pokraj vrata.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="3">
+                <img class="lp-reviews__photo" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp10_3.webp?v=1792727658" alt="Helen Marsh cipele za hodanje" loading="lazy" decoding="async">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Helen Marsh</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Kupila sam ih iz hira. Ispalo je da su to cipele za kojima posežem svako jutro.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="4">
+                <img class="lp-reviews__photo" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp10_4.webp?v=1792727658" alt="Diana Kessler cipele za hodanje" loading="lazy" decoding="async">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Diana Kessler</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Jutarnje trčanje, obavljanje obaveza, duge šetnje — noge mi se niti jednom nisu žalile. Podrška na blagi način, ako to ima smisla.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="5">
+                <img class="lp-reviews__photo" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp10_5.webp?v=1792727658" alt="Peter Lindqvist cipele za hodanje" loading="lazy" decoding="async">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Peter Lindqvist</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Uska stopala, obično razočarana. Ne ovaj put. Ugodno od prvog dana.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="6">
+                <img class="lp-reviews__photo" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp10_6.webp?v=1792727658" alt="Susan O&#39;Leary cipele za hodanje" loading="lazy" decoding="async">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Susan O&#39;Leary</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Kći me pitala zašto u posljednje vrijeme toliko hodam. Iskreno: stopala su mi prestala prigovarati. Trebala sam ih kupiti ranije.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="7">
+                <img class="lp-reviews__photo" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-28-YH105580_sp10_7.webp?v=1792727658" alt="Rachel Bennett cipele za hodanje" loading="lazy" decoding="async">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Rachel Bennett</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Ništa upadljivo, oni samo tiho i udobno obavljaju posao. Čak im i mačka na vratima odobrava.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="8">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Clara Nyman</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Drugi par. To govori sve, ali svejedno: smiješno udobno.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="9">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Judith Hale</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Stiglo brzo, kutija netaknuta. Nosio sam ih ravno za cijeli dan obaveza, ništa osim mekoće. Veličina je bila točna, olakšanje pri naručivanju online.</p>
+                </div>
+              </article>
+              <article class="lp-reviews__card" data-review-index="10">
+                <div class="lp-reviews__body">
+                  <div class="lp-reviews__stars"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_sp6_5star.svg?v=1791945959" alt="5 od 5 zvjezdica" loading="lazy"></div>
+                  <p class="lp-reviews__name">Laura Fischer</p>
+                  <p class="lp-reviews__verified"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_correct.svg?v=1792467486" width="14" height="14" alt="" loading="lazy">Provjereni korisnici</p>
+                  <p class="lp-reviews__text">Poklon sebi nakon dugih mjesec dana. Nema žaljenja — poput papuča koje idu bilo gdje.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+{% comment %} Size module migrated from ID19 {% endcomment %}
+
+
+      {% comment %} Product service module migrated from ID19 {% endcomment %}
+      
+
+
+      
+      
+
+      
+      
+
+
+      {% comment %} 产品模块 {% endcomment %}
+      
+
+      {% comment %} FAQ migrated from ID19 {% endcomment %}
+      <section class="lp-faq" id="faq" aria-label="Često postavljana pitanja">
+        <div class="lp-faq__inner">
+          <h2 class="lp-faq__title stitle2 reveal-on-scroll">Često postavljana pitanja</h2>
+
+          <div class="lp-faq__list" data-sp-faq-list>
+            <article class="lp-faq__item reveal-on-scroll">
+              <button
+                class="lp-faq__question" id="lp-faq-question-1"
+                type="button"
+                aria-expanded="false"
+                aria-controls="lp-faq-answer-1"
+                data-sp-faq-trigger
+              >
+                <span class="lp-faq__question-text stexts2">Podupiru li dobro čukljeve i široka stopala?</span>
+                <span class="lp-faq__icon" aria-hidden="true">
+                  <picture class="lp-faq__plus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq___mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_6f3aad91-5c5c-415e-b12e-f306fa459bb9.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                  <picture class="lp-faq__minus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_-_mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_1420ce0d-38ed-4e3a-b366-6b236f871c44.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                </span>
+              </button>
+              <div class="lp-faq__answer" id="lp-faq-answer-1" role="region" aria-labelledby="lp-faq-question-1" inert>
+                <div class="lp-faq__answer-inner"><div class="lp-faq__answer-content stext2">Širi prednji dio stopala daje čukljevima i zbijenim prstima više prostora za odmor i kretanje. To smanjuje bočni pritisak dok podesivi kroj drži petu sigurnom tijekom svakodnevnog hodanja.</div></div>
+              </div>
+            </article>
+
+            <article class="lp-faq__item reveal-on-scroll">
+              <button
+                class="lp-faq__question" id="lp-faq-question-2"
+                type="button"
+                aria-expanded="false"
+                aria-controls="lp-faq-answer-2"
+                data-sp-faq-trigger
+              >
+                <span class="lp-faq__question-text stexts2">Kako široka kutija za prste poboljšava udobnost?</span>
+                <span class="lp-faq__icon" aria-hidden="true">
+                  <picture class="lp-faq__plus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq___mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_6f3aad91-5c5c-415e-b12e-f306fa459bb9.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                  <picture class="lp-faq__minus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_-_mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_1420ce0d-38ed-4e3a-b366-6b236f871c44.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                </span>
+              </button>
+              <div class="lp-faq__answer" id="lp-faq-answer-2" role="region" aria-labelledby="lp-faq-question-2" inert>
+                <div class="lp-faq__answer-inner"><div class="lp-faq__answer-content stext2">Omogućuje prirodno širenje nožnih prstiju tijekom stajanja i odgurivanja, smanjujući kompresiju oko čukljeva, čekićastih prstiju i osjetljivih zglobova. Dodatni prostor u prednjem dijelu stopala također ograničava trljanje uzrokovano krutim ili suženim oblicima cipela.</div></div>
+              </div>
+            </article>
+
+            <article class="lp-faq__item reveal-on-scroll">
+              <button
+                class="lp-faq__question" id="lp-faq-question-3"
+                type="button"
+                aria-expanded="false"
+                aria-controls="lp-faq-answer-3"
+                data-sp-faq-trigger
+              >
+                <span class="lp-faq__question-text stexts2">Hoće li se moji nožni prsti osjećati slobodnima?</span>
+                <span class="lp-faq__icon" aria-hidden="true">
+                  <picture class="lp-faq__plus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq___mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_6f3aad91-5c5c-415e-b12e-f306fa459bb9.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                  <picture class="lp-faq__minus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_-_mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_1420ce0d-38ed-4e3a-b366-6b236f871c44.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                </span>
+              </button>
+              <div class="lp-faq__answer" id="lp-faq-answer-3" role="region" aria-labelledby="lp-faq-question-3" inert>
+                <div class="lp-faq__answer-inner"><div class="lp-faq__answer-content stext2">Prostrana kutija za prste dodaje prostor bez dopuštanja slobodnog kretanja cijelog stopala. Odaberite ispravnu duljinu, osigurajte kopču i provjerite ostaje li peta na mjestu bez stiskanja prednje strane.</div></div>
+              </div>
+            </article>
+
+            <article class="lp-faq__item reveal-on-scroll">
+              <button
+                class="lp-faq__question" id="lp-faq-question-4"
+                type="button"
+                aria-expanded="false"
+                aria-controls="lp-faq-answer-4"
+                data-sp-faq-trigger
+              >
+                <span class="lp-faq__question-text stexts2">Trebam li povećati veličinu za svoj široki prednji dio stopala?</span>
+                <span class="lp-faq__icon" aria-hidden="true">
+                  <picture class="lp-faq__plus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq___mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_6f3aad91-5c5c-415e-b12e-f306fa459bb9.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                  <picture class="lp-faq__minus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_-_mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_1420ce0d-38ed-4e3a-b366-6b236f871c44.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                </span>
+              </button>
+              <div class="lp-faq__answer" id="lp-faq-answer-4" role="region" aria-labelledby="lp-faq-question-4" inert>
+                <div class="lp-faq__answer-inner"><div class="lp-faq__answer-content stext2">Izmjerite oba stopala i koristite veći rezultat kada provjeravate tablicu veličina. Ako je između veličina, veća opcija može dodati prostor, ali izbjegavajte prekomjernu duljinu koja dopušta klizanje pete ili nestabilno kretanje svaki dan.</div></div>
+              </div>
+            </article>
+
+            <article class="lp-faq__item reveal-on-scroll">
+              <button
+                class="lp-faq__question" id="lp-faq-question-5"
+                type="button"
+                aria-expanded="false"
+                aria-controls="lp-faq-answer-5"
+                data-sp-faq-trigger
+              >
+                <span class="lp-faq__question-text stexts2">Mogu li cipele stajati oko natečenih zglobova prstiju?</span>
+                <span class="lp-faq__icon" aria-hidden="true">
+                  <picture class="lp-faq__plus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq___mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_6f3aad91-5c5c-415e-b12e-f306fa459bb9.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                  <picture class="lp-faq__minus"><source media="(max-width: 767px)" srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_-_mb.svg?v=1791962092"><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_faq_1420ce0d-38ed-4e3a-b366-6b236f871c44.svg?v=1791962092" alt="" width="24" height="24" loading="lazy"></picture>
+                </span>
+              </button>
+              <div class="lp-faq__answer" id="lp-faq-answer-5" role="region" aria-labelledby="lp-faq-question-5" inert>
+                <div class="lp-faq__answer-inner"><div class="lp-faq__answer-content stext2">Fleksibilni gornji i prošireni prednji dio stopala pružaju prostor oko iritiranih područja. Podesite zatvaranje i pratite oznake pritiska; ozbiljno, iznenadno ili jednostrano oticanje treba procijeniti medicinski stručnjak.</div></div>
+              </div>
+            </article>
+          </div>
+                
+          <a class="common-button lp-faq__cta reveal-on-scroll" href="#shopping"><span class="lp-faq__cta-box"><span class="lp-faq__cta-label">NARUČITE ODMAH</span><img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon1.svg?v=1792402546" alt="" width="41" height="41" loading="lazy"></span></a>
+        </div>
+      </section>
+
+      
+      
+      
+
+      
+      
+
+
+      
+
+
+      
+      
+
+      {% comment %} 尺寸弹窗 {% endcomment %}
+      <div class="sp-size-modal" data-sp-size-modal aria-hidden="true">
+        <div class="sp-size-modal__overlay" data-sp-size-close></div>
+        <div class="sp-size-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="sp-size-modal-title">
+          <button
+            class="sp-size-modal__close"
+            type="button"
+            data-sp-size-close
+            aria-label="Zatvori vodič za veličinu"
+          >
+            ×
+          </button>
+          <h2 id="sp-size-modal-title">Tablica veličina</h2>
+          <div class="sp-size-modal__table-wrap">
+            <section class="lp-size">
+        <div class="lp-size__inner">
+          <div class="lp-size__main">
+            <div class="lp-size__table-wrap reveal-on-scroll is-visible">
+              <table class="lp-size__table">
+                <thead>
+                  <tr>
+                    <th scope="col">EU</th>
+                    <th scope="col">Duljina <span>(mm)</span></th>
+                    <th scope="col">EU</th>
+                    <th scope="col">Duljina <span>(mm)</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>36</td><td>230</td><td>45</td><td>275</td></tr>
+                  <tr><td>37</td><td>235</td><td>46</td><td>280</td></tr>
+                  <tr><td>38</td><td>240</td><td>47</td><td>285</td></tr>
+                  <tr><td>39</td><td>245</td><td>48</td><td>290</td></tr>
+                  <tr><td>40</td><td>250</td><td>49</td><td>295</td></tr>
+                  <tr><td>41</td><td>255</td><td>50</td><td>300</td></tr>
+                  <tr><td>42</td><td>260</td><td>51</td><td>305</td></tr>
+                  <tr><td>43</td><td>265</td><td>52</td><td>310</td></tr>
+                  <tr><td>44</td><td>270</td><td>53</td><td>315</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="lp-size__aside reveal-on-scroll is-visible">
+              <div class="lp-size__guarantee">
+                <img
+                  class="lp-size__guarantee-img"
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-20-YH107740_banner_30-day.webp?v=1791874468"
+                  alt="30 dana jamstva povrata novca"
+                  width="92"
+                  height="92"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <div class="lp-size__guarantee-text">
+                  <strong>Zabrinuti ste da veličina možda ne odgovara?</strong>
+                  <p class="lp-size__guarantee-copy--pc stext2">Bez brige - imate 30 dana da ih isprobate. Ako veličina ne odgovara, povrat i zamjena su besplatni.</p>
+                  <p class="lp-size__guarantee-copy--mb stext2">Ne brinite - nudimo 30-dnevno jamstvo za prilagodbu. Ako ne odgovaraju, možete ih besplatno vratiti ili zamijeniti.</p>
+                </div>
+              </div>
+
+              <picture class="lp-size__measure">
+                <source
+                  media="(min-width: 768px)"
+                  srcset="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105674-measurement.webp?v=1787552916"
+                >
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105674-measurement-mb.webp?v=1787552916"
+                  alt="Kako izmjeriti veličinu stopala"
+                  width="640"
+                  height="360"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
+
+              <ul class="lp-size__tips stext2">
+                <li>Nosite čarape i stojte prirodno tijekom mjerenja.</li>
+                <li>Dopustite varijaciju mjerenja od 0.3 do 0.5 cm.</li>
+                <li>Odaberite veću veličinu ako je između veličina.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+          </div>
+        </div>
+      </div>
+
+      {% comment %} 购物车底部加购模块 {% endcomment %}
+      <div class="sp-shopping-drawer">
+        <div class="sp-cart-drawer-overlay" data-sp-drawer-overlay aria-hidden="true"></div>
+        <aside class="sp-cart-drawer" data-sp-cart-drawer aria-hidden="true" aria-label="Košarica za kupovinu">
+          <div class="sp-cart-drawer__header">
+            <h2 class="sp-cart-drawer__heading">Košarica (<span class="js-cardNum">0</span>)</h2>
+            <button
+              class="sp-cart-drawer__close"
+              type="button"
+              data-sp-drawer-close
+              aria-label="Zatvorite košaricu"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="sp-cart-drawer__notice">✓ Sigurno plaćanje · Brza dostava · Jednostavan povrat</div>
+
+          <div class="sp-cart-drawer__body">
+            <div class="sp-cart-drawer__loading" data-sp-cart-loading>Učitavanje vaše košarice…</div>
+
+            <div class="sp-cart-drawer__empty" data-sp-cart-empty>
+              <div class="sp-cart-drawer__empty-icon">🛒</div>
+              <p>Vaša košarica je trenutno prazna.</p>
+              <button class="sp-cart-drawer__continue" type="button" data-sp-drawer-close>Nastavite kupovati</button>
+            </div>
+
+            <div class="sp-cart-drawer__items" data-sp-cart-items aria-live="polite"></div>
+          </div>
+
+          <div class="sp-cart-drawer__footer" data-sp-cart-footer hidden>
+            <div class="sp-cart-drawer__note js-cart-drawer__note">
+              <button
+                class="sp-cart-drawer__note-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="sp-cart-note-panel"
+                data-sp-cart-note-toggle
+              >
+                <span data-sp-cart-note-toggle-label>Dodajte napomenu o narudžbi</span>
+                <span class="sp-cart-drawer__note-chevron" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z" fill="#000"></path>
+                  </svg>
+                </span>
+              </button>
+              <div class="sp-cart-drawer__note-panel" id="sp-cart-note-panel" data-sp-cart-note-panel hidden>
+                {% comment %} <label class="sp-cart-drawer__note-label" for="sp-cart-note">Order note</label> {% endcomment %}
+                <textarea
+                  class="sp-cart-drawer__note-input"
+                  id="sp-cart-note"
+                  maxlength="500"
+                  placeholder="Dodajte upute za dostavu ili napomenu o svojoj narudžbi"
+                  data-sp-cart-note
+                ></textarea>
+                <div class="sp-cart-drawer__note-actions">
+                  <span class="sp-cart-drawer__note-status" data-sp-cart-note-status aria-live="polite"></span>
+                  <button class="sp-cart-drawer__note-save" type="button" data-sp-cart-note-save>Spremi bilješku</button>
+                </div>
+              </div>
+            </div>
+            <div class="sp-cart-drawer__subtotal">
+              <span>Međuzbroj</span>
+              <span class="sp-cart-drawer__subtotal-value" data-sp-cart-total></span>
+            </div>
+            <p class="sp-cart-drawer__tax-note">Porezi i poštarina obračunavaju se prilikom naplate.</p>
+            <a class="sp-cart-drawer__checkout js-cart-drawer__checkout" href="/checkout"> Sigurna naplata </a>
+          </div>
+        </aside>
+      </div>
+      <!-- 页面底部加购模块 -->
+      <div class="sp-fixed-purchase-mount">
+        <section class="sp-fixed-purchase" data-sp-fixed-purchase aria-label="Brza kupnja">
+          <div class="sp-fixed-purchase__inner">
+            <div class="sp-fixed-purchase__product">
+              {%- assign sp_fixed_product_image = product.selected_or_first_available_variant.featured_image
+                | default: product.featured_image
+              -%}
+              {%- if sp_fixed_product_image -%}
+                {%- assign sp_fixed_product_image_url = sp_fixed_product_image
+                  | image_url: width: sp_fixed_product_image.width
+                  | split: '&width='
+                  | first
+                -%}
+              {%- else -%}
+                {%- assign sp_fixed_product_image_url = '' -%}
+              {%- endif -%}
+              <img
+                class="sp-fixed-purchase__image js-bind-image"
+                src="{{ sp_fixed_product_image_url }}"
+                alt="{{ product.title | escape }}"
+                width="80"
+                height="80"
+              >
+              <div class="sp-fixed-purchase__meta">
+                <p class="sp-fixed-purchase__title js-bind-title">{{ product.title }}</p>
+                <div class="sp-fixed-purchase__prices">
+                  <span class="sp-fixed-purchase__price js-bind-price"></span>
+                  <span class="sp-fixed-purchase__compare js-bind-compare"></span>
+                </div>
+              </div>
+            </div>
+
+            {%- unless product.has_only_default_variant -%}
+              <div class="sp-fixed-purchase__options">
+                {%- for option in product.options_with_values -%}
+                  <select
+                    class="sp-fixed-purchase__select js-variant-select"
+                    data-option-index="{{ forloop.index0 }}"
+                    aria-label="{{ option.name | escape }}"
+                  >
+                    <option value="" selected>{{ option.name | escape }}</option>
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}">
+                        {{ value | escape }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+
+            <div class="sp-fixed-purchase__actions">
+              <div class="sp-fixed-purchase__qty" aria-label="Količina">
+                <button class="js-reduce" type="button" aria-label="Smanjite količinu">−</button>
+                <input
+                  class="js-calcNumber"
+                  type="number"
+                  min="1"
+                  max="200"
+                  value="1"
+                  inputmode="numeric"
+                  aria-label="Količina"
+                >
+                <button class="js-add" type="button" aria-label="Povećajte količinu">+</button>
+              </div>
+
+              <button
+                class="sp-fixed-purchase__cart js-fixed-purchase__cart js-add-cart"
+                type="button"
+                aria-label="Dodaj u košaricu"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 7H6M10 20a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm9 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="js-cardNum{% if cart.item_count < 1 %} sp-gray{% endif %}">{{ cart.item_count }}</span>
+              </button>
+
+              <button class="sp-fixed-purchase__buy js-buy-now" type="button">NARUČITE ODMAH</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      {% comment %} 回到顶部 {% endcomment %}
+      <button class="sp-to-top" type="button" aria-label="Povratak na vrh" title="Povratak na vrh" >
+        <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/ID-25-YH008260_arrow-icon1.svg?v=1792402546" alt="" width="20" height="20">
+      </button>
+    </div>
+
+    {% comment %} 产品需要的数据 {% endcomment %}
+    <script>
+      window.product = {{ product.variants | json }}; {% comment %} 产品数据 {% endcomment %}
+      window.options = {{ product.options_with_values | json }}; {% comment %} 产品选项数据 {% endcomment %}
+      window.cartCount = {{ cart.item_count | json }}; {% comment %} 购物车数量 {% endcomment %}
+      window.shopMoneyFormat = {{ shop.money_format | json }}; {% comment %} 商店货币格式 {% endcomment %}
+      window.spCurrencyCode = {{ cart.currency.iso_code | default: localization.country.currency.iso_code | json }}; {% comment %} 商店货币代码 {% endcomment %}
+      window.spLocale = {{ request.locale.iso_code | json }}; {% comment %} 商店语言代码 {% endcomment %}
+      window.spSelectedVariantId = {{ product.selected_or_first_available_variant.id | json }}; {% comment %} 产品选定变体ID {% endcomment %}
+      window.spProductTitle = {{ product.title | json }}; {% comment %} 产品标题 {% endcomment %}
+    </script>
+
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+    <script src="https://cdn.shopify.com/s/files/1/0807/0086/6801/files/ID-28-YH008260-HR_1.js?v=1792995901" defer></script>
+    
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<div class="wpage-template">
+
+
+        {% assign product_id = product.metafields.custom.products_template_id.value.pid |  default: product.id | plus: 0 %}
+
+        {% case product_id %}
+            {% when 8005623218219 %}
+                {% render 'cpage8005623218219-1725' %}
+            {% else %}
+                <h1>{{ product.title }}</h1>
+        {% endcase %}
+
+</div>
+
+
+{% schema %}
+{
+    "name": "WPage Template Copy",
+    "settings": [],
+    "presets": [
+        {
+            "name": "WPage Template Copy"
+        }
+    ]
+}
+{% endschema %}

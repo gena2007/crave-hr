@@ -1,0 +1,748 @@
+<style>
+  .comp-table-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mb }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mb }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+  @media screen and (min-width: 750px) {
+    .comp-table-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .comp-table-{{ section.id }} .comp-tabs__nav {
+    background-color: {{ section.settings.tab_nav_bg }};
+  }
+  .comp-table-{{ section.id }} .comp-tabs__btn.is-active {
+    background-color: {{ section.settings.tab_active_bg }} !important;
+    color: {{ section.settings.tab_active_text }} !important;
+  }
+  .comp-table-{{ section.id }} .comp-main-container {
+    background-color: {{ section.settings.table_bg }};
+    border: 1px solid {{ section.settings.table_border_color }};
+  }
+  .comp-table-{{ section.id }} .comp-col--highlight {
+    background-color: {{ section.settings.highlight_bg }};
+    border-left: 1px solid {{ section.settings.highlight_border }};
+    border-right: 1px solid {{ section.settings.highlight_border }};
+  }
+  .comp-table-{{ section.id }} .comp-cell--header.comp-col--highlight {
+    border-top: 1px solid {{ section.settings.highlight_border }};
+  }
+  .comp-table-{{ section.id }} .comp-cell.comp-col--highlight.comp-cell--last {
+    border-bottom: 1px solid {{ section.settings.highlight_border }};
+  }
+</style>
+
+<div class="comparison-table-section comp-table-{{ section.id }} page-width">
+  <div class="comp-header text-center">
+    {%- if section.settings.title != blank -%}
+      <h2 class="comp-header__title inline-richtext">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.description != blank -%}
+      <div class="comp-header__desc rte">{{ section.settings.description }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <!-- Tabs -->
+    <div class="comp-tabs__nav-wrapper">
+      <div class="comp-tabs__nav" role="tablist">
+        {%- for block in section.blocks -%}
+          {%- assign marks = block.settings.row_1_comp | append: ',' | append: block.settings.row_2_comp | append: ',' | append: block.settings.row_3_comp | append: ',' | append: block.settings.row_4_comp | append: ',' | append: block.settings.row_5_comp -%}
+          <button 
+            type="button" 
+            class="comp-tabs__btn{% if forloop.first %} is-active{% endif %}" 
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            data-competitor-name="{{ block.settings.competitor_name | escape }}"
+            data-marks="{{ marks }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.tab_name }}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="comp-main-container">
+      <div class="comp-grid">
+        
+        <div class="comp-cell comp-cell--header comp-cell--empty" aria-hidden="true"> </div>
+        
+        <div class="comp-cell comp-cell--header comp-col--highlight comp-cell--brand">
+          <div class="comp-brand__name">{{ shop.name | upcase}}</div>
+          {%- if section.settings.brand_sub != blank -%}
+            <div class="comp-brand__sub">{{ section.settings.brand_sub }}</div>
+          {%- endif -%}
+        </div>
+
+        <div class="comp-cell comp-cell--header comp-cell--competitor">
+          <div class="comp-competitor__name dynamic-comp-name">{{ section.blocks.first.settings.competitor_name }}</div>
+        </div>
+
+        {%- assign total_valid_rows = 0 -%}
+        {%- for i in (1..5) -%}
+          {%- assign text_key = 'row_' | append: i | append: '_text' -%}
+          {%- if section.settings[text_key] != blank -%}
+            {%- assign total_valid_rows = total_valid_rows | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- assign current_valid_index = 0 -%}
+        {%- for i in (1..5) -%}
+          {%- assign row_text_key = 'row_' | append: i | append: '_text' -%}
+          {%- assign row_brand_key = 'row_' | append: i | append: '_brand' -%}
+          
+          {%- assign feature_text = section.settings[row_text_key] -%}
+          {%- if feature_text != blank -%}
+            {%- assign current_valid_index = current_valid_index | plus: 1 -%}
+            {%- assign is_last_row = false -%}
+            {%- if current_valid_index == total_valid_rows -%}
+              {%- assign is_last_row = true -%}
+            {%- endif -%}
+
+            <div class="comp-cell comp-cell--feature{% if is_last_row %} comp-cell--last{% endif %}">
+              <span>{{ feature_text }}</span>
+            </div>
+            
+            <div class="comp-cell comp-col--highlight comp-cell--icon{% if is_last_row %} comp-cell--last{% endif %}">
+              {%- if section.settings[row_brand_key] == 'true' -%}
+                <span class="comp-icon comp-icon--true" role="img" aria-label="Yes">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </span>
+              {%- else -%}
+                <span class="comp-icon comp-icon--false" role="img" aria-label="No">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path></svg>
+                </span>
+              {%- endif -%}
+            </div>
+
+            <div class="comp-cell comp-cell--icon dynamic-comp-cell{% if is_last_row %} comp-cell--last{% endif %}" data-row-index="{{ i | minus: 1 }}">
+              {%- assign comp_key = 'row_' | append: i | append: '_comp' -%}
+              {%- assign first_block_mark = section.blocks.first.settings[comp_key] -%}
+              {%- if first_block_mark == 'true' -%}
+                <span class="comp-icon comp-icon--true" role="img" aria-label="Yes">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </span>
+              {%- else -%}
+                <span class="comp-icon comp-icon--false" role="img" aria-label="No">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path></svg>
+                </span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<div style="display:none;">
+  <div id="comp-svg-true-{{ section.id }}">
+    <span class="comp-icon comp-icon--true" role="img" aria-label="Yes">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </span>
+  </div>
+  <div id="comp-svg-false-{{ section.id }}">
+    <span class="comp-icon comp-icon--false" role="img" aria-label="No">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path></svg>
+    </span>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.comp-table-{{ section.id }} .comp-tabs__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sectionContainer = btn.closest('.comp-table-{{ section.id }}');
+      
+      sectionContainer.querySelectorAll('.comp-tabs__btn').forEach(b => {
+        b.classList.remove('is-active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected', 'true');
+      
+      const compNameContainer = sectionContainer.querySelector('.dynamic-comp-name');
+      if (compNameContainer) {
+        compNameContainer.textContent = btn.getAttribute('data-competitor-name');
+      }
+      
+      const marksArray = btn.getAttribute('data-marks').split(',');
+      const svgTrueHtml = document.getElementById('comp-svg-true-{{ section.id }}').innerHTML;
+      const svgFalseHtml = document.getElementById('comp-svg-false-{{ section.id }}').innerHTML;
+      
+      sectionContainer.querySelectorAll('.dynamic-comp-cell').forEach(cell => {
+        const rowIndex = parseInt(cell.getAttribute('data-row-index'), 10);
+        const isTrue = marksArray[rowIndex] === 'true';
+        cell.innerHTML = isTrue ? svgTrueHtml : svgFalseHtml;
+      });
+    });
+  });
+</script>
+
+<style>
+  .comparison-table-section {
+    font-family: inherit;
+    color: #121212;
+    box-sizing: border-box;
+  }
+  .comp-header {
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  .comp-header__title {
+    margin: 0 0 12px 0;
+    font-weight: 700;
+    font-size:36px;
+    color: #151515;
+  }
+  .comp-header__desc {
+    color: #6c757d;
+    font-size: 22px;
+  }
+
+  .comp-tabs__nav-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 0;
+  }
+
+  .comp-tabs__nav-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .comp-tabs__nav-wrapper {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+  }
+
+  .comp-tabs__nav {
+    display: inline-flex;
+    padding: 6px;
+    border-radius: 30px;
+    gap: 4px;
+    flex-wrap: nowrap;
+  }
+  .comp-tabs__btn {
+    border: none;
+    background: transparent;
+    padding: 10px 22px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #6c757d;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  
+  .comp-main-container {
+    border-radius: 16px;
+    overflow: visible;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.02);
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  .comp-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(100px, 28vw, 210px) clamp(96px, 27vw, 190px);
+    align-items: stretch;
+  }
+  .comp-cell {
+    padding: 18px 12px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f0ede4;
+    box-sizing: border-box;
+  }
+  .comp-cell.comp-cell--last {
+    border-bottom: none !important;
+  }
+  
+  .comp-cell--header {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #e5e1d3;
+  }
+  .comp-cell--empty {
+    border-bottom: 1px solid #e5e1d3;
+    background: transparent;
+  }
+  
+  .comp-cell--feature {
+    justify-content: flex-start;
+    font-weight: 600;
+    color: #1d3557;
+    font-size: 16px;
+    line-height: 1.4;
+    padding-right: 15px;
+  }
+  .comp-cell--icon {
+    justify-content: center;
+  }
+  
+  .comp-col--highlight {
+    position: relative;
+    z-index: 2;
+  }
+  .comp-cell--header.comp-col--highlight {
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    margin-top: -10px;
+    padding-top: 25px;
+  }
+  .comp-grid .comp-cell.comp-col--highlight.comp-cell--last {
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+    padding-bottom: 25px;
+  }
+  
+  .comp-brand__name {
+    font-weight: 700;
+    color: #1d3557;
+    font-size: 18px;
+  }
+  .comp-brand__sub {
+    font-size: 14px;
+    color: #52b788;
+    font-weight: 600;
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+  .comp-competitor__name {
+    font-weight: 700;
+    color: #495057;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .comp-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .comp-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+  .comp-icon--true {
+    background-color: #74c69d;
+    color: #ffffff;
+    box-shadow: 0 0 0 6px rgba(116, 198, 157, 0.2);
+  }
+  .comp-icon--false {
+    background-color: #ca5757;
+    color: #ffffff;
+    box-shadow: 0 0 0 6px rgba(202, 87, 87, 0.18);
+  }
+
+  @media screen and (max-width: 749px) {
+    .comp-tabs__nav-wrapper {
+      justify-content: flex-start;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .comp-header__title {
+    font-size:24px;
+  }
+    .comp-header__desc {
+    font-size: 16px;
+  }
+    .comp-tabs__btn {
+    font-size: 14px;
+  }
+    .comp-main-container {
+      padding: 8px 4px;
+      margin: 0 0;
+    }
+    .comp-cell {
+      padding: 14px 6px;
+      min-height: 60px;
+    }
+    .comp-cell--header {
+      padding-bottom: 12px;
+      min-height: 70px;
+    }
+    .comp-cell--header.comp-col--highlight {
+      margin-top: -6px;
+      padding-top: 18px;
+    }
+    .comp-grid .comp-cell.comp-col--highlight.comp-cell--last {
+      padding-bottom: 20px;
+    }
+    .comp-cell--feature {
+      font-size: 14px;
+      padding-right: 4px;
+      line-height: 1.25;
+    }
+    .comp-brand__name { font-size: 15px; }
+    .comp-brand__sub { font-size: 11px; transform: scale(0.92); margin-top: 2px; letter-spacing: 0;}
+    .comp-competitor__name { font-size: 1.3rem; }
+    .comp-icon {
+      width: 28px;
+      height: 28px;
+    }
+    .comp-icon svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Ida Comparison Tabs Table",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Fixed Copy Settings"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "One Shoe. Replaces Everything."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>See how 店名 compares to the alternatives.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Our Brand Column Info"
+    },
+    {
+      "type": "text",
+      "id": "brand_sub",
+      "label": "Our Brand Subtitle",
+      "default": "★ The smart choice"
+    },
+    {
+      "type": "header",
+      "content": "Row Features List"
+    },
+    {
+      "type": "text",
+      "id": "row_1_text",
+      "label": "Row 1 Feature Text",
+      "default": "Wide toe box, room to splay"
+    },
+    {
+      "type": "select",
+      "id": "row_1_brand",
+      "label": "Row 1: Our Brand Status",
+      "options": [
+        { "value": "true", "label": "Check" },
+        { "value": "false", "label": "Cross" }
+      ],
+      "default": "true"
+    },
+    {
+      "type": "text",
+      "id": "row_2_text",
+      "label": "Row 2 Feature Text",
+      "default": "Orthopedic, supportive sole"
+    },
+    {
+      "type": "select",
+      "id": "row_2_brand",
+      "label": "Row 2: Our Brand Status",
+      "options": [
+        { "value": "true", "label": "Check" },
+        { "value": "false", "label": "Cross" }
+      ],
+      "default": "true"
+    },
+    {
+      "type": "text",
+      "id": "row_3_text",
+      "label": "Row 3 Feature Text",
+      "default": "Eases pressure on joints"
+    },
+    {
+      "type": "select",
+      "id": "row_3_brand",
+      "label": "Row 3: Our Brand Status",
+      "options": [
+        { "value": "true", "label": "Check" },
+        { "value": "false", "label": "Cross" }
+      ],
+      "default": "true"
+    },
+    {
+      "type": "text",
+      "id": "row_4_text",
+      "label": "Row 4 Feature Text",
+      "default": "Podiatrist-developed"
+    },
+    {
+      "type": "select",
+      "id": "row_4_brand",
+      "label": "Row 4: Our Brand Status",
+      "options": [
+        { "value": "true", "label": "Check" },
+        { "value": "false", "label": "Cross" }
+      ],
+      "default": "true"
+    },
+    {
+      "type": "text",
+      "id": "row_5_text",
+      "label": "Row 5 Feature Text",
+      "default": "Comfortable all day"
+    },
+    {
+      "type": "select",
+      "id": "row_5_brand",
+      "label": "Row 5: Our Brand Status",
+      "options": [
+        { "value": "true", "label": "Check" },
+        { "value": "false", "label": "Cross" }
+      ],
+      "default": "true"
+    },
+    {
+      "type": "header",
+      "content": "Theme Styling Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "tab_nav_bg",
+      "label": "Tab Nav Bar Background",
+      "default": "#fbfbf9"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Active Tab Background",
+      "default": "#c28d59"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Active Tab Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "table_bg",
+      "label": "Table Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "table_border_color",
+      "label": "Table Card Border",
+      "default": "#f0ede4"
+    },
+    {
+      "type": "color",
+      "id": "highlight_bg",
+      "label": "Highlighted Column Background",
+      "default": "#fbfbf9"
+    },
+    {
+      "type": "color",
+      "id": "highlight_border",
+      "label": "Highlighted Column Border",
+      "default": "#d9d9d9ff"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Bottom Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mb",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Top Padding",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mb",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Bottom Padding",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Compare Tab Target",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_name",
+          "label": "Tab Trigger Button Text",
+          "default": "vs Sneakers"
+        },
+        {
+          "type": "text",
+          "id": "competitor_name",
+          "label": "Competitor Column Header Name",
+          "default": "Regular Sneakers"
+        },
+        {
+          "type": "header",
+          "content": "Competitor Icon Mapping"
+        },
+        {
+          "type": "select",
+          "id": "row_1_comp",
+          "label": "Row 1 Status",
+          "options": [
+            { "value": "true", "label": "Check" },
+            { "value": "false", "label": "Cross" }
+          ],
+          "default": "false"
+        },
+        {
+          "type": "select",
+          "id": "row_2_comp",
+          "label": "Row 2 Status",
+          "options": [
+            { "value": "true", "label": "Check" },
+            { "value": "false", "label": "Cross" }
+          ],
+          "default": "false"
+        },
+        {
+          "type": "select",
+          "id": "row_3_comp",
+          "label": "Row 3 Status",
+          "options": [
+            { "value": "true", "label": "Check" },
+            { "value": "false", "label": "Cross" }
+          ],
+          "default": "false"
+        },
+        {
+          "type": "select",
+          "id": "row_4_comp",
+          "label": "Row 4 Status",
+          "options": [
+            { "value": "true", "label": "Check" },
+            { "value": "false", "label": "Cross" }
+          ],
+          "default": "false"
+        },
+        {
+          "type": "select",
+          "id": "row_5_comp",
+          "label": "Row 5 Status",
+          "options": [
+            { "value": "true", "label": "Check" },
+            { "value": "false", "label": "Cross" }
+          ],
+          "default": "false"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ida Comparison Tabs Table",
+      "settings": {
+      "title": "Una Scarpa. Sostituisce Tutte le Altre.",
+      "description": "<p>Scopri come 店名 si confronta con le alternative.</p>",
+      "brand_sub": "★ La scelta intelligente",
+      "row_1_text": "<p>Punta larga, spazio per allargare le dita</p>",
+      "row_2_text": "<p>Suola ortopedica e di supporto</p>",
+      "row_3_text": "<p>Riduce la pressione sulle articolazioni</p>",
+      "row_4_text": "<p>Sviluppata da podologi</p>",
+      "row_5_text": "<p>Comfort per tutto il giorno</p>"
+    },
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "vs. Sneakers",
+            "competitor_name": "Sneakers comuni",
+            "row_1_comp": "false",
+            "row_2_comp": "false",
+            "row_3_comp": "false",
+            "row_4_comp": "false",
+            "row_5_comp": "false"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "vs. Ortopediche",
+            "competitor_name": "Scarpe ortopediche",
+            "row_1_comp": "false",
+            "row_2_comp": "false",
+            "row_3_comp": "true",
+            "row_4_comp": "true",
+            "row_5_comp": "false"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_name": "vs. Tradizionali",
+            "competitor_name": "Scarpe tradizionali",
+            "row_1_comp": "true",
+            "row_2_comp": "true",
+            "row_3_comp": "false",
+            "row_4_comp": "false",
+            "row_5_comp": "false"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

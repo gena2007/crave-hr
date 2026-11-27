@@ -1,0 +1,86 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "wpage_template_copy_BLwTAf": {
+      "type": "wpage-template-copy",
+      "name": "WPage Template Copy",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "custom_liquid_8K7gQy": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"margin: 0; padding: 0;\">\n  <div style=\"display: flex; align-items: center; margin-bottom: 10px;\">\n    <img src=\"https://cdn.shopify.com/s/files/1/0883/2712/7322/files/9165774_plane_airplane_icon_eca1c8f0-51b6-4a03-a0e5-63f883bffb3a.svg?v=1764927829\" alt=\"service\" style=\"width: 20px; height: 20px; margin-right: 8px;\">\n    <span style=\"font-weight:  ;font-size: 15px;\">Doprava zdarma pri objednávkach nad 73 €</span>\n  </div>\n  \n  <div style=\"display: flex; align-items: center; margin-bottom: 10px;\">\n    <img src=\"https://watsont.com/cdn/shop/files/2.png?v=1755225618&width=1024\" alt=\"security\n\" style=\"width: 20px; height: 20px; margin-right: 8px;\">\n    <span style=\"font-size: 15px;color: #ff0000;font-weight: bold;\">Platba pri doručení</span>\n  </div>\n  \n  <div style=\"display: flex; align-items: center; margin-bottom: 10px;\">\n    <img src=\"https://watsont.com/cdn/shop/files/24h-1.png?v=1755225618&width=1024\" alt=\"service\" style=\"width: 20px; height: 20px; margin-right: 8px;\">\n    <span style=\"font-weight:  ;font-size: 15px;\">E-mail :service@booofer.com</span>\n  </div>\n  \n  <div style=\"display: flex; align-items: center;margin-bottom: 10px;\">\n    <img src=\"https://watsont.com/cdn/shop/files/5.png?v=1755225618&width=1024\" alt=\"guarantee\" style=\"width: 20px; height: 20px; margin-right: 8px;\">\n    <span style=\"font-size: 15px;\">Záruka vrátenia peňazí, ak nie ste spokojní</span>\n  </div>\n\n  <div style=\"display: flex; align-items: center; margin-bottom: 10px;\">\n     <img src=\"https://cdn.shopify.com/s/files/1/0883/2712/7322/files/time_1a3ceca6-81fa-418e-adfe-ed1c4453b6e5.png?v=1764927508\" style=\"width: 25px; height: 25px; margin-right: 8px;\">\n    <span style=\"font-size: 15px;\">Dodacia lehota: 5-14 pracovných dní</span>\n  </div>\n\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "custom_liquid_8K7gQy"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".product__info-container {background-color: #f5f5f5; border-radius: 8px; padding: 16px;}"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 16
+      }
+    },
+  },
+  "order": [
+    "wpage_template_copy_BLwTAf",
+    "main",
+  ]
+}

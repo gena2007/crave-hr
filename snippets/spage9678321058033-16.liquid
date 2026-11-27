@@ -1,0 +1,1927 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code | default: 'hr' }}" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+      rel="preload"
+      as="image"
+      href="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_bg_pc.webp?v=1787825077"
+      media="(min-width: 768px)"
+      fetchpriority="high"
+    >
+    <link
+      rel="preload"
+      as="image"
+      href="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_bg_mb_2.webp?v=1787970324"
+      media="(max-width: 767px)"
+      fetchpriority="high"
+    >
+  </head>
+  <body>
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+    <link rel="stylesheet" href="https://cdn.shopify.com/s/files/1/0807/0086/6801/files/spage9678321058033-16.css?v=1789020856">
+    <style>
+      #sticky-cart-portal{display:block !important;}
+    </style>
+
+    <div
+      id="root"
+      data-page-id="ID-16-YH105580-hr-G43"
+      style="
+        --wrapper-mw: 1400px;
+        --wrapper-padding-mb: 16px;
+        --primary-color: #FFA41C;
+        --primary-hover-color: #FFA41C;
+        --accent-color: #FFA41C;
+        --secondary-color: #f3f3f3;
+        --third-color: #ffffff;
+        --btn-color: #050505;
+        --border-color: #050505;
+      "
+    >
+
+      {% liquid
+        assign page_discount_variant = product.selected_or_first_available_variant
+        assign page_discount_price = page_discount_variant.price
+        assign page_discount_compare = page_discount_variant.compare_at_price
+        assign page_discount_percent = 0
+        if page_discount_compare > page_discount_price and page_discount_compare > 0
+          assign page_discount_percent = page_discount_compare | minus: page_discount_price | times: 100.0 | divided_by: page_discount_compare | ceil
+        endif
+      %}
+
+      <section class="sph" id="sph-header" data-sp-header aria-label="Encabezado de la página">
+        {% liquid
+          assign sph_nav_text = 'Vodič za veličine|||Recenzije|||Česta pitanja' | split: '|||'
+          assign sph_nav_target = 'size|||reviews|||faq' | split: '|||'
+          assign sph_nav_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/size-chart.svg?v=1786778904|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/reviews.svg?v=1786778904|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/faq.svg?v=1786778904' | split: '|||'
+        %}
+
+        <div class="sph__inner">
+          <a class="sph__logo" href="#shopping" aria-label="{{ shop.name | escape }}">
+            <img src="{{ settings.logo | image_url: width: 600 }}" alt="{{ shop.name | escape }}" width="136" height="45" loading="eager" decoding="async">
+          </a>
+
+          <div class="sph__perks" aria-label="Pogodnosti kupnje">
+            <span class="sph__perk"><span>Plaćanje pouzećem</span></span>
+            <span class="sph__perk sph__perk--delivery">
+              <span>Brza dostava</span>
+              <img
+                src="https://cdn.shopify.com/s/files/1/0991/9614/1880/files/hot.png?v=1776492941"
+                alt=""
+                width="35"
+                height="25"
+                loading="eager"
+                decoding="async"
+              >
+            </span>
+          </div>
+
+          <nav class="sph__nav" aria-label="Navigacija po odjeljcima">
+            {%- for text in sph_nav_text -%}
+              {%- assign nav_label = text | strip -%}
+              {%- assign nav_target = sph_nav_target[forloop.index0] | default: '' | replace: '#', '' | strip -%}
+              {%- assign nav_icon_url = sph_nav_icon[forloop.index0] | default: '' | strip -%}
+              <a class="sph__nav-link sph__nav-link--{{ forloop.index }}" href="#{{ nav_target | escape }}">
+                <span>{{ nav_label | escape }}</span>
+                <img src="{{ nav_icon_url }}" alt="" width="20" height="20" loading="lazy" decoding="async">
+              </a>
+              {%- unless forloop.last -%}
+                <span class="sph__nav-sep" aria-hidden="true"></span>
+              {%- endunless -%}
+            {%- endfor -%}
+          </nav>
+
+          <button class="sph__action sph__action--cart js-cart" type="button">
+            <span>Pogledaj košaricu</span>
+            <span class="sph__action-icon sph__action-icon--cart" aria-hidden="true">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/cart_cb02b4fd-a771-4dbf-b31d-a4c05131be1b.svg?v=1786778904"
+                alt=""
+                width="27"
+                height="27"
+                loading="eager"
+                decoding="async"
+              >
+              <span class="sph__cart-count js-cardNum{% if cart.item_count < 1 %} sp-gray{% endif %}">{{ cart.item_count }}</span>
+            </span>
+          </button>
+
+          <a class="sph__action sph__action--shop" href="#shopping">
+            <span>Kupi odmah</span>
+            <span class="sph__action-icon sph__action-icon--arrow" aria-hidden="true">
+              <img
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2374239d8cd7f0857b5ab4b254ddf575.svg?v=1786779537"
+                alt=""
+                width="18"
+                height="9"
+                loading="eager"
+                decoding="async"
+              >
+            </span>
+          </a>
+        </div>
+
+        <div class="sph__mobile-inner">
+          <a class="sph__mobile-logo" href="#shopping" aria-label="{{ shop.name | escape }}">
+            <img src="{{ settings.logo | image_url: width: 600}}" alt="{{ shop.name | escape }}" width="145" height="38" loading="eager" decoding="async">
+          </a>
+
+          <div class="sph__mobile-actions">
+            <a class="sph__mobile-buy" href="#shopping">
+              <span class="sph__mobile-buy-icon" aria-hidden="true">
+                <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon.svg?v=1786518955" alt="" width="19" height="18" loading="eager" decoding="async">
+                <span class="sph__mobile-cart-count js-cardNum{% if cart.item_count < 1 %} sp-gray{% endif %}">{{ cart.item_count }}</span>
+              </span>
+              <span>Kupi odmah</span>
+            </a>
+
+            <button class="sph__mobile-menu js-sp-header-menu-btn" type="button" aria-label="Otvori navigacijski izbornik" aria-expanded="false" aria-controls="sph-drawer">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="sph__drawer-backdrop js-sp-header-menu-btn" data-header-menu aria-hidden="true"></div>
+        <aside class="sph__drawer" id="sph-drawer" data-header-menu aria-hidden="true">
+          <div class="sph__drawer-head">
+            <strong>Izbornik</strong>
+            <button class="sph__drawer-close js-sp-header-menu-btn" type="button" aria-label="Zatvori navigacijski izbornik">×</button>
+          </div>
+          <nav class="sph__drawer-nav" aria-label="Mobilna navigacija">
+            {%- for text in sph_nav_text -%}
+              {%- assign nav_label = text | strip -%}
+              {%- assign nav_target = sph_nav_target[forloop.index0] | default: '' | replace: '#', '' | strip -%}
+              {%- assign nav_icon_url = sph_nav_icon[forloop.index0] | default: '' | strip -%}
+              <a class="sph__drawer-link js-sp-header-menu-btn" href="#{{ nav_target | escape }}">
+                <img src="{{ nav_icon_url }}" alt="" width="20" height="20" loading="lazy" decoding="async">
+                <span>{{ nav_label | escape }}</span>
+              </a>
+            {%- endfor -%}
+            <button class="sph__drawer-link js-cart js-sp-header-menu-btn" type="button">
+              <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon.svg?v=1786518955" alt="" width="20" height="20" loading="lazy" decoding="async">
+              <span>Coș (<span class="js-cardNum">{{ cart.item_count }}</span>)</span>
+            </button>
+          </nav>
+        </aside>
+      </section>
+
+      <section class="sp-part banner-box v24-banner" aria-label="Ortopedske cipele za hodanje">
+        {% liquid
+          assign banner_rating_alt = 'Ocjena kupaca'
+          assign banner_title_line_1 = 'Hodajte dulje,'
+          assign banner_title_line_2 = 'Osjećajte se bolje pri svakom koraku'
+          assign banner_title_mobile = 'Hodajte dulje, osjećajte se bolje pri svakom koraku'
+          assign banner_subtitle = 'Ortopedske cipele za hodanje, stvorene za svakodnevnu udobnost'
+          assign banner_description = 'Ortopedske cipele s potporom koja ublažava bol za sigurnije svakodnevno hodanje.'
+          assign banner_cta_before_discount = 'Uštedite do'
+          assign banner_cta_after_discount = 'odmah'
+          assign banner_features_label = 'Prednosti proizvoda'
+          assign banner_feature_labels = 'ORTOPEDSKE|||UBLAŽAVANJE BOLI|||ERGONOMSKE' | split: '|||'
+          assign banner_background_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_bg_pc.webp?v=1787825077'
+          assign banner_background_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_bg_mb_2.webp?v=1787970324'
+          assign banner_rating_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_rating_pc.svg?v=1787825075'
+          assign banner_rating_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_rating_mb.svg?v=1787825076'
+          assign banner_button_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+          assign banner_quality = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_quality.webp?v=1787825076'
+          assign banner_cross_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_cross_icon_5019e9cd-aa91-4863-b901-5de765557fd0.webp?v=1787825076'
+          assign banner_feature_icons = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_orthopedic.svg?v=1787825076|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_pain-relief.svg?v=1787825076|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_banner_ergonomic.svg?v=1787825076' | split: '|||'
+        %}
+
+        <picture class="v24-banner__background" aria-hidden="true">
+          <source media="(max-width: 767px)" srcset="{{ banner_background_mb }}">
+          <img src="{{ banner_background_pc }}" alt="" width="1921" height="850" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+
+        <div class="v24-banner__inner">
+          <div class="v24-banner__content">
+            <img
+              class="v24-banner__rating v24-banner__rating--pc"
+              src="{{ banner_rating_pc }}"
+              alt="{{ banner_rating_alt | escape }}"
+              width="360"
+              height="31"
+              loading="eager"
+              decoding="async"
+            >
+            <img
+              class="v24-banner__rating v24-banner__rating--mb"
+              src="{{ banner_rating_mb }}"
+              alt="{{ banner_rating_alt | escape }}"
+              width="243"
+              height="26"
+              loading="eager"
+              decoding="async"
+            >
+
+            <div class="v24-banner__copy">
+              <h1 class="v24-banner__title">
+                <span class="v24-banner__title-pc">{{ banner_title_line_1 }} {{ banner_title_line_2 }}</span>
+                <span class="v24-banner__title-mb">{{ banner_title_mobile }}</span>
+              </h1>
+              <p class="v24-banner__subtitle">{{ banner_subtitle }}</p>
+              <p class="v24-banner__description">{{ banner_description }}</p>
+            </div>
+
+            <div class="v24-banner__badges" aria-label="Insignias de calidad y comodidad">
+              <img class="v24-banner__badge v24-banner__badge--quality" src="{{ banner_quality }}" alt="Garanție de calitate" width="140" height="140" loading="eager" decoding="async">
+              <img class="v24-banner__badge v24-banner__badge--cross" src="{{ banner_cross_icon }}" alt="Comodidad ortopédica" width="139" height="139" loading="eager" decoding="async">
+            </div>
+
+            <ul class="v24-banner__features" aria-label="{{ banner_features_label | escape }}">
+              {% for feature_label in banner_feature_labels %}
+                {% assign feature_index = forloop.index0 %}
+                <li>
+                  <img src="{{ banner_feature_icons[feature_index] }}" alt="" width="93" height="93" loading="eager" decoding="async">
+                  <span>{{ feature_label }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+
+            <a class="v24-banner__cta" href="#shopping">
+              <span class="v24-banner__cta-copy">
+                {{ banner_cta_before_discount }}
+                <span class="js-bind-discount-percent" data-discount-sync>{{ page_discount_percent }}%</span>
+                {{ banner_cta_after_discount }}
+              </span>
+              <span class="v24-banner__cta-icon" aria-hidden="true">
+                <img src="{{ banner_button_icon }}" alt="" width="30" height="30" loading="eager" decoding="async">
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="sp-part2 sp2" id="size" aria-label="Vodič za veličine, jamstva kupnje i informacije o svakodnevnoj udobnosti stopala">
+        {% liquid
+          assign sp2_rating_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/sp2-rating-pc.webp?v=1787882349'
+          assign sp2_rating_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/sp2-rating-mb.webp?v=1787882349'
+          assign sp2_rating_alt = 'Ocijenjeno s 4.7 od 5'
+          assign sp2_reviews_copy = '100% provjereno na temelju 2.179 recenzija proizvoda'
+          assign sp2_guarantee_title = '90-DNEVNO JAMSTVO BEZ RIZIKA!'
+          assign sp2_guarantee_title_mb = '90-dnevno jamstvo bez rizika'
+          assign sp2_emoji_left = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_emoji_1.webp?v=1787882349'
+          assign sp2_emoji_right = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_emoji_2.webp?v=1787882349'
+          assign sp2_service_labels = 'Lokalna dostava|||Kupnja bez rizika|||Narudžba obrađena u roku od 24 sata|||Povrat novca u roku od 90 dana' | split: '|||'
+          assign sp2_service_icons = 'https://cdn.shopify.com/s/files/1/0807/0086/6801/files/local_connwan.svg?v=1789008825|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_risk_1.svg?v=1788258795|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_24_1.svg?v=1788258795|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_90_1.svg?v=1788258795' | split: '|||'
+          assign size_chart_title = 'Vodič za veličine'
+          assign size_chart_eu_label = 'EU'
+          assign size_chart_length_label = 'Duljina'
+          assign size_chart_unit_label = 'mm'
+          assign size_chart_rows = '36|230|45|275|||37|235|46|280|||38|240|47|285|||39|245|48|290|||40|250|49|295|||41|255|50|300|||42|260|51|305|||43|265|52|310|||44|270|53|315' | split: '|||'
+          assign size_chart_measure_image_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/sp2-measurement-pc.webp?v=1787882348'
+          assign size_chart_measure_image_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/sp2-measurement-mb.webp?v=1787882349'
+          assign size_chart_measure_image_alt = 'Upute za mjerenje duljine i širine stopala'
+          assign size_chart_tips = 'Pri mjerenju nosite čarape i stojte prirodno.|||Moguće je odstupanje mjerenja od 0,3 do 0,5 cm.|||Ako ste između dvije veličine, odaberite veću.' | split: '|||'
+          assign size_chart_notice_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_90_1.svg?v=1788258795'
+          assign size_chart_notice_title = 'Brinete se da vam veličina možda neće odgovarati?'
+          assign size_chart_notice_description_before = 'Ne brinite — nudimo'
+          assign size_chart_notice_emphasis = '90-dnevno'
+          assign size_chart_notice_description_after = 'jamstvo odgovarajuće veličine. Ako vam ne odgovaraju, možete ih besplatno vratiti ili zamijeniti.'
+          assign pain_title = 'Traže li vaša stopala pomoć?'
+          assign pain_subtitle = 'Zaustavite svakodnevno opterećenje stopala prije nego što se pogorša'
+          assign pain_labels = 'Utrnuli prsti zbog trenja|||Peckanje u petama nakon hodanja|||Teške noge i bolna koljena|||Nesigurni koraci na skliskom' | split: '|||'
+          assign pain_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp3_1.webp?v=1787884390|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp3_2.webp?v=1787884389|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp3_3.webp?v=1787884390|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp3_4.webp?v=1787884390' | split: '|||'
+          assign pain_warning = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp2_warning.svg?v=1787884599'
+        %}
+        <div class="sp2__main">
+          <div class="sp2__guarantee">
+            <div class="sp2__guarantee-top">
+              <div class="sp2__rating">
+                <picture>
+                  <source media="(max-width: 767px)" srcset="{{ sp2_rating_mb }}">
+                  <img src="{{ sp2_rating_pc }}" alt="{{ sp2_rating_alt | escape }}" width="260" height="23" loading="lazy" decoding="async">
+                </picture>
+                <span>{{ sp2_reviews_copy }}</span>
+              </div>
+
+              <div class="sp2__guarantee-heading">
+                <img src="{{ sp2_emoji_left }}" alt="" width="49" height="47" loading="lazy" decoding="async">
+                <h2>
+                  <span class="sp2__heading-pc">{{ sp2_guarantee_title }}</span>
+                  <span class="sp2__heading-mb">{{ sp2_guarantee_title_mb }}</span>
+                </h2>
+                <img src="{{ sp2_emoji_right }}" alt="" width="46" height="44" loading="lazy" decoding="async">
+              </div>
+            </div>
+
+            <ul class="sp2__services" aria-label="Pogodnosti kupnje">
+              {% for service_label in sp2_service_labels %}
+                {% assign service_index = forloop.index0 %}
+                <li class="sp2__service sp2__service--{{ forloop.index }}">
+                  <img src="{{ sp2_service_icons[service_index] }}" alt="" width="62" height="62" loading="lazy" decoding="async">
+                  {% if forloop.index == 3 %}
+                    <span>Comandă procesată<br class="sp2__service-break"> în 24 de ore</span>
+                  {% else %}
+                    <span>{{ service_label }}</span>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div class="size-chart">
+            <div class="size-chart__inner" data-size-chart-reusable>
+              <h2 class="size-chart__title">{{ size_chart_title }}</h2>
+
+              <div class="size-chart__content">
+                <div class="size-chart__table-panel">
+                  <div class="size-chart__table-wrap">
+                    <table class="size-chart__table">
+                      <thead>
+                        <tr>
+                          <th scope="col">{{ size_chart_eu_label }}</th>
+                          <th scope="col"><span class="size-chart__pc-label"><span class="size-chart__pc-length-main">{{ size_chart_length_label }}</span><span class="size-chart__pc-length-unit">({{ size_chart_unit_label }})</span></span><span class="size-chart__mobile-label"><span class="size-chart__mobile-length-main">{{ size_chart_length_label }}</span><span class="size-chart__mobile-length-unit">({{ size_chart_unit_label }})</span></span></th>
+                          <th scope="col">{{ size_chart_eu_label }}</th>
+                          <th scope="col"><span class="size-chart__pc-label"><span class="size-chart__pc-length-main">{{ size_chart_length_label }}</span><span class="size-chart__pc-length-unit">({{ size_chart_unit_label }})</span></span><span class="size-chart__mobile-label"><span class="size-chart__mobile-length-main">{{ size_chart_length_label }}</span><span class="size-chart__mobile-length-unit">({{ size_chart_unit_label }})</span></span></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for size_chart_row in size_chart_rows %}
+                          {% assign size_chart_cells = size_chart_row | split: '|' %}
+                          <tr>
+                            {% for size_chart_cell in size_chart_cells %}
+                              <td>{{ size_chart_cell }}</td>
+                            {% endfor %}
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="size-chart__details">
+                  <div class="size-chart__notice">
+                    <img class="size-chart__notice-icon" src="{{ size_chart_notice_icon }}" alt="" width="83" height="83" loading="lazy" decoding="async">
+                    <div class="size-chart__notice-text">
+                      <strong class="size-chart__notice-title">{{ size_chart_notice_title }}</strong>
+                      <p class="size-chart__notice-description">{{ size_chart_notice_description_before }} <span class="size-chart__notice-emphasis">{{ size_chart_notice_emphasis }}</span> {{ size_chart_notice_description_after }}</p>
+                    </div>
+                  </div>
+
+                  <div class="size-chart__measure">
+                    <picture class="size-chart__measure-picture">
+                      <source media="(max-width: 767px)" srcset="{{ size_chart_measure_image_mb }}">
+                      <img class="size-chart__measure-image" src="{{ size_chart_measure_image_pc }}" alt="{{ size_chart_measure_image_alt | escape }}" width="770" height="163" loading="lazy" decoding="async">
+                    </picture>
+                    <ul class="size-chart__tips">
+                      {% for size_chart_tip in size_chart_tips %}
+                        <li>{{ size_chart_tip }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sp2__pain">
+          <div class="sp2__pain-heading">
+            <h2>{{ pain_title }}</h2>
+            <p>{{ pain_subtitle }}</p>
+          </div>
+          <ul class="sp2__pain-grid" aria-label="Señales comunes de tensión diaria en los pies">
+            {% for pain_label in pain_labels %}
+              {% assign pain_index = forloop.index0 %}
+              <li class="sp2__pain-card sp2__pain-card--{{ forloop.index }}">
+                <img class="sp2__pain-image" src="{{ pain_images[pain_index] }}" alt="" width="332" height="288" loading="lazy" decoding="async">
+                <div class="sp2__pain-label">
+                  <img class="sp2__pain-warning" src="{{ pain_warning }}" alt="" width="37" height="32" loading="lazy" decoding="async">
+                  <span>{{ pain_label }}</span>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+
+      <section class="sp-part2 sp4" aria-label="Wsparcie ortopedyczne i zmniejszenie codziennego nacisku na stopy">
+        {% liquid
+          assign sp4_eyebrow = 'Ortopedska potpora'
+          assign sp4_title = 'Ublažava svakodnevni pritisak na stopala'
+          assign sp4_subtitle = 'Dizajnirane za potporu pravilnom položaju tijela, počevši od stopala.'
+          assign sp4_cross_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_green-cross.svg?v=1787897046'
+          assign sp4_background_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp4_bg_pc.webp?v=1787897042'
+          assign sp4_background_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp4_bg_mb.webp?v=1787897042'
+          assign sp4_metric_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp4_1.webp?v=1787897041|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp4_2.webp?v=1787897041|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp4_3.webp?v=1787897042|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp4_4.webp?v=1787897041' | split: '|||'
+          assign sp4_metric_values = '98%|||3X|||360°|||12H' | split: '|||'
+          assign sp4_metric_labels = 'Ublažavanje boli|||Potpora svodu stopala|||Pravilan položaj stopala|||Cjelodnevna udobnost' | split: '|||'
+          assign sp4_cta_label = 'KUPI ODMAH'
+          assign sp4_button_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+        %}
+        <div class="sp4__layout sp4__layout--pc">
+          <picture class="sp4__hero-media" aria-hidden="true">
+            <img src="{{ sp4_background_pc }}" alt="" width="1397" height="726" loading="lazy" decoding="async">
+          </picture>
+
+          <div class="sp4__heading">
+            <p class="sp4__eyebrow">
+              <img src="{{ sp4_cross_icon }}" alt="" width="30" height="29" loading="lazy" decoding="async">
+              <span>{{ sp4_eyebrow }}</span>
+            </p>
+            <h2>{{ sp4_title }}</h2>
+            <p class="sp4__subtitle">{{ sp4_subtitle }}</p>
+          </div>
+
+          <ul class="sp4__metrics" aria-label="Korzyści ze wsparcia ortopedycznego">
+            {% for metric_value in sp4_metric_values %}
+              {% assign metric_index = forloop.index0 %}
+              <li class="sp4__metric sp4__metric--{{ forloop.index }}">
+                <img class="sp4__metric-image" src="{{ sp4_metric_images[metric_index] }}" alt="" width="196" height="171" loading="lazy" decoding="async">
+                <div class="sp4__metric-copy">
+                  <strong>{{ metric_value }}</strong>
+                  <span>{{ sp4_metric_labels[metric_index] }}</span>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <a class="sp4__cta" href="#shopping">
+            <span class="sp4__cta-copy">{{ sp4_cta_label }}</span>
+            <span class="sp4__cta-icon" aria-hidden="true">
+              <img src="{{ sp4_button_icon }}" alt="" width="30" height="30" loading="lazy" decoding="async">
+            </span>
+          </a>
+        </div>
+
+        <div class="sp4__layout sp4__layout--mb">
+          <div class="sp4__heading">
+            <p class="sp4__eyebrow">
+              <img src="{{ sp4_cross_icon }}" alt="" width="15" height="15" loading="lazy" decoding="async">
+              <span>{{ sp4_eyebrow }}</span>
+            </p>
+            <h2>{{ sp4_title }}</h2>
+            <p class="sp4__subtitle">{{ sp4_subtitle }}</p>
+          </div>
+
+          <picture class="sp4__hero-media" aria-hidden="true">
+            <img src="{{ sp4_background_mb }}" alt="" width="345" height="347" loading="lazy" decoding="async">
+          </picture>
+
+          <ul class="sp4__metrics" aria-label="Korzyści ze wsparcia ortopedycznego">
+            {% for metric_value in sp4_metric_values %}
+              {% assign metric_index_mb = forloop.index0 %}
+              <li class="sp4__metric sp4__metric--{{ forloop.index }}">
+                <img class="sp4__metric-image" src="{{ sp4_metric_images[metric_index_mb] }}" alt="" width="156" height="136" loading="lazy" decoding="async">
+                <div class="sp4__metric-copy">
+                  <strong>{{ metric_value }}</strong>
+                  <span>{{ sp4_metric_labels[metric_index_mb] }}</span>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <a class="sp4__cta" href="#shopping">
+            <span class="sp4__cta-copy">{{ sp4_cta_label }}</span>
+            <span class="sp4__cta-icon" aria-hidden="true">
+              <img src="{{ sp4_button_icon }}" alt="" width="19" height="19" loading="lazy" decoding="async">
+            </span>
+          </a>
+        </div>
+      </section>
+
+      {% comment %}
+      <section class="sp-part2 loafer-benefits-showcase" data-loafer-benefits>
+        {% liquid
+          assign loafer_benefit_titles = "Side-Zip Easy On/Off|||Hand-Stitched for Durability|||Soles That Bend With You|||Soft From the First Step" | split: '|||'
+          assign loafer_benefit_copies = "No more struggling with laces or squeezing your foot in. The side zipper lets you slide these on and off effortlessly — perfect if bending is hard or you're always on the go.|||Every pair is carefully hand-stitched, not just glued. That means the upper and sole stay together longer — no peeling, no separation, just shoes that last.|||Our rubber soles flex naturally with every step. Walk, bend, twist — they move with your foot, not against it. Your feet will thank you at the end of the day.|||The synthetic leather upper feels soft and supple right out of the box. No blisters, no break-in period — just comfortable shoes you'll want to wear every day." | split: '|||'
+          assign loafer_benefit_wrong_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_3.webp?v=1786954478|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_2.webp?v=1786954478|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_1.webp?v=1786954477|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_cbd7670b-ca3d-4fa2-821a-c9c7c15e7d98.webp?v=1786954478' | split: '|||'
+          assign loafer_benefit_wrong_alts = 'Obuća koja se teško obuva|||Bol u stopalima zbog obuće bez potpore|||Nelagoda u stopalima uzrokovana krutom obućom|||Istrošene krute cipele' | split: '|||'
+          assign loafer_benefit_posters = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_3.webp?v=1786954478|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_2.webp?v=1786954477|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_1.webp?v=1786954478|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_6fde5cba-314e-4489-8c79-a9eff1cfc5ba.webp?v=1786954478' | split: '|||'
+          assign loafer_benefit_video_labels = 'Kožna mokasina s praktičnim bočnim patentnim zatvaračem|||Ručno prošivena konstrukcija kožne mokasine|||Fleksibilan potplat mokasine koji prati stopalo|||Ručna završna obrada mekane kožne mokasine' | split: '|||'
+          assign loafer_benefit_videos = 'https://cdn.shopify.com/videos/c/o/v/bf69a73446734742b2df7bce157190ae.mp4|||https://cdn.shopify.com/videos/c/o/v/18232a871e2941efa7c89ef24adc29a2.mp4|||https://cdn.shopify.com/videos/c/o/v/65d08f44aa0b4eef9427a27c7bce0e6a.mp4|||https://cdn.shopify.com/videos/c/o/v/34e9abd21dc44d0cab23be385a0067d1.mp4' | split: '|||'
+          assign loafer_benefit_prev_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_7461953f-0594-4303-b4f7-3b062e55f83b.svg?v=1786954825'
+          assign loafer_benefit_next_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/fe1095699b9e8075fc70f51ee1eeb89b.svg?v=1786954825'
+          assign loafer_benefit_wrong_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_cfa9a712-b9a8-4b33-acdd-115d87982036.svg?v=1786954762'
+          assign loafer_benefit_correct_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_1.svg?v=1786954762'
+          assign loafer_benefit_media_logos = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_5d791f7f-ec1e-4208-9124-73855719986e.webp?v=1786954686'
+        %}
+
+        <div class="loafer-benefits-showcase__surface">
+          <div class="loafer-benefits-showcase__heading-inner">
+            <h2 class="loafer-benefits-showcase__title">Te-ai săturat de pantofii care te incomodează<br class="common-small--hide"> în fiecare dimineață?</h2>
+          </div>
+
+          <div class="loafer-benefits-showcase__stage" aria-label="Loafer feature comparison carousel">
+            <button class="loafer-benefits-showcase__arrow loafer-benefits-showcase__arrow--prev" type="button" data-benefit-prev aria-label="Previous feature">
+              <img src="{{ loafer_benefit_prev_icon }}" alt="" width="25" height="42" loading="eager" decoding="async">
+            </button>
+
+            <div class="loafer-benefits-showcase__comparison swiper" data-benefit-swiper aria-live="polite">
+              <div class="swiper-wrapper">
+                {% for loafer_benefit_title in loafer_benefit_titles %}
+                  {%- liquid
+                    assign loafer_benefit_index = forloop.index0
+                    assign loafer_benefit_loading = 'lazy'
+                    if forloop.first
+                      assign loafer_benefit_loading = 'eager'
+                    endif
+                  -%}
+                  <div class="loafer-benefits-showcase__slide swiper-slide" data-benefit-slide data-benefit-index="{{ loafer_benefit_index }}" data-benefit-title="{{ loafer_benefit_title | escape }}" data-benefit-copy="{{ loafer_benefit_copies[loafer_benefit_index] | escape }}">
+                    <div class="loafer-benefits-showcase__card">
+                      <figure class="loafer-benefits-showcase__media loafer-benefits-showcase__media--wrong">
+                        <img class="loafer-benefits-showcase__photo" src="{{ loafer_benefit_wrong_images[loafer_benefit_index] }}" alt="{{ loafer_benefit_wrong_alts[loafer_benefit_index] | escape }}" width="600" height="500" loading="{{ loafer_benefit_loading }}" decoding="async">
+                        <img class="loafer-benefits-showcase__status-icon" src="{{ loafer_benefit_wrong_icon }}" alt="" width="60" height="60" loading="{{ loafer_benefit_loading }}" decoding="async">
+                      </figure>
+                      <figure class="loafer-benefits-showcase__media loafer-benefits-showcase__media--correct">
+                        <video
+                          class="loafer-benefits-showcase__photo loafer-benefits-showcase__video"
+                          width="600"
+                          height="500"
+                          autoplay
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="{{ loafer_benefit_posters[loafer_benefit_index] }}"
+                          aria-label="{{ loafer_benefit_video_labels[loafer_benefit_index] | escape }}"
+                        >
+                          <source src="{{ loafer_benefit_videos[loafer_benefit_index] }}" type="video/mp4">
+                        </video>
+                        <img class="loafer-benefits-showcase__status-icon" src="{{ loafer_benefit_correct_icon }}" alt="" width="60" height="60" loading="{{ loafer_benefit_loading }}" decoding="async">
+                      </figure>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <button class="loafer-benefits-showcase__arrow loafer-benefits-showcase__arrow--next" type="button" data-benefit-next aria-label="Next feature">
+              <img src="{{ loafer_benefit_next_icon }}" alt="" width="25" height="42" loading="eager" decoding="async">
+            </button>
+          </div>
+
+          <div class="loafer-benefits-showcase__pagination" role="tablist" aria-label="Choose feature">
+            {% for loafer_benefit_title in loafer_benefit_titles %}
+              <button class="loafer-benefits-showcase__dot{% if forloop.first %} is-active{% endif %}" type="button" data-benefit-dot="{{ forloop.index0 }}" aria-label="Show feature {{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+            {% endfor %}
+          </div>
+
+          <div class="loafer-benefits-showcase__copy">
+            <h3 class="loafer-benefits-showcase__feature-title" data-active-title>{{ loafer_benefit_titles[0] }}</h3>
+            <p class="loafer-benefits-showcase__feature-text" data-active-copy>{{ loafer_benefit_copies[0] }}</p>
+          </div>
+
+          <img class="loafer-benefits-showcase__media-logos" src="{{ loafer_benefit_media_logos }}" alt="TikTok, Facebook, YouTube, Instagram and Meta" width="919" height="35" loading="lazy" decoding="async">
+        </div>
+      </section>
+      {% endcomment %}
+
+      <section class="sp-part3 sp5" aria-label="Porównanie wsparcia i ustawienia ciała" data-v24-sp3>
+        {% liquid
+          assign sp5_title = 'Više potpore. Manje boli.'
+          assign sp5_subtitle = 'Potpora svodu stopala i amortizacija za ugodno svakodnevno hodanje'
+          assign sp5_before_label = 'Prije'
+          assign sp5_after_label = 'Poslije'
+          assign sp5_cta_label = 'KUPI ODMAH'
+          assign sp5_background_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_bg_pc.webp?v=1787900227'
+          assign sp5_background_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_bg_mb.webp?v=1787900227'
+          assign sp5_compare_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_double-arrow.svg?v=1787900360'
+          assign sp5_correct_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_correct.svg?v=1787900452'
+          assign sp5_error_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_error.svg?v=1787900452'
+          assign sp5_cta_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+          assign sp5_before_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_before_1.webp?v=1787900226|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_before_2.webp?v=1787900226|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_before_3.webp?v=1787900226|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_before_4.webp?v=1787900226' | split: '|||'
+          assign sp5_after_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_after_1.webp?v=1787900226|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_after_2.webp?v=1787900226|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_after_3.webp?v=1787900226|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp5_after_4.webp?v=1787900226' | split: '|||'
+          assign sp5_anatomy_titles = 'Ramena|||Donji dio leđa|||Gležnjevi|||Koljena|||Stopala' | split: '|||'
+          assign sp5_anatomy_copies = 'Prirodan položaj|||Uravnoteženo držanje|||Stabilna potpora|||Smanjen pritisak|||Bolji položaj' | split: '|||'
+          assign sp5_before_alt_prefix = 'Usporedba položaja tijela prije nošenja obuće s potporom'
+          assign sp5_after_alt_prefix = 'Usporedba položaja tijela nakon nošenja obuće s potporom'
+          assign sp5_pagination_label = 'Odaberite usporedbu prije i poslije'
+        %}
+        <div class="sp5__hero">
+          <picture class="sp5__background" aria-hidden="true">
+            <source media="(max-width: 767px)" srcset="{{ sp5_background_mb }}">
+            <img src="{{ sp5_background_pc }}" alt="" width="1920" height="701" loading="lazy" decoding="async">
+          </picture>
+
+          <div class="sp5__hero-content">
+            <header class="sp5__heading">
+              <h2>{{ sp5_title }}</h2>
+              <p>{{ sp5_subtitle }}</p>
+            </header>
+
+            <ul class="sp5__anatomy" aria-label="Korzyści ze wsparcia dla całego ciała">
+              {% for anatomy_title in sp5_anatomy_titles %}
+                {% assign anatomy_index = forloop.index0 %}
+                <li class="sp5__anatomy-item sp5__anatomy-item--{{ forloop.index }}">
+                  <strong>{{ anatomy_title }}</strong>
+                  <span>{{ sp5_anatomy_copies[anatomy_index] }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="sp5__inner">
+          <div class="sp5__panel">
+            <div class="sp5__surface">
+              <div class="sp5__labels v24-sp3__labels" aria-hidden="true">
+                <span class="sp5__label v24-sp3__label">
+                  <img src="{{ sp5_error_icon }}" alt="" width="23" height="23" loading="lazy" decoding="async">
+                  <span>{{ sp5_before_label }}</span>
+                </span>
+                <img class="sp5__label-arrow v24-sp3__label-compare-icon" src="{{ sp5_compare_icon }}" alt="" width="17" height="16" loading="lazy" decoding="async">
+                <span class="sp5__label v24-sp3__label">
+                  <img src="{{ sp5_correct_icon }}" alt="" width="23" height="23" loading="lazy" decoding="async">
+                  <span>{{ sp5_after_label }}</span>
+                </span>
+              </div>
+
+              <div class="sp5__comparison v24-sp3__comparison swiper" data-v24-sp3-swiper data-loop-additional-slides="2" aria-live="polite">
+                <div class="swiper-wrapper">
+                  {% for sp5_before_image in sp5_before_images %}
+                    {% assign sp5_index = forloop.index0 %}
+                    <div class="sp5__slide v24-sp3__slide swiper-slide">
+                      <figure class="sp5__media v24-sp3__media v24-sp3__media--before">
+                        <img src="{{ sp5_before_image }}" alt="{{ sp5_before_alt_prefix | escape }} {{ forloop.index }}" width="384" height="288" loading="lazy" decoding="async">
+                      </figure>
+                      <figure class="sp5__media v24-sp3__media">
+                        <img src="{{ sp5_after_images[sp5_index] }}" alt="{{ sp5_after_alt_prefix | escape }} {{ forloop.index }}" width="384" height="288" loading="lazy" decoding="async">
+                      </figure>
+                      <span class="sp5__compare-icon v24-sp3__compare-icon" aria-hidden="true">
+                        <img src="{{ sp5_compare_icon }}" alt="" width="27" height="25" loading="lazy" decoding="async">
+                      </span>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="sp5__pagination v24-sp3__pagination" data-v24-sp3-pagination role="group" aria-label="{{ sp5_pagination_label | escape }}"></div>
+            </div>
+
+            <a class="sp5__cta" href="#shopping">
+              <span>{{ sp5_cta_label }}</span>
+              <span class="sp5__cta-icon" aria-hidden="true">
+                <img src="{{ sp5_cta_icon }}" alt="" width="30" height="30" loading="lazy" decoding="async">
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="sp-part4 foot-health-expert-showcase" aria-labelledby="foot-health-expert-showcase-title">
+        {% liquid
+          assign foot_health_cross_pc_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_bg_cross_pc.webp?v=1787907082'
+          assign foot_health_cross_mb_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_bg_cross_mb.webp?v=1787907082'
+          assign foot_health_icon_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_green-cross.svg?v=1787897046'
+          assign foot_health_pick_icon_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_shield.svg?v=1787907124'
+          assign foot_health_expert_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_expert_1.webp?v=1787907082'
+          assign foot_health_expert_mb_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_expert_1_mb.webp?v=1787908955'
+          assign foot_health_pick_photo_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_expert_2.webp?v=1787907083'
+          assign foot_health_pick_photo_mb_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_expert_2_mb.webp?v=1787910270'
+          assign foot_health_pick_badges = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_doctor_recommended.webp?v=1787907082|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_bone_health.webp?v=1787907082' | split: '|||'
+          assign foot_health_pick_badge_alts = 'Preporučuju liječnici|||Potpora zdravlju kostiju' | split: '|||'
+          assign foot_health_cert_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_fda.webp?v=1787907082|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_ce.webp?v=1787907082|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_orthopedic.webp?v=1787907082|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp6_biomechanical.webp?v=1787907082' | split: '|||'
+          assign foot_health_cert_labels = 'FDA<br>registrirani pogon|||CE certifikat|||Testiran ortopedski<br>dizajn|||Biomehanička<br>potpora' | split: '|||'
+          assign foot_health_kicker = 'Razvijeno uz ortopedsko stručno znanje'
+          assign foot_health_title = 'Znanost o stopalu i gležnju susreće svakodnevnu udobnost'
+          assign foot_health_description = 'Kako se stopala mijenjaju s godinama, dizajnirali smo ovu cipelu kako bi starijim osobama pružila potporu i udobnost potrebnu za svakodnevno hodanje.'
+          assign foot_health_expert_name = 'Graham Chuter'
+          assign foot_health_expert_role = 'Konzultant ortopedske kirurgije<br>Specijalist za stopalo i gležanj'
+          assign foot_health_pick_title = 'OSMIŠLJENO ZA ŽIVOT'
+          assign foot_health_expert_alt = 'Graham Chuter, specijalist za stopalo i gležanj'
+          assign foot_health_pick_photo_alt = 'Savjetovanje o stopalu i gležnju'
+        %}
+
+        <div class="foot-health-expert-showcase__inner">
+          <div class="foot-health-expert-showcase__surface">
+            <div class="foot-health-expert-showcase__layout">
+              <div class="foot-health-expert-showcase__content">
+                <div class="foot-health-expert-showcase__intro reveal-on-scroll">
+                  <div class="foot-health-expert-showcase__kicker">
+                    <img
+                      class="foot-health-expert-showcase__health-icon"
+                      src="{{ foot_health_icon_image }}"
+                      alt=""
+                      width="30"
+                      height="29"
+                      loading="lazy"
+                      decoding="async"
+                      aria-hidden="true"
+                    >
+                    <span>{{ foot_health_kicker }}</span>
+                  </div>
+
+                  <h2 class="foot-health-expert-showcase__title" id="foot-health-expert-showcase-title">{{ foot_health_title }}</h2>
+                  <p class="foot-health-expert-showcase__description">{{ foot_health_description }}</p>
+                </div>
+
+                <div class="foot-health-expert-showcase__signature reveal-on-scroll">
+                  <strong>{{ foot_health_expert_name }}</strong>
+                  <span>{{ foot_health_expert_role }}</span>
+                </div>
+
+                <ul class="foot-health-expert-showcase__certifications reveal-on-scroll" aria-label="Certyfikaty produktu i standardy wsparcia">
+                  {% for cert_image in foot_health_cert_images %}
+                    {% assign cert_index = forloop.index0 %}
+                    <li class="foot-health-expert-showcase__certification">
+                      <img src="{{ cert_image }}" alt="" width="72" height="72" loading="lazy" decoding="async">
+                      <span>{{ foot_health_cert_labels[cert_index] }}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+              <div class="foot-health-expert-showcase__visual reveal-on-scroll">
+                <picture>
+                  <source media="(max-width: 767px)" srcset="{{ foot_health_cross_mb_image }}">
+                  <img
+                    class="foot-health-expert-showcase__decor foot-health-expert-showcase__decor--plus"
+                    src="{{ foot_health_cross_pc_image }}"
+                    alt=""
+                    width="276"
+                    height="276"
+                    loading="lazy"
+                    decoding="async"
+                    aria-hidden="true"
+                  >
+                </picture>
+
+                <picture class="foot-health-expert-showcase__expert-picture">
+                  <source media="(max-width: 767px)" srcset="{{ foot_health_expert_mb_image }}">
+                  <img
+                    class="foot-health-expert-showcase__expert-image"
+                    src="{{ foot_health_expert_image }}"
+                    alt="{{ foot_health_expert_alt | escape }}"
+                    width="523"
+                    height="695"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </picture>
+
+                <div class="foot-health-expert-showcase__pick-stack">
+                  <article class="foot-health-expert-showcase__pick-card">
+                    <div class="foot-health-expert-showcase__pick-head">
+                      <img
+                        class="foot-health-expert-showcase__pick-icon"
+                        src="{{ foot_health_pick_icon_image }}"
+                        alt=""
+                        width="35"
+                        height="34"
+                        loading="lazy"
+                        decoding="async"
+                        aria-hidden="true"
+                      >
+                      <strong>{{ foot_health_pick_title }}</strong>
+                    </div>
+                    <div class="foot-health-expert-showcase__pick-body">
+                      <div class="foot-health-expert-showcase__pick-badges">
+                        {% for pick_badge in foot_health_pick_badges %}
+                          {% assign pick_badge_index = forloop.index0 %}
+                          <img src="{{ pick_badge }}" alt="{{ foot_health_pick_badge_alts[pick_badge_index] | escape }}" width="120" height="120" loading="lazy" decoding="async">
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </article>
+
+                  <picture class="foot-health-expert-showcase__pick-photo-picture">
+                    <source media="(max-width: 767px)" srcset="{{ foot_health_pick_photo_mb_image }}">
+                    <img
+                      class="foot-health-expert-showcase__pick-photo"
+                      src="{{ foot_health_pick_photo_image }}"
+                      alt="{{ foot_health_pick_photo_alt | escape }}"
+                      width="262"
+                      height="189"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </picture>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sp7" aria-labelledby="sp7-title" aria-label="Oddychająca świeżość i nanoochrona antybakteryjna">
+        {% liquid
+          assign sp7_title = 'Svježina i prozračna udobnost tijekom cijelog dana'
+          assign sp7_subtitle = 'Napredna nanozaštita održava stopala svježima, suhima i udobnima.'
+          assign sp7_background_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp7_bg_pc.webp?v=1787970805'
+          assign sp7_background_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp7_bg_mb.webp?v=1787970806'
+          assign sp7_feature_names = 'nano|||lightweight|||breathable|||odor' | split: '|||'
+          assign sp7_feature_titles = 'NANO ANTIBAKTERIJSKA ZAŠTITA|||LAGAN DIZAJN|||PROZRAČNA MREŽASTA TKANINA|||KONTROLA NEUGODNIH MIRISA' | split: '|||'
+          assign sp7_feature_descriptions = 'Neutralizira do 99% bakterija|||Lagana cjelodnevna udobnost|||Održava stopala svježima i suhima|||Pomaže spriječiti neugodne mirise' | split: '|||'
+          assign sp7_feature_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp7_nano.webp?v=1787970806|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp7_lightweight.webp?v=1787970805|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp7_breathable.webp?v=1787970806|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp7_odor.webp?v=1787970805' | split: '|||'
+          assign sp7_button_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+        %}
+        <picture class="sp7__background" aria-hidden="true">
+          <source media="(max-width: 767px)" srcset="{{ sp7_background_mb }}">
+          <img src="{{ sp7_background_pc }}" alt="" width="1919" height="892" loading="lazy" decoding="async">
+        </picture>
+        <div class="sp7__mobile-overlay" aria-hidden="true"></div>
+
+        <div class="sp7__inner">
+          <header class="sp7__heading reveal-on-scroll">
+            <h2 id="sp7-title">{{ sp7_title }}</h2>
+            <p>{{ sp7_subtitle }}</p>
+          </header>
+
+          <ul class="sp7__features" aria-label="Funkcje zapewniające świeżość i komfort">
+            {% for sp7_feature_title in sp7_feature_titles %}
+              {% assign sp7_feature_index = forloop.index0 %}
+              <li class="sp7__feature sp7__feature--{{ sp7_feature_names[sp7_feature_index] }} reveal-on-scroll">
+                <img src="{{ sp7_feature_images[sp7_feature_index] }}" alt="" width="68" height="68" loading="lazy" decoding="async">
+                <div class="sp7__feature-copy">
+                  <h3>{{ sp7_feature_title }}</h3>
+                  <p>{{ sp7_feature_descriptions[sp7_feature_index] }}</p>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <a class="sp7__cta" href="#shopping">
+            <span class="sp7__cta-copy">OSTVARITE <span class="js-bind-discount-percent" data-discount-sync>{{ page_discount_percent }}%</span> POPUSTA</span>
+            <span class="sp7__cta-icon" aria-hidden="true">
+              <img src="{{ sp7_button_icon }}" alt="" width="25" height="25" loading="lazy" decoding="async">
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="sp8" data-sp8 aria-labelledby="sp8-title">
+        {% liquid
+          assign sp8_title = 'Zašto odabrati naše ortopedske cipele?'
+          assign sp8_video_pc = 'https://cdn.shopify.com/videos/c/o/v/c4c5d6a9a811401a9b867c563a8e1553.mp4'
+          assign sp8_video_mb = 'https://cdn.shopify.com/videos/c/o/v/0a3fe86cb9a24c20b81810a9a8100a67.mp4'
+          assign sp8_poster_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_poster_pc.webp?v=1787971944'
+          assign sp8_poster_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_poster_mb.webp?v=1787971943'
+          assign sp8_our_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_our_shoes.webp?v=1787971944'
+          assign sp8_traditional_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_traditional_shoes.webp?v=1787971944'
+          assign sp8_main_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_main.webp?v=1787971943'
+          assign sp8_error_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_error_icon_fd02de85-34dc-4d89-8076-968988a089eb.svg?v=1787971915'
+          assign sp8_correct_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_correct_icon_4a28e74c-3a40-4075-a220-afaa0d0146a9.svg?v=1787971916'
+          assign sp8_compare_arrow = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp8_vs.svg?v=1787974023'
+          assign sp8_button_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+          assign sp8_features = 'Bol u prednjem dijelu stopala|||Potpora cirkulaciji|||Olakšanje plantarne fascije|||Nošenje do 12 sati|||Visoka cijena' | split: '|||'
+          assign sp8_our_states = 'correct|||correct|||correct|||correct|||error' | split: '|||'
+          assign sp8_traditional_states = 'error|||error|||correct|||error|||correct' | split: '|||'
+        %}
+        <div class="sp8__video-shell">
+          <video
+            class="sp8__video"
+            data-sp8-video
+            data-video-pc="{{ sp8_video_pc }}"
+            data-video-mb="{{ sp8_video_mb }}"
+            data-poster-pc="{{ sp8_poster_pc }}"
+            data-poster-mb="{{ sp8_poster_mb }}"
+            poster="{{ sp8_poster_pc }}"
+            width="1919"
+            height="823"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source data-sp8-video-source src="{{ sp8_video_pc }}" type="video/mp4">
+          </video>
+          <button
+            class="sp8__video-toggle"
+            type="button"
+            data-sp8-video-toggle
+            data-play-label="Pokreni video prikaza cipela"
+            data-pause-label="Pauziraj video prikaza cipela"
+            aria-label="Pokreni video prikaza cipela"
+            aria-pressed="false"
+          ></button>
+        </div>
+
+        <div class="sp8__inner">
+          <h2 id="sp8-title">{{ sp8_title }}</h2>
+
+          <div class="sp8__comparison">
+            <img class="sp8__main-image" src="{{ sp8_main_image }}" alt="Widok rozłożonego buta ortopedycznego i warstw amortyzujących" width="543" height="407" loading="lazy" decoding="async">
+
+            <div class="sp8__columns">
+              <div class="sp8__column sp8__column--our">
+                <img src="{{ sp8_our_image }}" alt="" width="125" height="73" loading="lazy" decoding="async">
+                <strong>Pantofii noștri</strong>
+              </div>
+              <img class="sp8__compare-arrow" src="{{ sp8_compare_arrow }}" alt="" width="53" height="47" loading="lazy" decoding="async">
+              <div class="sp8__column sp8__column--traditional">
+                <img src="{{ sp8_traditional_image }}" alt="" width="125" height="73" loading="lazy" decoding="async">
+                <strong>Pantofi<br class="sp8__mobile-break"> tradiționali</strong>
+              </div>
+            </div>
+
+            <ul class="sp8__table" aria-label="Porównanie naszych butów ortopedycznych z tradycyjnymi butami">
+              {% for sp8_feature in sp8_features %}
+                {% assign sp8_index = forloop.index0 %}
+                {% assign sp8_our_state = sp8_our_states[sp8_index] %}
+                {% assign sp8_traditional_state = sp8_traditional_states[sp8_index] %}
+                <li class="sp8__row">
+                  <span class="sp8__state sp8__state--our">
+                    <img src="{% if sp8_our_state == 'correct' %}{{ sp8_correct_icon }}{% else %}{{ sp8_error_icon }}{% endif %}" alt="{% if sp8_our_state == 'correct' %}Tak{% else %}Nie{% endif %}" width="25" height="25" loading="lazy" decoding="async">
+                  </span>
+                  <span class="sp8__feature">{{ sp8_feature }}</span>
+                  <span class="sp8__state sp8__state--traditional">
+                    <img src="{% if sp8_traditional_state == 'correct' %}{{ sp8_correct_icon }}{% else %}{{ sp8_error_icon }}{% endif %}" alt="{% if sp8_traditional_state == 'correct' %}Tak{% else %}Nie{% endif %}" width="25" height="25" loading="lazy" decoding="async">
+                  </span>
+                </li>
+              {% endfor %}
+            </ul>
+
+            <a class="sp8__cta" href="#shopping">
+              <span class="sp8__cta-copy">OSTVARITE <span class="js-bind-discount-percent" data-discount-sync>{{ page_discount_percent }}%</span> POPUSTA</span>
+              <span class="sp8__cta-icon" aria-hidden="true">
+                <img src="{{ sp8_button_icon }}" alt="" width="25" height="25" loading="lazy" decoding="async">
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="sp9" aria-labelledby="sp9-title">
+        {% liquid
+          assign sp9_title = 'Fleksibilni koraci uz pouzdano prianjanje'
+          assign sp9_subtitle = 'Slobodno savijanje uz stabilnost na različitim podlogama'
+          assign sp9_images = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp9_1_1.webp?v=1788417346|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp9_2.webp?v=1787975579' | split: '|||'
+          assign sp9_icons = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp9_stable.webp?v=1787975578|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp9_flexible.webp?v=1787975578' | split: '|||'
+          assign sp9_titles = 'Stabilno prianjanje|||Fleksibilno kretanje' | split: '|||'
+          assign sp9_description_line_1 = 'Mokri podovi – stabilno hodanje|||Prirodno se savijaju bez gubitka oblika.' | split: '|||'
+          assign sp9_description_line_2 = 'Nagibi – sigurni koraci|||Brzo se vraćaju u oblik nakon svakog koraka.' | split: '|||'
+          assign sp9_image_widths = '674|||694' | split: '|||'
+          assign sp9_button_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+        %}
+        <div class="sp9__inner">
+          <header class="sp9__heading">
+            <h2 id="sp9-title">{{ sp9_title }}</h2>
+            <p>{{ sp9_subtitle }}</p>
+          </header>
+
+          <div class="sp9__grid">
+            {% for sp9_feature_title in sp9_titles %}
+              {% assign sp9_index = forloop.index0 %}
+              <article class="sp9__item sp9__item--{{ forloop.index }}">
+                <img
+                  class="sp9__media"
+                  src="{{ sp9_images[sp9_index] }}"
+                  alt="{% if forloop.first %}But ortopedyczny zachowujący przyczepność na mokrej nawierzchni{% else %}But ortopedyczny elastycznie zginany dłonią{% endif %}"
+                  width="{{ sp9_image_widths[sp9_index] }}"
+                  height="460"
+                  loading="lazy"
+                  decoding="async"
+                >
+                <div class="sp9__feature">
+                  <img class="sp9__feature-icon" src="{{ sp9_icons[sp9_index] }}" alt="" width="68" height="68" loading="lazy" decoding="async">
+                  <div class="sp9__feature-copy">
+                    <h3>{{ sp9_feature_title }}</h3>
+                    <p>
+                      <span>{{ sp9_description_line_1[sp9_index] }}</span>
+                      <span>{{ sp9_description_line_2[sp9_index] }}</span>
+                    </p>
+                  </div>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+
+          <a class="sp9__cta" href="#shopping">
+            <span class="sp9__cta-copy">OSTVARITE <span class="js-bind-discount-percent" data-discount-sync>{{ page_discount_percent }}%</span> POPUSTA</span>
+            <span class="sp9__cta-icon" aria-hidden="true">
+              <img src="{{ sp9_button_icon }}" alt="" width="30" height="30" loading="lazy" decoding="async">
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="sp-part7 all-day-scenarios v24-sp7 sp10" aria-labelledby="all-day-scenarios-title">
+        {% liquid
+          assign all_day_scenarios_title = 'Jedan par spreman za svaki trenutak dana'
+          assign all_day_scenarios_subtitle = 'Dizajnirane za prilagodljiv način života i različite svakodnevne prilike.'
+          assign all_day_scenarios_section_label = 'Svakodnevne prilike za nošenje cipela'
+          assign all_day_scenarios_media_label = 'Galerija svakodnevne udobnosti'
+          assign all_day_scenarios_media_alt_prefix = 'Ortopedske cipele u svakodnevnoj prilici'
+          assign all_day_scenarios_product_alt = 'Prikaz bež ortopedskih cipela'
+          assign all_day_scenarios_sale_label = 'Trenutačni popust na proizvod'
+          assign all_day_scenarios_sale_copy = 'POPUSTA'
+          assign all_day_scenarios_cta_prefix = 'OSTVARITE'
+          assign all_day_scenarios_cta_suffix = 'POPUSTA'
+          assign all_day_scenarios_media = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_1.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_2.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_3.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_4.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_5.webp?v=1787984799|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_6.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_7.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_8.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_9.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_10.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_11.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_12.webp?v=1787984798|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_13.webp?v=1787984798' | split: '|||'
+          assign all_day_scenarios_product_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_main_mb.webp?v=1787984798'
+          assign all_day_scenarios_sale_bg = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_sp10_discount_bg.svg?v=1787984788'
+          assign all_day_scenarios_button_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+        %}
+
+        <div class="all-day-scenarios__inner" aria-label="{{ all_day_scenarios_section_label | escape }}">
+          <div class="all-day-scenarios__head">
+            <h2 class="all-day-scenarios__title reveal-on-scroll" id="all-day-scenarios-title">{{ all_day_scenarios_title }}</h2>
+            <p class="all-day-scenarios__subtitle">{{ all_day_scenarios_subtitle }}</p>
+          </div>
+        </div>
+
+        <div class="all-day-scenarios__carousel-wrap reveal-on-scroll">
+          <div class="all-day-scenarios__swiper swiper" data-all-day-scenarios-swiper aria-label="{{ all_day_scenarios_media_label | escape }}">
+            <div class="swiper-wrapper">
+              {% for all_day_scenarios_media_url in all_day_scenarios_media %}
+                <div class="all-day-scenarios__slide swiper-slide">
+                  {% if all_day_scenarios_media_url contains '/videos/' %}
+                    <video
+                      class="all-day-scenarios__image all-day-scenarios__video"
+                      aria-label="{{ all_day_scenarios_video_label | escape }}"
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                    >
+                      <source src="{{ all_day_scenarios_media_url | strip }}" type="video/mp4">
+                    </video>
+                  {% else %}
+                    <img
+                      class="all-day-scenarios__image"
+                      src="{{ all_day_scenarios_media_url | strip }}"
+                      alt="{{ all_day_scenarios_media_alt_prefix | escape }} {{ forloop.index }}"
+                      width="602"
+                      height="803"
+                      loading="{% if forloop.index <= 4 %}eager{% else %}lazy{% endif %}"
+                      decoding="async"
+                    >
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="all-day-scenarios__mobile-tail">
+          <div class="all-day-scenarios__mobile-promo reveal-on-scroll">
+            <img
+              class="all-day-scenarios__product-image"
+              src="{{ all_day_scenarios_product_image }}"
+              alt="{{ all_day_scenarios_product_alt | escape }}"
+              width="372"
+              height="213"
+              loading="lazy"
+              decoding="async"
+            >
+
+            <div class="all-day-scenarios__sale-badge all-day-scenarios__sale-badge--mb" aria-label="{{ all_day_scenarios_sale_label | escape }}">
+              <img
+                class="all-day-scenarios__sale-bg"
+                src="{{ all_day_scenarios_sale_bg }}"
+                alt=""
+                width="90"
+                height="90"
+                loading="lazy"
+                decoding="async"
+                aria-hidden="true"
+              >
+              <span class="all-day-scenarios__sale-percent">-<span class="js-bind-discount-percent" data-discount-sync>{{ page_discount_percent }}%</span></span>
+              <span class="all-day-scenarios__sale-copy">{{ all_day_scenarios_sale_copy }}</span>
+            </div>
+          </div>
+
+          <div class="all-day-scenarios__cta reveal-on-scroll">
+            <a class="all-day-scenarios__button all-day-scenarios__button--mb mb-banner-cta" href="#shopping">
+              <span>{{ all_day_scenarios_cta_prefix }} <span class="js-bind-discount-percent" data-discount-sync>{{ page_discount_percent }}%</span> {{ all_day_scenarios_cta_suffix }}</span>
+              <span class="all-day-scenarios__button-arrow" aria-hidden="true">
+                <img
+                  class="mb-cta-icon-img"
+                  src="{{ all_day_scenarios_button_icon }}"
+                  alt=""
+                  width="13"
+                  height="13"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="shopping" class="shopping-product" aria-label="Zakup produktu">
+        {% liquid
+          assign sp_trust_aria = 'Jamstva pri kupnji'
+          assign sp_specialist_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_shopping_expert.webp?v=1787987628'
+          assign sp_product_rating_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_70f524a2-1ee3-4e11-80fb-4a28f1b39af3.svg?v=1787710670'
+          assign sp_guarantee_title = 'KUPUJTE UZ NAŠE JAMSTVO'
+          assign sp_guarantee_emoji_left = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_emoji_1.webp?v=1787882349'
+          assign sp_guarantee_emoji_right = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_emoji_2.webp?v=1787882349'
+          assign sp_guarantee_service_images = 'https://cdn.shopify.com/s/files/1/0807/0086/6801/files/local_connwan.svg?v=1789008825|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_risk_1.svg?v=1788258795|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_24_1.svg?v=1788258795|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_90_1.svg?v=1788258795' | split: '|||'
+          assign sp_guarantee_service_titles = 'Lokalna<br>dostava|||Kupnja<br>bez rizika|||Narudžba obrađena<br>u roku od 24 sata|||Povrat novca<br>u roku od 90 dana' | split: '|||'
+          assign sp_specialist_copy = 'Certificirani stručnjak:'
+          assign sp_rating_score_copy = '4,8/5'
+          assign sp_rating_count_copy = '（2.179）'
+          assign sp_rating_aria = 'Ocijenjeno s 4,8 od 5 na temelju 2.179 recenzija'
+          assign sp_benefit_1 = 'Trenutačno ublažavanje boli u stopalima'
+          assign sp_benefit_2 = 'Postupno poboljšanje položaja stopala'
+          assign sp_benefit_3 = 'Minimalistički dizajn za svaki dan'
+          assign sp_stock_copy = 'Na zalihi je još samo 18 komada!'
+          assign sp_limited_discount_copy = 'Vremenski ograničen popust!!!'
+          assign sp_ticker_copies = 'Svi ih obožavaju!|||Topla preporuka!|||Naručite s povjerenjem!' | split: '|||'
+          assign sp_sale_prefix = 'Kupite sada – uštedite'
+          assign sp_discount_label = 'Popust'
+          assign sp_size_label = 'Veličina'
+          assign sp_size_guide_label = 'Vodič za veličine'
+          assign sp_size_chart_label = 'Tablica veličina'
+          assign sp_add_to_cart_label = 'DODAJ U KOŠARICU'
+          assign sp_shop_now_label = 'KUPI ODMAH'
+          assign sp_delivery_label = 'Procijenjeno vrijeme dostave:'
+          assign sp_vat_label = 'PDV uključen i besplatno probno razdoblje'
+        %}
+
+        <div class="sp_product_content sp-product-layout">
+          <div class="sp-relative sp-product-media">
+            <div class="sp-gallery-main js-gallery-main">
+              <div class="sp-product-visual js-product-visual">
+                {%- assign sp_first_product_image = product.images.first -%}
+
+                <div class="sp-product-gallery sp-product-gallery-pc sp_pc" aria-label="Zdjęcie produktu" data-sp-pc-gallery>
+                  {%- if sp_first_product_image -%}
+                    {%- assign sp_first_product_image_url = sp_first_product_image | image_url: width: sp_first_product_image.width | split: '&width=' | first -%}
+                    <img
+                      alt="{{ sp_first_product_image.alt | default: product.title | escape }}"
+                      class="sp-img-p js-img-p sp-pc-main-image js-pc-main-image"
+                      src="{{ sp_first_product_image_url }}"
+                      width="{{ sp_first_product_image.width }}"
+                      height="{{ sp_first_product_image.height }}"
+                      data-image-id="{{ sp_first_product_image.id }}"
+                      data-image-position="0"
+                      loading="eager"
+                    >
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'sp-img-p js-img-p sp-pc-main-image js-pc-main-image sp-product-placeholder' }}
+                  {%- endif -%}
+                </div>
+
+                <div class="sp-img-wrap sp-product-gallery sp-product-gallery-mobile sp_mobile swiper" aria-label="Galeria produktu" data-sp-product-gallery>
+                  <div class="sp-img-inner swiper-wrapper">
+                    {%- for image in product.images -%}
+                      {%- assign sp_product_image_url = image | image_url: width: image.width | split: '&width=' | first -%}
+                      <div
+                        class="sp-product-slide js-product-slide swiper-slide{% if forloop.first %} is-active{% endif %}"
+                        data-image-id="{{ image.id }}"
+                        data-image-position="{{ forloop.index0 }}"
+                      >
+                        <img
+                          alt="{{ image.alt | default: product.title | escape }}"
+                          class="sp-img-p js-img-p"
+                          src="{{ sp_product_image_url }}"
+                          width="{{ image.width }}"
+                          height="{{ image.height }}"
+                          data-image-id="{{ image.id }}"
+                          data-image-position="{{ forloop.index0 }}"
+                          loading="eager"
+                        >
+                      </div>
+                    {%- else -%}
+                      <div class="sp-product-slide js-product-slide swiper-slide is-active">
+                        {{ 'product-1' | placeholder_svg_tag: 'sp-img-p js-img-p sp-product-placeholder' }}
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                  <button class="swiper-button-prev sp-gallery-prev js-gallery-prev" type="button" aria-label="Poprzednie zdjęcie"></button>
+                  <button class="swiper-button-next sp-gallery-next js-gallery-next" type="button" aria-label="Imagen siguiente"></button>
+                </div>
+
+                <div class="sp-img-clock js-img-clock sp_top_cut_down" aria-hidden="true">
+                  <div class="sp-stock-title">{{ sp_stock_copy }}</div>
+                  <div class="sp-stock-bottom">
+                    <div class="sp-clock-s clock-wrap sp_left_view" aria-label="Odliczanie do końca oferty">
+                      <div class="square js-hour">15</div>
+                      <div class="sp-dots"><div class="sp-dot"></div><div class="sp-dot"></div></div>
+                      <div class="square js-minute">00</div>
+                      <div class="sp-dots"><div class="sp-dot"></div><div class="sp-dot"></div></div>
+                      <div class="square js-second">00</div>
+                    </div>
+                    <div class="sp-countdown-promo">
+                      <strong>{{ sp_limited_discount_copy }}</strong>
+                      <div class="sp-countdown-progress" aria-hidden="true">
+                        <span class="sp-countdown-progress__fill"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sp-product-thumbs swiper" aria-label="Miniatury produktu" data-sp-product-thumbs>
+                <div class="swiper-wrapper">
+                  {%- for image in product.images -%}
+                    <button
+                      class="js-product-thumb swiper-slide{% if forloop.first %} is-active{% endif %}"
+                      type="button"
+                      data-image-id="{{ image.id }}"
+                      data-image-position="{{ forloop.index0 }}"
+                      aria-label="Wyświetl zdjęcie produktu {{ forloop.index }}"
+                    >
+                      <img
+                        src="{{ image | image_url: width: 240 }}"
+                        alt="{{ image.alt | default: product.title | escape }}"
+                        width="120"
+                        height="120"
+                      >
+                    </button>
+                  {%- endfor -%}
+                </div>
+
+                <button class="sp-thumb-prev js-thumb-prev" type="button" aria-label="Poprzednie miniatury">
+                  <img class="sp-thumb-nav-icon sp-thumb-nav-icon--pc" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_099ec59f-331d-4284-ab7c-7fcd37e35a53.svg?v=1787045162" alt="" width="12" height="7" aria-hidden="true">
+                  <img class="sp-thumb-nav-icon sp-thumb-nav-icon--mb" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_2.svg?v=1787045958" alt="" width="4" height="7" aria-hidden="true">
+                </button>
+                <button class="sp-thumb-next js-thumb-next" type="button" aria-label="Miniaturas siguientes">
+                  <img class="sp-thumb-nav-icon sp-thumb-nav-icon--pc" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_1.svg?v=1787045190" alt="" width="12" height="7" aria-hidden="true">
+                  <img class="sp-thumb-nav-icon sp-thumb-nav-icon--mb" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_3.svg?v=1787045958" alt="" width="4" height="7" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sp_product_inner js-product-inner">
+            <div class="sp-product-info">
+
+              <div class="sp-popularity-note sp-text-ticker js-text-ticker swiper" aria-hidden="true">
+                <div class="swiper-wrapper">
+                  {%- for sp_ticker_copy in sp_ticker_copies -%}
+                    <div class="swiper-slide">{{ sp_ticker_copy }}</div>
+                  {%- endfor -%}
+                </div>
+              </div>
+
+              <div class="sp-specialist-line">
+                <img class="sp-specialist-avatar" src="{{ sp_specialist_image }}" alt="" width="33" height="32" loading="lazy" aria-hidden="true">
+                <span>{{ sp_specialist_copy }}</span>
+              </div>
+
+              <h2 class="sp-title-s js-bind-title">{{ product.title }}</h2>
+
+              <div class="sp-product-rating" aria-label="{{ sp_rating_aria }}">
+                <img class="sp-rating-stars" src="{{ sp_product_rating_image }}" alt="" width="104" height="15" loading="lazy" aria-hidden="true">
+                <strong class="sp-rating-score">{{ sp_rating_score_copy }}</strong>
+                <span class="sp-rating-count">{{ sp_rating_count_copy }}</span>
+              </div>
+
+              <ul class="sp-product-benefits">
+                <li>{{ sp_benefit_1 }}</li>
+                <li>{{ sp_benefit_2 }}</li>
+                <li>{{ sp_benefit_3 }}</li>
+              </ul>
+            </div>
+
+            <div class="sp-product-purchase">
+              <div class="sp-sale-pill">
+                {{ sp_sale_prefix }}&nbsp;<span class="js-bind-save-amount"></span>
+              </div>
+
+              <div class="sp-price-group js-price-group">
+                {%- liquid
+                  assign sp_price = page_discount_price
+                  assign sp_compare = page_discount_compare
+                  assign sp_off = page_discount_percent
+                -%}
+
+                <div class="sp-price1">
+                  <span class="sp-span js-bind-price">{{ sp_price | money }}</span>
+                </div>
+
+                <div class="sp-price2">
+                  <span class="js-bind-compare">
+                    {%- if sp_compare > sp_price %}{{ sp_compare | money }}{% else %}{{ sp_price | money }}{% endif -%}
+                  </span>
+                </div>
+
+                <div class="sp-row sp-uppercase" aria-hidden="true">
+                  <p class="sp-p">
+                    <span class="js-bind-discount-percent">{{ sp_off }}%</span>
+                    {{ sp_discount_label }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="sp-options-card sp-padding">
+                {%- unless product.has_only_default_variant -%}
+                  {%- for option in product.options_with_values -%}
+                    <div class="js-option-heading">
+                      <div class="option-title">
+                        {%- if option.position == 2 -%}{{ sp_size_label }}{%- else -%}{{ option.name | escape }}{%- endif -%}:
+                        {%- if forloop.first -%}
+                          <span class="js-option-current" data-sp-option-current="{{ forloop.index0 }}">{{ option.selected_value | default: option.values.first | escape }}</span>
+                        {%- endif -%}
+                      </div>
+                    </div>
+
+                    <div
+                      class="js-opt-group{% if option.position == 1 %} sp-color-options{% else %} sp-size-options{% endif %}"
+                      data-option-index="{{ forloop.index0 }}"
+                      data-option-name="{{ option.name | escape }}"
+                    >
+                      {%- for value in option.values -%}
+                        {%- liquid
+                          assign is_active = false
+                          if option.selected_value == value
+                            assign is_active = true
+                          elsif option.selected_value == blank and forloop.first
+                            assign is_active = true
+                          endif
+                        -%}
+
+                        <button
+                          type="button"
+                          class="js-option{% if is_active %} active{% endif %}{% if option.position == 1 %} js-option-swatch{% endif %}"
+                          data-val="{{ value | escape }}"
+                          data-option-position="{{ option.position }}"
+                        >
+                          {%- if option.position == 1 -%}
+                            {%- assign option_variant = product.variants | where: 'option1', value | first -%}
+                            {%- if option_variant.featured_image -%}
+                              <img src="{{ option_variant.featured_image | image_url: width: 220 }}" alt="{{ value | escape }}" width="180" height="180">
+                              <span class="visually-hidden">{{ value | escape }}</span>
+                            {%- else -%}
+                              {{ value | escape }}
+                            {%- endif -%}
+                          {%- else -%}
+                            {{ value | escape }}
+                          {%- endif -%}
+                        </button>
+                      {%- endfor -%}
+                    </div>
+                  {%- endfor -%}
+
+                  <div class="sp-size-actions">
+                    <button class="js-size-guide sp-size-action" type="button">
+                      <img class="sp-size-action-icon" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_size-guide.svg?v=1786518956" alt="" width="22" height="18" loading="lazy" decoding="async">
+                      <span>{{ sp_size_guide_label }}</span>
+                    </button>
+
+                    <button class="js-size-guide sp-size-action sp-size-chart-link" type="button">
+                      <img class="sp-size-action-icon" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_size-chart.svg?v=1786518955" alt="" width="18" height="18" loading="lazy" decoding="async">
+                      <span>{{ sp_size_chart_label }}</span>
+                    </button>
+                  </div>
+                {%- endunless -%}
+              </div>
+
+              <div class="sp-quality-row">
+                <div class="addGroup" hidden aria-hidden="true">
+                  <button class="js-reduce" type="button" aria-label="Zmniejsz ilość">−</button>
+                  <input class="js-calcNumber" name="quantity" type="text" value="1" inputmode="numeric" aria-label="Ilość">
+                  <button class="js-add" type="button" aria-label="Zwiększ ilość">+</button>
+                </div>
+
+                <button class="addCart btn-style cart-btn js-add-cart" type="button">
+                  <span>{{ sp_add_to_cart_label }}</span>
+                  <img class="sp-add-cart-icon" src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon.svg?v=1786518955" alt="" width="30" height="30" loading="lazy" decoding="async">
+                </button>
+              </div>
+
+              <button class="sp-btn-style btn-style js-buy-now mb-banner-cta" type="button">
+                <span>{{ sp_shop_now_label }}</span>
+                <span class="sp-buy-arrow" aria-hidden="true">
+                  <img
+                    class="mb-cta-icon-img"
+                    src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_2x_bea56d6f-7f75-4730-bbf7-e8b6c09c1a2e.png?v=1786946817"
+                    alt=""
+                    width="27"
+                    height="27"
+                    loading="eager"
+                    decoding="async"
+                  >
+                </span>
+              </button>
+
+              <div class="sp-footer-wrap">
+                <div class="sp-delivery-note">
+                  <span class="sp-delivery-icon" aria-hidden="true">
+                    <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_delivery.svg?v=1786518956" alt="" width="24" height="24" loading="lazy" decoding="async">
+                  </span>
+                  <span>{{ sp_delivery_label }}
+                    <strong><span data-sp-delivery-start></span><span class="sp-delivery-separator"> – </span><span data-sp-delivery-end></span></strong>
+                  </span>
+                </div>
+
+                <div class="sp-vat-note">
+                  <span class="sp-vat-icon" aria-hidden="true">
+                    <img src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_vat.svg?v=1786518956" alt="" width="22" height="22" loading="lazy" decoding="async">
+                  </span>
+                  <span>{{ sp_vat_label }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sp-trust-shell" aria-label="{{ sp_trust_aria }}">
+          <div class="sp-trust-heading">
+            <img class="sp-trust-heading-icon sp-trust-heading-icon--left" src="{{ sp_guarantee_emoji_left }}" alt="" width="49" height="47" loading="lazy" aria-hidden="true">
+            <h2>{{ sp_guarantee_title }}</h2>
+            <img class="sp-trust-heading-icon sp-trust-heading-icon--right" src="{{ sp_guarantee_emoji_right }}" alt="" width="46" height="44" loading="lazy" aria-hidden="true">
+          </div>
+
+          <div class="sp-trust-bar">
+            {%- for sp_guarantee_service_title in sp_guarantee_service_titles -%}
+              <div class="sp-trust-item">
+                <img class="sp-trust-icon" src="{{ sp_guarantee_service_images[forloop.index0] }}" alt="" width="62" height="62" loading="lazy" aria-hidden="true">
+                <strong class="sp-trust-title">{{ sp_guarantee_service_title }}</strong>
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+
+      {% comment %}
+      <section class="size-chart" aria-label="Size chart">
+        {% liquid
+          assign size_chart_title = 'Vodič za veličine'
+          assign size_chart_eu_label = 'EU'
+          assign size_chart_length_label = 'Duljina (cm)'
+          assign size_chart_mobile_length_label = 'EU/Duljina'
+          assign size_chart_unit_label = '(cm)'
+          assign size_chart_rows = '35|22.5|42|26|||36|23|43|26.5|||37|23.5|44|27|||38|24|45|27.5|||39|24.5|46|28|||40|25|47|28.5|||41|25.5|48|29' | split: '|||'
+          assign size_chart_measure_image_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/6e8f7216039668c8da6986141762fbb2.webp?v=1787105295'
+          assign size_chart_measure_image_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2x_6abc6f77-7013-42fd-93be-889d067252f1.webp?v=1787105457'
+          assign size_chart_measure_image_alt = 'Kako izmjeriti veličinu stopala'
+          assign size_chart_tips = 'Pri mjerenju nosite odgovarajuće čarape i održavajte pravilan položaj tijela.|||Kod navedenih veličina moguće je odstupanje od 0,3 do 0,5 cm; veličinu odaberite prema duljini stopala.|||Ako ste između dvije veličine, odaberite veću.|||Ako oblik vašeg stopala odgovara gore navedenim zahtjevima, slijedite naše preporuke za odabir odgovarajuće veličine.' | split: '|||'
+          assign size_chart_notice_icon = 'https://cdn.shopify.com/s/files/1/0991/9614/1880/files/90day.png?v=1785227314'
+          assign size_chart_notice_icon_alt = '90-dnevno jamstvo povrata novca'
+          assign size_chart_notice_title = 'Brinete se da vam veličina možda neće odgovarati?'
+          assign size_chart_notice_description = 'Ne brinite — jamčimo 90-dnevno besplatno probno razdoblje, a ako vam ne odgovaraju, možete ih besplatno vratiti ili zamijeniti.'
+        %}
+        <div class="size-chart__inner" data-size-chart-reusable>
+          <h2 class="size-chart__title reveal-on-scroll">{{ size_chart_title }}</h2>
+
+          <div class="size-chart__content">
+            <div class="size-chart__table-panel">
+              <div class="size-chart__table-wrap reveal-on-scroll">
+                <table class="size-chart__table">
+                  <thead>
+                    <tr>
+                      <th scope="col">{{ size_chart_eu_label }}</th>
+                      <th scope="col">
+                        <span class="size-chart__pc-label">{{ size_chart_length_label }}</span>
+                        <span class="size-chart__mobile-label">
+                          <span class="size-chart__mobile-length-main">{{ size_chart_mobile_length_label }}</span>
+                          <span class="size-chart__mobile-length-unit">{{ size_chart_unit_label }}</span>
+                        </span>
+                      </th>
+                      <th scope="col">{{ size_chart_eu_label }}</th>
+                      <th scope="col">
+                        <span class="size-chart__pc-label">{{ size_chart_length_label }}</span>
+                        <span class="size-chart__mobile-label">
+                          <span class="size-chart__mobile-length-main">{{ size_chart_mobile_length_label }}</span>
+                          <span class="size-chart__mobile-length-unit">{{ size_chart_unit_label }}</span>
+                        </span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for size_chart_row in size_chart_rows %}
+                      {% assign size_chart_cells = size_chart_row | split: '|' %}
+                      <tr>
+                        {% for size_chart_cell in size_chart_cells %}
+                          <td>{{ size_chart_cell }}</td>
+                        {% endfor %}
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="size-chart__measure reveal-on-scroll" >
+              <picture class="size-chart__measure-picture">
+                <source media="(max-width: 767px)" srcset="{{ size_chart_measure_image_mb }}">
+                <img
+                  class="size-chart__measure-image"
+                  src="{{ size_chart_measure_image_pc }}"
+                  alt="{{ size_chart_measure_image_alt | escape }}"
+                  width="580"
+                  height="330"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
+
+              <ul class="size-chart__tips">
+                {% for size_chart_tip in size_chart_tips %}
+                  <li>{{ size_chart_tip }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="size-chart__notice reveal-on-scroll">
+              <img
+                class="size-chart__notice-icon"
+                src="{{ size_chart_notice_icon }}"
+                alt="{{ size_chart_notice_icon_alt | escape }}"
+                width="72"
+                height="72"
+                loading="lazy"
+                decoding="async"
+              >
+
+              <div class="size-chart__notice-text">
+                <strong class="size-chart__notice-title">{{ size_chart_notice_title }}</strong>
+                <p class="size-chart__notice-description">{{ size_chart_notice_description }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="common__cta reveal-on-scroll">
+            <a class="common-button" href="#shopping">
+              <span class="size-chart__cta-mb">KUPI ODMAH</span>
+              <span class="btn-arrow" aria-hidden="true">
+                <img
+                  class="mb-cta-icon-img"
+                  src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_2x_bea56d6f-7f75-4730-bbf7-e8b6c09c1a2e.png?v=1786946817"
+                  alt=""
+                  width="27"
+                  height="27"
+                  loading="eager"
+                  decoding="async"
+                >
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+      {% endcomment %}
+
+      <section class="faq" id="faq">
+        {% liquid
+          assign faq_id = 'faq'
+          assign faq_title = 'Česta pitanja'
+          assign faq_subtitle = 'Imate pitanja prije prvog koraka?'
+          assign faq_contact_labels = 'Service@connwan.com|||+44 7580973778' | split: '|||'
+          assign faq_contact_links = 'mailto:Service@connwan.com|||tel:+447580973778' | split: '|||'
+          assign faq_contact_icons = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_email.svg?v=1786518955|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_phone.svg?v=1786518956' | split: '|||'
+          assign faq_questions = 'Kako cipela podupire pravilan položaj stopala?|||Može li pružiti potporu ravnim ili spuštenim svodovima?|||Hoće li ortopedska potpora biti tvrda?|||Mogu li ih nositi dulje vrijeme?' | split: '|||'
+          assign faq_answers = 'Talpa conturată susține arcada și ajută la menținerea unei alinieri mai naturale a piciorului.|||Da. Suportul integrat pentru arcadă este conceput pentru a oferi mai multă stabilitate când arcada este căzută.|||Nu. Branțul căptușit și spuma cu memorie moale oferă suport confortabil și de durată.|||Da. Structura de suport este concepută pentru mers și stat în picioare perioade lungi în fiecare zi.' | split: '|||'
+          assign faq_open_index = 4
+          assign faq_plus_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_8f245959-fd1f-4bcf-8ba1-dab709ec9c59.svg?v=1787106291'
+          assign faq_close_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/3_30153cbd-e222-46bd-972b-7d94cb42ad2b.svg?v=1787106291'
+          assign faq_plus_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/2_1_4a764381-61e7-44b0-a797-a554a212db63.svg?v=1787106291'
+          assign faq_close_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/3_1.svg?v=1787106290'
+          assign faq_cta_icon = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_btn_icon_adeb816e-6644-4294-816d-bdfd55fc752f.svg?v=1787825076'
+        %}
+        <div class="faq__inner">
+          <div class="faq__layout">
+            <div class="faq__intro reveal-on-scroll">
+              <h2 class="faq__title">{{ faq_title }}</h2>
+              <p class="faq__subtitle">{{ faq_subtitle }}</p>
+
+              <div class="faq__contacts">
+                {% for faq_contact_label in faq_contact_labels %}
+                  {% assign faq_contact_index = forloop.index0 %}
+                  <a class="faq__contact" href="{{ faq_contact_links[faq_contact_index] }}">
+                    <span class="faq__contact-icon" aria-hidden="true"><img src="{{ faq_contact_icons[faq_contact_index] }}" alt="" width="18" height="18" loading="lazy" decoding="async"></span>
+                    <span class="faq__contact-label">{{ faq_contact_label }}</span>
+                  </a>
+                {% endfor %}
+              </div>
+
+            </div>
+
+            <div class="faq__content reveal-on-scroll">
+              <div class="faq__list" id="{{ faq_id }}-list">
+                {% for faq_question in faq_questions %}
+                  {% assign faq_index = forloop.index0 %}
+                  {% assign faq_answer = faq_answers[faq_index] %}
+                  {% assign faq_is_open = false %}
+                  {% if forloop.index == faq_open_index %}
+                    {% assign faq_is_open = true %}
+                  {% endif %}
+
+                  <article class="faq__item{% if faq_is_open %} is-open{% endif %}">
+                    <button
+                      class="faq__question"
+                      type="button"
+                      aria-expanded="{% if faq_is_open %}true{% else %}false{% endif %}"
+                      aria-controls="{{ faq_id }}-answer-{{ forloop.index }}"
+                    >
+                      <span class="faq__question-text">{{ faq_question }}</span>
+                      <span class="faq__question-icon" aria-hidden="true">
+                        <picture class="faq__toggle-picture faq__toggle-picture--plus">
+                          <source media="(max-width: 767px)" srcset="{{ faq_plus_mb }}">
+                          <img class="faq__toggle-icon faq__toggle-icon--plus" src="{{ faq_plus_pc }}" alt="" width="17" height="17" loading="lazy" decoding="async">
+                        </picture>
+                        <picture class="faq__toggle-picture faq__toggle-picture--close">
+                          <source media="(max-width: 767px)" srcset="{{ faq_close_mb }}">
+                          <img class="faq__toggle-icon faq__toggle-icon--close" src="{{ faq_close_pc }}" alt="" width="14" height="14" loading="lazy" decoding="async">
+                        </picture>
+                      </span>
+                    </button>
+
+                    <div class="faq__answer" id="{{ faq_id }}-answer-{{ forloop.index }}">
+                      <div class="faq__answer-inner">{{ faq_answer }}</div>
+                    </div>
+                  </article>
+                {% endfor %}
+              </div>
+
+              <div class="faq__button-wrap faq__button--mobile">
+                <a class="common-button faq__cta faq__cta--mobile mb-banner-cta" href="#shopping">
+                  <span class="faq__cta-label">KUPI ODMAH</span>
+                  <span class="faq__cta-arrow" aria-hidden="true">
+                    <img
+                      class="faq__cta-icon faq__cta-icon--mb"
+                      src="{{ faq_cta_icon }}"
+                      alt=""
+                      width="13"
+                      height="13"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews_box" id="reviews">
+        {% liquid
+          assign review_image_names = 'Oliver Bennett|||Isabella Conti|||James Whitfield|||Sophie Laurent|||Marcus Webb|||Clara Müller|||Erik Johansson|||Richard Aldridge|||Thomas Meyer|||Daniel Rossi' | split: '|||'
+          assign review_image_texts = 'Nu mă așteptam la mare lucru, dar pantofii aceștia sunt cu adevărat confortabili. Am mers cu ei timp de o oră și nu a apărut niciun punct dureros.|||Arată suficient de eleganți pentru birou și, în același timp, sunt confortabili pentru drumurile zilnice. Numai avantaje.|||I-am luat într-o călătorie de afaceri și i-am purtat în fiecare zi. Sunt ușori în bagaj, eleganți pentru întâlniri și nu au nevoie de perioadă de acomodare.|||I-am încălțat imediat ce i-am scos din cutie. Sunt atât de confortabili încât am uitat că îi port. Deja mă gândesc să îi combin în weekend cu blugi, pantaloni și chiar o rochie casual. Mi-aș fi dorit să îi comand mai devreme.|||Conduc mult pentru serviciu. Acești pantofi nu apasă pe partea superioară a piciorului ca alte modele. Confortabili din prima zi.|||Se potrivesc cu toată garderoba mea: blugi, pantaloni chino și chiar o fustă midi. Mărimea este corectă și se simt confortabil de la început, ca și cum ar fi deja purtați. Sunt foarte mulțumită de achiziție.|||Aspect simplu, potrivire confortabilă și aderență bună. Exact ce aveam nevoie.|||Când i-am primit, am verificat cusăturile și finisajul: fabricația este foarte bună. În plus, sunt confortabili. I-aș cumpăra din nou.|||Îi las lângă ușă și îi port pentru orice ieșire rapidă. Pur și simplu funcționează: fără complicații, fără dureri de picioare și ușor de curățat. O alegere grozavă pentru zi cu zi.|||I-am purtat la o plimbare de seară și am mers de două ori mai mult decât plănuisem. Fără frecări sau presiune: doar confort solid. Talpa are flexibilitatea potrivită. Deja mă gândesc să cumpăr încă o pereche.' | split: '|||'
+          assign review_image_urls = "https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg1.webp?v=1788243820|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg2.webp?v=1788243821|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg3.webp?v=1788243821|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg4.webp?v=1788243820|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg5.webp?v=1788243821|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg6.webp?v=1788243820|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg7.webp?v=1788243820|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg8.webp?v=1788243821|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg9.webp?v=1788243821|||https://cdn.shopify.com/s/files/1/0688/0460/8043/files/YH105580_srimg10.webp?v=1788243821" | split: '|||'
+          assign review_rating_stars_pc = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_2.svg?v=1787108056'
+          assign review_rating_stars_mb = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/9_2de3490d-6614-41c5-beb0-79fd2015d525.svg?v=1787108056'
+          assign review_card_star_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/6.svg?v=1787108056'
+          assign review_verified_icon_image = 'https://cdn.shopify.com/s/files/1/0688/0460/8043/files/1_c3a7fc54-18fd-4973-ae2e-0b7e53eb0c6b.svg?v=1787108056'
+          assign review_rating_score = '4.7'
+          assign review_rating_labels = '5|||4|||3|||2|||1' | split: '|||'
+          assign review_rating_counts = '2.156|||15|||6|||2|||0' | split: '|||'
+        %}
+
+        <section
+          class="reviews_section"
+          id="reviews_section"
+          aria-label="Stvarne recenzije korisnika"
+          data-review-masonry
+        >
+          <div class="reviews_inner">
+            <header class="reviews_head">
+              <div class="reviews_head-copy">
+                <h2 class="reviews_title">Stvarne recenzije korisnika</h2>
+                <p class="reviews_sub">Solo compradores verificados comparten experiencias reales</p>
+              </div>
+
+              <div class="reviews_rating-summary" aria-label="Resumen de valoraciones de clientes">
+                <div class="reviews_rating-main">
+                  <div class="reviews_rating-score-block">
+                    <div class="reviews_rating-score">
+                      <strong>
+                        <span class="reviews_rating-score-pc">{{ review_rating_score }}</span>
+                        <span class="reviews_rating-score-mb">{{ review_rating_score }}</span>
+                      </strong>
+                      <span class="reviews_rating-out-of">/ 5</span>
+                      <img
+                        class="reviews_rating-single-star"
+                        src="{{ review_rating_stars_mb }}"
+                        alt=""
+                        width="15"
+                        height="15"
+                        loading="lazy"
+                        decoding="async"
+                        aria-hidden="true"
+                      >
+                    </div>
+                    <div class="reviews_rating-stars" aria-hidden="true">
+                      <img
+                        class="reviews_rating-stars-image"
+                        src="{{ review_rating_stars_pc }}"
+                        alt=""
+                        width="128"
+                        height="20"
+                        loading="lazy"
+                        decoding="async"
+                      >
+                    </div>
+                  </div>
+
+                  <div class="reviews_rating-meta">
+                    <div class="reviews_rating-label">
+                      <span class="reviews_rating-label-pc">
+                        <span>Evaluare medie<br>Peste 2,179 cumpărători verificați la nivel global</span>
+                      </span>
+                      <span class="reviews_rating-label-mb">Na temelju (2.179)<br>recenzija proizvoda</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="reviews_rating-bars">
+                  {% for review_rating_label in review_rating_labels %}
+                    {% assign review_rating_index = forloop.index0 %}
+                    <div class="reviews_rating-row">
+                      <span class="reviews_rating-row-label">
+                        <span class="reviews_rating-row-label-pc">{{ review_rating_label }} estrellas</span>
+                        <span class="reviews_rating-row-label-mb">{{ review_rating_label }} estrellas</span>
+                      </span>
+                      <span class="reviews_rating-track"><span></span></span>
+                      <span class="reviews_rating-row-count">
+                        <span class="reviews_rating-row-count-pc">{{ review_rating_counts[review_rating_index] }}</span>
+                        <span class="reviews_rating-row-count-mb">{{ review_rating_counts[review_rating_index] }}</span>
+                      </span>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </header>
+
+            <div class="reviews_masonry">
+              <div class="reviews_masonry-source" data-review-source>
+                {%- for review_name in review_image_names -%}
+                  {%- assign review_index = forloop.index0 -%}
+                  <article
+                    class="review-card review-card--image"
+                    data-review-card
+                    data-review-index="{{ review_index }}"
+                  >
+                    <div class="review-card__media">
+                      <img
+                        class="review-card__image"
+                        src="{{ review_image_urls[review_index] }}"
+                        alt="Foto de cliente de {{ review_name | escape }}"
+                        loading="eager"
+                        decoding="async"
+                      >
+                    </div>
+                    <div class="review-card__body">
+                      <div class="review-card__stars" aria-label="5 de 5">
+                        <img
+                          class="review-card__stars-image"
+                          src="{{ review_card_star_image }}"
+                          alt=""
+                          width="120"
+                          height="17"
+                          loading="lazy"
+                          decoding="async"
+                        >
+                      </div>
+                      <h3 class="review-card__name">{{ review_name }}</h3>
+                      <div class="review-card__verified">
+                        <span class="review-card__verified-icon" aria-hidden="true">
+                          <img
+                            class="review-card__verified-icon-image"
+                            src="{{ review_verified_icon_image }}"
+                            alt=""
+                            width="12"
+                            height="9"
+                            loading="lazy"
+                            decoding="async"
+                          >
+                        </span>
+                        <span>Utilizatori verificați</span>
+                      </div>
+                      <p class="review-card__text">{{ review_image_texts[review_index] }}</p>
+                    </div>
+                  </article>
+                {%- endfor -%}
+              </div>
+
+              <div class="reviews_masonry-columns" data-review-columns aria-live="polite"></div>
+
+              <nav
+                class="reviews_pagination"
+                data-review-pagination
+                aria-label="Strony opinii"
+              ></nav>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div class="sp-size-modal" data-sp-size-modal aria-hidden="true">
+        <div class="sp-size-modal__overlay" data-sp-size-close></div>
+        <div class="sp-size-modal__dialog" role="dialog" aria-modal="true" aria-label="Vodič za veličine">
+          <button class="sp-size-modal__close" type="button" data-sp-size-close aria-label="Zatvori vodič za veličine">×</button>
+          <div
+            class="sp-size-modal__table-wrap size-chart size-chart--modal"
+            data-size-chart-modal-content
+          ></div>
+        </div>
+      </div>
+
+      <div
+        class="sp-shopping-drawer"
+        style="--btn-bg-color: linear-gradient(135deg,#ff873d,#ff4b16);"
+      >
+        <div class="sp-cart-drawer-overlay" data-sp-drawer-overlay aria-hidden="true"></div>
+
+        <aside class="sp-cart-drawer" data-sp-cart-drawer aria-hidden="true" aria-label="Coș">
+          <div class="sp-cart-drawer__header">
+            <h2 class="sp-cart-drawer__heading">Coș (<span class="js-cardNum">0</span>)</h2>
+            <button class="sp-cart-drawer__close" type="button" data-sp-drawer-close aria-label="Cerrar carrito">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="sp-cart-drawer__notice">✓ Sigurno plaćanje · Brza dostava · Jednostavni povrati</div>
+
+          <div class="sp-cart-drawer__body">
+            <div class="sp-cart-drawer__loading" data-sp-cart-loading>Košarica se učitava...</div>
+
+            <div class="sp-cart-drawer__empty" data-sp-cart-empty>
+              <div class="sp-cart-drawer__empty-icon">🛒</div>
+              <p>Košarica je trenutačno prazna.</p>
+              <button class="sp-cart-drawer__continue" type="button" data-sp-drawer-close>Nastavi kupnju</button>
+            </div>
+
+            <div class="sp-cart-drawer__items" data-sp-cart-items aria-live="polite"></div>
+          </div>
+
+          <div class="sp-cart-drawer__footer" data-sp-cart-footer hidden>
+            <div class="sp-cart-drawer__note js-cart-drawer__note">
+              <button class="sp-cart-drawer__note-toggle" type="button" aria-expanded="false" aria-controls="sp-cart-note-panel" data-sp-cart-note-toggle>
+                <span data-sp-cart-note-toggle-label>Dodaj napomenu narudžbi</span>
+                <span class="sp-cart-drawer__note-chevron" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6l-1.41 1.41L13.17 12l-4.58 4.59L10 18l6-6z" fill="#000"></path>
+                  </svg>
+                </span>
+              </button>
+              <div class="sp-cart-drawer__note-panel" id="sp-cart-note-panel" data-sp-cart-note-panel hidden>
+                <textarea class="sp-cart-drawer__note-input" id="sp-cart-note" maxlength="500" placeholder="Dodajte upute za dostavu ili napomenu uz narudžbu" data-sp-cart-note></textarea>
+                <div class="sp-cart-drawer__note-actions">
+                  <span class="sp-cart-drawer__note-status" data-sp-cart-note-status aria-live="polite"></span>
+                  <button class="sp-cart-drawer__note-save" type="button" data-sp-cart-note-save>Spremi napomenu</button>
+                </div>
+              </div>
+            </div>
+            <div class="sp-cart-drawer__subtotal">
+              <span>Subtotal</span>
+              <span class="sp-cart-drawer__subtotal-value" data-sp-cart-total></span>
+            </div>
+            <p class="sp-cart-drawer__tax-note">Porezi i dostava obračunavaju se pri plaćanju.</p>
+            <a class="sp-cart-drawer__checkout js-cart-drawer__checkout" href="/checkout">Sigurno plaćanje</a>
+          </div>
+        </aside>
+      </div>
+
+      <aside
+        class="sp-mobile-fixed-purchase"
+        data-mobile-fixed-purchase
+        aria-label="Compra rápida"
+        aria-hidden="true"
+      >
+        <div class="sp-mobile-fixed-purchase__inner">
+          <a
+            class="sp-mobile-fixed-purchase__cta mb-banner-cta"
+            href="#shopping"
+            data-mobile-fixed-purchase-cta
+          >
+            <span class="sp-mobile-fixed-purchase__cta-copy">
+              AHORRA HASTA
+              <span class="js-bind-discount-percent" data-discount-sync>{{ page_discount_percent }}%</span>
+              AHORA
+            </span>
+            <span class="sp-mobile-fixed-purchase__cta-icon" aria-hidden="true">
+              <img
+                class="mb-cta-icon-img"
+                src="https://cdn.shopify.com/s/files/1/0688/0460/8043/files/icon_2x_bea56d6f-7f75-4730-bbf7-e8b6c09c1a2e.png?v=1786946817"
+                alt=""
+                width="32"
+                height="32"
+                loading="eager"
+                decoding="async"
+              >
+            </span>
+          </a>
+
+          <div class="sp-mobile-fixed-purchase__meta" aria-label="Estado de envío y stock">
+            <span class="sp-mobile-fixed-purchase__status-dot" aria-hidden="true"></span>
+            <span class="sp-mobile-fixed-purchase__ship">
+              Dostava sutra
+            </span>
+            <span class="sp-mobile-fixed-purchase__divider" aria-hidden="true">|</span>
+            <span class="sp-mobile-fixed-purchase__stock-label">Stanje zaliha</span>
+            <span class="sp-mobile-fixed-purchase__stock-meter" aria-label="Stock bajo">
+              <i class="is-low" aria-hidden="true"></i>
+              <i aria-hidden="true"></i>
+              <i aria-hidden="true"></i>
+              <i aria-hidden="true"></i>
+              <i aria-hidden="true"></i>
+            </span>
+            <strong class="sp-mobile-fixed-purchase__low">SCĂZUT</strong>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      window.product = {{ product.variants | json }};
+      window.options = {{ product.options_with_values | json }};
+      window.shopMoneyFormat = {{ shop.money_format | json }};
+      window.spCurrencyCode = {{ cart.currency.iso_code | default: localization.country.currency.iso_code | json }};
+      window.spLocale = {{ request.locale.iso_code | json }};
+      window.cartCount = {{ cart.item_count | json }};
+      window.spSelectedVariantId = {{ product.selected_or_first_available_variant.id | json }};
+      window.spProductTitle = {{ product.title | json }};
+    </script>
+
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'page-shopping.js' | asset_url }}" defer></script>
+    <script src="https://cdn.shopify.com/s/files/1/0807/0086/6801/files/spage9678321058033-16.js?v=1789020856" defer></script>
+
+  </body>
+</html>
